@@ -11,22 +11,22 @@ var default_pronouns:= {
 	"she": {
 		"object": "she",
 		"subjective": "her",
-		"possessive_independant": "her",
-		"possessive_dependant": "hers",
+		"possessive_indep": "her",
+		"possessive_dep": "hers",
 		"reflexive": "herself",
 	},
 	"he": {
 		"object": "he",
 		"subjective": "his",
-		"possessive_independant": "his",
-		"possessive_dependant": "him",
+		"possessive_indep": "his",
+		"possessive_dep": "him",
 		"reflexive": "himself",
 	},
 	"they": {
 		"object": "they",
 		"subjective": "theirs",
-		"possessive_independant": "theirs",
-		"possessive_dependant": "theirs",
+		"possessive_indep": "theirs",
+		"possessive_dep": "theirs",
 		"reflexive": "themself",
 	}
 }

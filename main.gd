@@ -16,26 +16,30 @@ extends Control
 
 @export_category("Container")
 @export var line_edit_vbox: VBoxContainer
+@export var pronoun_choice_hbox: HBoxContainer
 
-var subject_pronoun: String
-var object_pronoun: String
-var possessive_dependant_pronoun: String
-var possessive_independant_pronoun: String
-var reflexive_pronoun: String
 
 func _ready() -> void:
-	get_line_edits()
+	for i in get_line_edits():
+		i.editable = false
+	line_edits_text_submitted()
+	set_defaults()
 
-func get_line_edits():
+func get_line_edits() -> Array[LineEdit]:
+	var line_array: Array[LineEdit]
 	for i in line_edit_vbox.get_children(true):
 		if i.get_child_count() >= 1:
 			for x in i.get_children():
 				if x is LineEdit:
-					#print(x.name)
-					#print(x)
-					var pronoun_type = x.name.trim_suffix("_line_edit")
-					#print(pronoun_type)
-					x.text_submitted.connect(update_pronouns.bind(pronoun_type))
+					line_array.append(x)
+	#print(line_array)
+	return line_array
+
+func line_edits_text_submitted():
+	for i in get_line_edits():
+		var pronoun_type = i.name.trim_suffix("_line_edit")
+		i.text_submitted.connect(update_pronouns.bind(pronoun_type))
+		#print(pronoun_type)
 
 func update_pronouns(new_text: String, type: String):
 	check_custom()
@@ -66,38 +70,48 @@ func _on_reflexive_line_edit_text_changed(new_text: String) -> void:
 #endregion
 
 #region DEFAULTS
-func _on_custom_pronoun_button_pressed() -> void:
-	check_custom()
-	#Pronouns.player_pronouns['custom'] = {}
-	print(JSON.stringify(Pronouns.player_pronouns, "  "))
-
-
-func _on_they_button_toggled(toggled_on: bool) -> void:
+func _on_custom_pronoun_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		Pronouns.player_pronouns['they'] = Pronouns.default_pronouns['they']
+		check_custom()
+		for i in get_line_edits():
+			i.editable = true
 	else:
-		if Pronouns.player_pronouns.get("they"):
-			Pronouns.player_pronouns.erase('they')
+		for i in get_line_edits():
+			i.editable = false
 	print(JSON.stringify(Pronouns.player_pronouns, "  "))
 
+func set_defaults():
+	for i in pronoun_choice_hbox.get_children():
+		if i is Button and !i.name.begins_with("custom") and !i.name.begins_with("add"):
+			#print(i.name)
+			i.toggled.connect(toggle_default_pronouns.bind(i.name.trim_suffix("_button")))
+			i.toggled.connect(line_edits_default_pronouns.bind(i.name.trim_suffix("_button")))
 
-func _on_she_button_toggled(toggled_on: bool) -> void:
+func toggle_default_pronouns(toggled_on: bool, pronoun: String):
 	if toggled_on:
-		Pronouns.player_pronouns['she'] = Pronouns.default_pronouns['she']
+		Pronouns.player_pronouns[pronoun] = Pronouns.default_pronouns[pronoun]
 	else:
-		if Pronouns.player_pronouns.get("she"):
-			Pronouns.player_pronouns.erase('she')
+		if Pronouns.player_pronouns.get(pronoun):
+			Pronouns.player_pronouns.erase(pronoun)
 	print(JSON.stringify(Pronouns.player_pronouns, "  "))
 
-
-func _on_he_button_toggled(toggled_on: bool) -> void:
+func line_edits_default_pronouns(toggled_on: bool, pronoun: String):
 	if toggled_on:
-		Pronouns.player_pronouns['he'] = Pronouns.default_pronouns['he']
-	else:
-		if Pronouns.player_pronouns.get("he"):
-			Pronouns.player_pronouns.erase('he')
-	print(JSON.stringify(Pronouns.player_pronouns, "  "))
-
+		for i in get_line_edits():
+			if i.name.begins_with("subjective") or i.name.begins_with("possessive_indep"):
+				i.text = Pronouns.default_pronouns[pronoun]['subjective'].to_pascal_case()
+			elif i.name.begins_with("object"):
+				i.text = Pronouns.default_pronouns[pronoun]['object'].to_pascal_case()
+			elif i.name.begins_with("possessive_dep"):
+				i.text = Pronouns.default_pronouns[pronoun]['possessive_dep'].to_pascal_case()
+			elif i.name.begins_with("reflexive"):
+				i.text = Pronouns.default_pronouns[pronoun]['reflexive'].to_pascal_case()
+			elif i.name.begins_with("subjective"):
+				i.text = Pronouns.default_pronouns[pronoun]['subjective'].to_pascal_case()
+	
+	if Pronouns.player_pronouns == {}:
+		for i in get_line_edits():
+			i.text = ""
 #endregion
 
 
