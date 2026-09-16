@@ -6,6 +6,7 @@ extends Node
 #TODO: add multiple set of custom pronouns (hopefully without the need of a limit.)
 
 signal curr_pronoun(pronoun)
+signal curr_custom(custom)
 
 var player_pronouns:= {}
 

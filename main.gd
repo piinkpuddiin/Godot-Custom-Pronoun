@@ -1,6 +1,7 @@
 extends Control
 
 # TODO: make it work in a text/dialogic setting
+# TODO: the custom is so buggy + it needs to load the saved dicts into the example slots for view grrr
 
 @export_category("Line Edits")
 @export var subjective_line_edit: LineEdit
@@ -21,13 +22,17 @@ extends Control
 @export var pronoun_choice_hbox: HBoxContainer
 @export var pronoun_choice_scroll_container: ScrollContainer
 
-
+var curr_custom_dict: String
 
 func _ready() -> void:
 	for i in get_line_edits():
 		i.editable = false
 	line_edits_text_submitted()
 	set_defaults()
+	Pronouns.curr_custom.connect(set_curr_dict)
+
+func set_curr_dict(custom_dict):
+	curr_custom_dict = custom_dict
 
 func get_line_edits() -> Array[LineEdit]:
 	var line_array: Array[LineEdit]
@@ -42,12 +47,14 @@ func line_edits_text_submitted():
 	for i in get_line_edits():
 		var pronoun_type = i.name.trim_suffix("_line_edit")
 		i.text_submitted.connect(update_pronouns.bind(pronoun_type))
-		#print(pronoun_type)
+
 
 func update_pronouns(new_text: String, type: String):
 	check_custom()
-	Pronouns.player_pronouns['custom'][type] = new_text.to_lower()
-	print(Pronouns.player_pronouns['custom'])
+	Pronouns.player_pronouns[curr_custom_dict][type] = new_text.to_lower()
+	#print(Pronouns.player_pronouns[curr_custom_dict])
+	print(JSON.stringify(Pronouns.player_pronouns[curr_custom_dict], "  "))
+
 
 # TODO: Set the pronouns in such a way that custom types are their own dict.
 func _on_add_button_pressed() -> void:
@@ -60,19 +67,19 @@ func _on_add_button_pressed() -> void:
 			@warning_ignore("unassigned_variable_op_assign")
 			x += 1
 	
-	button.text = "Custom_" + str(x)
+	button.text = "custom_" + str(x)
+	Pronouns.curr_custom.emit("custom_" + str(x))
+	
 	pronoun_choice_hbox.add_child(button)
 	await get_tree().process_frame
 	pronoun_choice_scroll_container.ensure_control_visible(button)
 	button.pressed.connect(check_custom)
-	#pronoun_choice_hbox.add_child(button)
+	button.toggled.connect(_on_custom_pronoun_button_toggled.bind(button.text))
 	pronoun_choice_hbox.move_child(%add_button, -1)
 
 #region Line Edits EXAMPLES
 func _on_subjective_line_edit_text_changed(new_text: String) -> void:
-	#subjective_line_edit.text = subjective_line_edit.text[0].to_upper() + subjective_line_edit.text.substr(1,-1)
 	subjective_example.text = "[b]" + new_text.capitalize() + "[/b] did the job."
-	reflexive_example.text = new_text.capitalize() + " took charge all by [b]herself[/b]."
 
 func _on_objective_line_edit_text_changed(new_text: String) -> void:
 	object_example.text = "Are you talking to [b]" + new_text.to_lower() + "[/b]?"
@@ -83,31 +90,36 @@ func _on_possessive_dep_line_edit_text_changed(new_text: String) -> void:
 func _on_possessive_indep_line_edit_text_changed(new_text: String) -> void:
 	possessive_indep_example.text = "This book is [b]" + new_text + "[/b]."
 
-func _on_reflexive_line_edit_text_changed(new_text: String) -> void:
-	if Pronouns.player_pronouns.has('custom'):
-		if Pronouns.player_pronouns['custom'].get('subjective'):
-			var subjective_pronoun = Pronouns.player_pronouns['custom']['subjective']
+func _on_reflexive_line_edit_text_changed(new_text: String, pronoun = "", custom = "") -> void:
+	if Pronouns.player_pronouns.has(custom):
+		if Pronouns.player_pronouns[custom].get('subjective'):
+			var subjective_pronoun = Pronouns.player_pronouns[custom]['subjective']
 			reflexive_example.text = subjective_pronoun.capitalize() + " took charge all by [b]" + new_text + "[/b]."
+	if Pronouns.player_pronouns.has(pronoun):
+		reflexive_example.text = Pronouns.player_pronouns[pronoun]['subjective'].capitalize() + " took charge all by [b]" + new_text + "[/b]."
 	else:
 		reflexive_example.text = "She took charge all by [b]" + new_text + "[/b]."
 #endregion
 
 #region DEFAULTS
-func _on_custom_pronoun_button_toggled(toggled_on: bool) -> void:
+func _on_custom_pronoun_button_toggled(toggled_on: bool, custom_dict: String) -> void:
+	Pronouns.curr_pronoun.emit(custom_dict)
+	check_custom()
 	if toggled_on:
-		check_custom()
 		for i in get_line_edits():
 			i.editable = true
 			i.text = ""
 	else:
 		for i in get_line_edits():
 			i.editable = false
-	print(JSON.stringify(Pronouns.player_pronouns, "  "))
+	
+	#print(JSON.stringify(Pronouns.player_pronouns[custom_dict], "  "))
+	#print("current dict custom num: ", custom_dict)
+	print("current dict custom num: ", curr_custom_dict)
 
 func set_defaults():
 	for i in pronoun_choice_hbox.get_children():
 		if i is Button and !i.name.begins_with("custom") and !i.name.begins_with("add"):
-			#print(i.name)
 			i.toggled.connect(toggle_default_pronouns.bind(i.name.trim_suffix("_button")))
 			i.toggled.connect(line_edits_default_pronouns.bind(i.name.trim_suffix("_button")))
 
@@ -120,6 +132,8 @@ func toggle_default_pronouns(toggled_on: bool, pronoun: String):
 	print(JSON.stringify(Pronouns.player_pronouns, "  "))
 
 func line_edits_default_pronouns(toggled_on: bool, pronoun: String):
+	Pronouns.curr_pronoun.emit(pronoun)
+	
 	if toggled_on:
 		for i in get_line_edits():
 			if i.name.begins_with("subjective") or i.name.begins_with("possessive_indep"):
@@ -134,7 +148,7 @@ func line_edits_default_pronouns(toggled_on: bool, pronoun: String):
 				_on_possessive_dep_line_edit_text_changed(Pronouns.default_pronouns[pronoun]['possessive_dep'])
 			elif i.name.begins_with("reflexive"):
 				i.text = Pronouns.default_pronouns[pronoun]['reflexive'].to_pascal_case()
-				_on_reflexive_line_edit_text_changed(Pronouns.default_pronouns[pronoun]['reflexive'])
+				_on_reflexive_line_edit_text_changed(Pronouns.default_pronouns[pronoun]['reflexive'], pronoun, curr_custom_dict)
 			elif i.name.begins_with("subjective"):
 				i.text = Pronouns.default_pronouns[pronoun]['subjective'].to_pascal_case()
 				_on_subjective_line_edit_text_changed(Pronouns.default_pronouns[pronoun]['subjective'])
@@ -147,8 +161,7 @@ func line_edits_default_pronouns(toggled_on: bool, pronoun: String):
 
 #region HELPER FUNCS
 ## If the custom key doesn't exist, we create it.
-func check_custom(value: int = 0):
-	if !Pronouns.player_pronouns.has('custom'):
-		Pronouns.player_pronouns['custom_' + str(value)] = {}
-		
+func check_custom():
+	if !Pronouns.player_pronouns.has(curr_custom_dict):
+		Pronouns.player_pronouns[curr_custom_dict] = {}
 #endregion
