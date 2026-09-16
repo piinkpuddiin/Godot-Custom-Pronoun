@@ -24,7 +24,7 @@ corner_radius_top_right = 35
 corner_radius_bottom_right = 35
 corner_radius_bottom_left = 35
 
-[node name="CustomPronouns" type="Control" unique_id=78342683 node_paths=PackedStringArray("subjective_line_edit", "object_line_edit", "possessive_indep_line_edit", "possessive_dep_line_edit", "reflexive_line_edit", "subjective_example", "object_example", "possessive_indep_example", "possessive_dep_example", "reflexive_example", "line_edit_vbox", "pronoun_choice_hbox")]
+[node name="CustomPronouns" type="Control" unique_id=78342683 node_paths=PackedStringArray("subjective_line_edit", "object_line_edit", "possessive_indep_line_edit", "possessive_dep_line_edit", "reflexive_line_edit", "subjective_example", "object_example", "possessive_indep_example", "possessive_dep_example", "reflexive_example", "line_edit_vbox", "pronoun_choice_hbox", "pronoun_choice_scroll_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,11 +40,12 @@ possessive_dep_line_edit = NodePath("HBoxContainer/pronoun_panel/MarginContainer
 reflexive_line_edit = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/reflexive_vbox/reflexive_line_edit")
 subjective_example = NodePath("HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/subjective_vbox/subject_example_label")
 object_example = NodePath("HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/object_vbox/object_example_label")
-possessive_indep_example = NodePath("HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/possessive_dep_vbox/possesive_dependant_label")
-possessive_dep_example = NodePath("HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/possessive_indep_vbox/possesive_independant_label")
+possessive_indep_example = NodePath("HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/possessive_indep_vbox/possesive_independant_label")
+possessive_dep_example = NodePath("HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/possessive_dep_vbox/possesive_dependant_label")
 reflexive_example = NodePath("HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/reflexive_vbox/reflexive_example_label")
 line_edit_vbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox")
-pronoun_choice_hbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/pronoun_choice_hbox")
+pronoun_choice_hbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox")
+pronoun_choice_scroll_container = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer")
 
 [node name="Panel" type="Panel" parent="." unique_id=1604500296]
 layout_mode = 1
@@ -66,6 +67,17 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_7dm0k")
+
+[node name="delete_custom_button" type="Button" parent="HBoxContainer/pronoun_panel" unique_id=1043474018]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -59.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Delete"
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/pronoun_panel" unique_id=1435708293]
 layout_mode = 1
@@ -90,32 +102,40 @@ theme_override_font_sizes/font_size = 35
 text = "PRONOUNS"
 horizontal_alignment = 1
 
-[node name="pronoun_choice_hbox" type="HBoxContainer" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox" unique_id=570172461]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox" unique_id=866741368]
+custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
+
+[node name="pronoun_choice_hbox" type="HBoxContainer" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer" unique_id=570172461]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="they_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/pronoun_choice_hbox" unique_id=1354806464]
+[node name="they_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox" unique_id=1354806464]
 layout_mode = 2
 toggle_mode = true
 text = "They/Them"
 
-[node name="she_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/pronoun_choice_hbox" unique_id=1729739052]
+[node name="she_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox" unique_id=1729739052]
 layout_mode = 2
 toggle_mode = true
 text = "She/Her"
 
-[node name="he_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/pronoun_choice_hbox" unique_id=1216475078]
+[node name="he_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox" unique_id=1216475078]
 layout_mode = 2
 toggle_mode = true
 text = "He/Him"
 
-[node name="custom_pronoun_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/pronoun_choice_hbox" unique_id=590994520]
+[node name="custom_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox" unique_id=590994520]
+visible = false
 layout_mode = 2
 toggle_mode = true
 text = "Custom"
 
-[node name="add_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/pronoun_choice_hbox" unique_id=1420610478]
+[node name="add_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox" unique_id=1420610478]
+unique_name_in_owner = true
 layout_mode = 2
 text = "+"
 
@@ -271,7 +291,8 @@ bbcode_enabled = true
 text = "She took charge all by [b]herself[/b]."
 fit_content = true
 
-[connection signal="toggled" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/pronoun_choice_hbox/custom_pronoun_button" to="." method="_on_custom_pronoun_button_toggled"]
+[connection signal="toggled" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox/custom_button" to="." method="_on_custom_pronoun_button_toggled"]
+[connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox/add_button" to="." method="_on_add_button_pressed"]
 [connection signal="text_changed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/subjective_vbox/subjective_line_edit" to="." method="_on_subjective_line_edit_text_changed"]
 [connection signal="text_changed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/object_vbox/objective_line_edit" to="." method="_on_objective_line_edit_text_changed"]
 [connection signal="text_changed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/possessive_dep_vbox/possessive_dep_line_edit" to="." method="_on_possessive_dep_line_edit_text_changed"]

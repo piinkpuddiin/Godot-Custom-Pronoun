@@ -1,33 +1,35 @@
 extends Node
 
 #NOTE: Watch out for pronoun grammar mistakes...
-#TODO: add verbs...
-#TODO: mix and match pronuns, technically done
+#TODO: add verbs... like the fucking special ones...
+#TODO: mix and match pronouns, technically done
 #TODO: add multiple set of custom pronouns (hopefully without the need of a limit.)
+
+signal curr_pronoun(pronoun)
 
 var player_pronouns:= {}
 
 var default_pronouns:= {
 	"she": {
-		"object": "she",
-		"subjective": "her",
-		"possessive_indep": "her",
+		"subjective": "she",
+		"objective": "her",
 		"possessive_dep": "hers",
+		"possessive_indep": "her",
 		"reflexive": "herself",
 	},
 	"he": {
-		"object": "he",
-		"subjective": "his",
-		"possessive_indep": "his",
+		"subjective": "he",
+		"objective": "him",
 		"possessive_dep": "him",
+		"possessive_indep": "his",
 		"reflexive": "himself",
 	},
 	"they": {
-		"object": "they",
-		"subjective": "theirs",
+		"subjective": "they",
+		"objective": "them",
+		"possessive_dep": "their",
 		"possessive_indep": "theirs",
-		"possessive_dep": "theirs",
-		"reflexive": "themself",
+		"reflexive": "themselves",
 	}
 }
 

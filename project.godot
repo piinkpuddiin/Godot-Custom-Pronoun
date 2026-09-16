@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Dialogic Custom Pronoun"
-config/tags=PackedStringArray("piinkpuddiin")
+config/tags=PackedStringArray("piinkpuddiin", "plugin", "visual_novel")
 run/main_scene="uid://bkoi1o4txqnfo"
 config/features=PackedStringArray("4.8", "Forward Plus")
 config/icon="uid://crhyr4sppqrcq"
@@ -20,6 +20,10 @@ config/icon="uid://crhyr4sppqrcq"
 
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 Pronouns="*uid://cygrlwg1v72ld"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
 
 [dialogic]
 
