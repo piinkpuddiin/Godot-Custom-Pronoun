@@ -36,7 +36,7 @@ func _ready() -> void:
 	line_edits_text_submitted()
 	set_defaults()
 
-
+# Return all the line edits.
 func get_line_edits() -> Array[LineEdit]:
 	var line_array: Array[LineEdit]
 	for i in line_edit_vbox.get_children(true):
@@ -46,17 +46,18 @@ func get_line_edits() -> Array[LineEdit]:
 					line_array.append(x)
 	return line_array
 
-
-func line_edits_text_submitted():
+# Submits the text for all the line edits.
+func line_edits_text_submitted() -> void:
 	for i in get_line_edits():
 		var pronoun_type = i.name.trim_suffix("_line_edit")
 		i.text_submitted.connect(update_pronouns.bind(pronoun_type))
+		i.text_changed.connect(update_pronouns.bind(pronoun_type))
 
-
-func update_pronouns(new_text: String, type: String):
+# Add the pronoun if it doesn't exit to the dict. Add the pronoun to it's
+# respective type.
+func update_pronouns(new_text: String, type: String) -> void:
 	check_custom()
 	Pronouns.player_pronouns[curr_custom_dict][type] = new_text.to_lower()
-	print(JSON.stringify(Pronouns.player_pronouns[curr_custom_dict], "  "))
 
 
 # TODO: Set the pronouns in such a way that custom types are their own dict.
@@ -64,22 +65,18 @@ func _on_add_button_pressed() -> void:
 	var button = Button.new()
 	button.toggle_mode = true
 	
-	#for i in pronoun_choice_hbox.get_children():
-		#if i.text.contains("custom_"):
-			#@warning_ignore("unassigned_variable_op_assign")
 	custom_num += 1
-	print("The custom number: ", custom_num)
 	
 	button.text = "custom_" + str(custom_num)
 	button.name = "custom_" + str(custom_num)
 	Pronouns.player_pronouns["custom_" + str(custom_num)] = {}
 	
+	button.pressed.connect(check_custom)
+	button.pressed.connect(_on_custom_pronoun_button_pressed.bind(button.name))
+	
 	pronoun_choice_hbox.add_child(button)
 	await get_tree().process_frame
 	pronoun_choice_scroll_container.ensure_control_visible(button)
-	button.pressed.connect(check_custom)
-	button.pressed.connect(_on_custom_pronoun_button_pressed.bind(button.name))
-	button.toggled.connect(line_edits_pronouns.bind(Pronouns.player_pronouns, "custom_" + str(custom_num)))
 	pronoun_choice_hbox.move_child(%add_button, -1)
 
 #region Line Edits EXAMPLES
@@ -109,27 +106,31 @@ func _on_custom_pronoun_button_pressed(custom_pronoun: String) -> void:
 		i.text = ""
 	
 	delete_button.disabled = false
+	save_button.disabled = false
 	curr_custom_dict = custom_pronoun
 	curent_pronoun_label.text = custom_pronoun
-	print("current dict custom num: ", custom_pronoun)
+	print("Current custom pronoun: ", custom_pronoun)
+	line_edits_pronouns(true, Pronouns.player_pronouns, custom_pronoun)
 
 
-func set_defaults():
+func set_defaults() -> void:
 	for i in pronoun_choice_hbox.get_children():
 		if i is Button and !i.name.begins_with("custom") and !i.name.begins_with("add"):
 			i.toggled.connect(toggle_default_pronouns.bind(i.name.trim_suffix("_button")))
-			i.toggled.connect(line_edits_pronouns.bind(Pronouns.default_pronouns,i.name.trim_suffix("_button")))
+			i.toggled.connect(line_edits_pronouns.bind(Pronouns.default_pronouns, i.name.trim_suffix("_button")))
 
 
-func toggle_default_pronouns(toggled_on: bool, pronoun: String):
+func toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
 	if toggled_on:
 		Pronouns.player_pronouns[pronoun] = Pronouns.default_pronouns[pronoun]
 	else:
 		if Pronouns.player_pronouns.get(pronoun):
 			Pronouns.player_pronouns.erase(pronoun)
+	
 	delete_button.disabled = true
+	save_button.disabled = true
 
-
+## Sets the line_edit for both the custom and default pronouns.
 func line_edits_pronouns(toggled_on: bool, dict: Dictionary, pronoun: String):
 	Pronouns.curr_pronoun.emit(pronoun)
 	
@@ -168,21 +169,32 @@ func line_edits_pronouns(toggled_on: bool, dict: Dictionary, pronoun: String):
 
 #region HELPER FUNCS
 ## If the custom key doesn't exist, we create it.
-func check_custom():
+func check_custom() -> void:
 	if !Pronouns.player_pronouns.has(curr_custom_dict):
 		Pronouns.player_pronouns[curr_custom_dict] = {}
 #endregion
 
 
+## Saves the custom pronouns input.
 func _on_save_button_pressed() -> void:
-	pass # Replace with function body.
+	for i in get_line_edits():
+		if i.name.begins_with('subjective'):
+			Pronouns.player_pronouns[curr_custom_dict]['subjective'] = i.text
+		elif i.name.begins_with('objective'):
+			Pronouns.player_pronouns[curr_custom_dict]['objective'] = i.text
+		elif i.name.begins_with('possessive_dep'):
+			Pronouns.player_pronouns[curr_custom_dict]['possessive_dep'] = i.text
+		elif i.name.begins_with('possessive_indep'):
+			Pronouns.player_pronouns[curr_custom_dict]['possessive_indep'] = i.text
+		elif i.name.begins_with('reflexive'):
+			Pronouns.player_pronouns[curr_custom_dict]['reflexive'] = i.text
 
-
+## Prints the players pronouns.
 func _on_print_all_button_pressed() -> void:
 	print("All the pronouns: ", JSON.stringify((Pronouns.player_pronouns), "  "))
 
 
-## ONLY FOR CUSTOM PRONOUNS
+## Deletes the custom pronoun.
 func _on_delete_button_pressed() -> void:
 	for i in pronoun_choice_hbox.get_children():
 		if i.name == curr_custom_dict:
