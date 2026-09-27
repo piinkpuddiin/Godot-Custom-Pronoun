@@ -214,20 +214,20 @@ max_length = 32
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-text = "print all"
+text = "Print All"
 
 [node name="save_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer" unique_id=24158198]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-text = "save"
+text = "Save"
 
 [node name="delete_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer" unique_id=1500803226]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 disabled = true
-text = "delete"
+text = "Delete"
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=540486374]
 layout_mode = 2
