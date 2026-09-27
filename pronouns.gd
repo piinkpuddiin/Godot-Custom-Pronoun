@@ -14,14 +14,14 @@ var default_pronouns:= {
 	"she": {
 		"subjective": "she",
 		"objective": "her",
-		"possessive_dep": "hers",
-		"possessive_indep": "her",
+		"possessive_dep": "her",
+		"possessive_indep": "hers",
 		"reflexive": "herself",
 	},
 	"he": {
 		"subjective": "he",
 		"objective": "him",
-		"possessive_dep": "him",
+		"possessive_dep": "his",
 		"possessive_indep": "his",
 		"reflexive": "himself",
 	},
