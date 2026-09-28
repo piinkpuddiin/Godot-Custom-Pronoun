@@ -7,6 +7,8 @@ extends Node
 
 signal curr_pronoun(pronoun)
 signal curr_custom(custom)
+signal curr_verb()
+signal loaded_pronouns
 
 var player_pronouns:= {}
 
@@ -47,13 +49,8 @@ var gender_expression:= {
 	"custom": {}
 }
 
-
 ## Verbs
 ## The verbs go from singular to plural pronoun
-
-## They are named after the plural form of the verb aside from s/es, since
-## you will be writing pronouns as [they] [are] rather than [they] [is].
-## So excited to lose brain cells <33
 
 var are = ["is", "are"]
 var were = ["was", "were"]
@@ -64,3 +61,39 @@ var do = ["does", "do"]
 var dont = ["doesn't", "don't"]
 var s = ["s", ""]
 var es = ["es", ""]
+
+#region SAVE/LOAD
+
+const SAVE_PATH:= "user://"
+const FILE_PATH:= ".ini"
+
+func _save(save_name: String):
+	var config_file:= ConfigFile.new()
+	var error
+	
+	config_file.set_value("Pronouns", "player", player_pronouns)
+	error = config_file.save(SAVE_PATH + save_name + FILE_PATH)
+	
+	if error:
+		print("An error happened while saving data: ", error)
+	
+	print("Succesfully saved! Save: " + save_name + ".")
+
+
+func _load(save_name: String):
+	var config_file := ConfigFile.new()
+	var load_data = {}
+	var error
+	
+	error = config_file.load(SAVE_PATH + save_name + FILE_PATH)
+	
+	if error:
+		print("An error happened while loading data: ", error)
+		return
+	
+	var saved_pronouns = config_file.get_value("Pronouns", "player", {})
+	load_data['pronouns'] = saved_pronouns
+	
+	print("The loaded data: ", load_data)
+	return load_data
+#endregion

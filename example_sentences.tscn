@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c33dl8n5kstxm"]
 
 [ext_resource type="Script" uid="uid://cwh34fi1bulsx" path="res://example_sentences.gd" id="1_ut5k8"]
+[ext_resource type="Theme" uid="uid://hn1qglo51or4" path="res://pronoun_theme.tres" id="2_o5sij"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi1ct"]
 bg_color = Color(0.033853278, 0.033853278, 0.033853274, 0.4117647)
@@ -14,7 +15,9 @@ corner_radius_top_right = 35
 corner_radius_bottom_right = 35
 corner_radius_bottom_left = 35
 
-[node name="Control" type="Control" unique_id=733475182]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p7k8k"]
+
+[node name="ExampleSentences" type="Control" unique_id=733475182 node_paths=PackedStringArray("vbox_container", "are_label", "arent_label", "were_label", "have_label", "do_label", "dont_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +25,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ut5k8")
+vbox_container = NodePath("Panel/Panel/MarginContainer/VBoxContainer")
+are_label = NodePath("Panel/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer/are_label")
+arent_label = NodePath("Panel/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer/arent_label")
+were_label = NodePath("Panel/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer/were_label")
+have_label = NodePath("Panel/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer/have_label")
+do_label = NodePath("Panel/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer/do_label")
+dont_label = NodePath("Panel/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer/dont_label")
 
 [node name="Panel" type="Panel" parent="." unique_id=7624072]
 layout_mode = 1
@@ -61,3 +71,196 @@ theme_override_constants/margin_bottom = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Panel/MarginContainer" unique_id=1576903788]
 layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="are_panel" type="Panel" parent="Panel/Panel/MarginContainer/VBoxContainer" unique_id=752861319]
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o5sij")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/are_panel" unique_id=835521096]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer" unique_id=1356366565]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o5sij")
+
+[node name="are_label" type="RichTextLabel" parent="Panel/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer" unique_id=120486461]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="are_button" type="CheckButton" parent="Panel/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer" unique_id=1345413435]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="arent_panel" type="Panel" parent="Panel/Panel/MarginContainer/VBoxContainer" unique_id=392040169]
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o5sij")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p7k8k")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/arent_panel" unique_id=1918421839]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer" unique_id=1324578717]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o5sij")
+
+[node name="arent_label" type="RichTextLabel" parent="Panel/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=1930773529]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="arent_button" type="CheckButton" parent="Panel/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=629490013]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="were_panel" type="Panel" parent="Panel/Panel/MarginContainer/VBoxContainer" unique_id=1429795574]
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o5sij")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p7k8k")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/were_panel" unique_id=1268965587]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer" unique_id=142141983]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o5sij")
+
+[node name="were_label" type="RichTextLabel" parent="Panel/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer" unique_id=113410060]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="were_button" type="CheckButton" parent="Panel/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer" unique_id=317367285]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="have_panel" type="Panel" parent="Panel/Panel/MarginContainer/VBoxContainer" unique_id=996886174]
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o5sij")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/have_panel" unique_id=1951477763]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer" unique_id=389630915]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o5sij")
+
+[node name="have_label" type="RichTextLabel" parent="Panel/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=1267480670]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="have_button" type="CheckButton" parent="Panel/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=10616149]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="do_panel" type="Panel" parent="Panel/Panel/MarginContainer/VBoxContainer" unique_id=1917274669]
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o5sij")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/do_panel" unique_id=941610490]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer" unique_id=359900955]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o5sij")
+
+[node name="do_label" type="RichTextLabel" parent="Panel/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=684988593]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="do_button" type="CheckButton" parent="Panel/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=615695145]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="dont_panel" type="Panel" parent="Panel/Panel/MarginContainer/VBoxContainer" unique_id=1922918899]
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o5sij")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p7k8k")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/dont_panel" unique_id=1963239310]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer" unique_id=389023409]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o5sij")
+
+[node name="dont_label" type="RichTextLabel" parent="Panel/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=787641833]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="dont_button" type="CheckButton" parent="Panel/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=1785237839]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"

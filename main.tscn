@@ -1,7 +1,15 @@
 [gd_scene format=3 uid="uid://bkoi1o4txqnfo"]
 
+[ext_resource type="Script" uid="uid://b5lufh74gl71q" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://8v6rjdnw80di" path="res://custom_pronouns.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://c33dl8n5kstxm" path="res://example_sentences.tscn" id="2_0xm2m"]
 
 [node name="Node" type="Node" unique_id=437644318]
+script = ExtResource("1_h2yge")
 
-[node name="CustomPronouns" parent="." unique_id=78342683 instance=ExtResource("1_ig7tw")]
+[node name="CustomPronouns" parent="." unique_id=78342683 node_paths=PackedStringArray("main") instance=ExtResource("1_ig7tw")]
+main = NodePath("..")
+
+[node name="ExampleSentences" parent="." unique_id=733475182 node_paths=PackedStringArray("main") instance=ExtResource("2_0xm2m")]
+visible = false
+main = NodePath("..")

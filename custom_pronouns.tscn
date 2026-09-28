@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://8v6rjdnw80di"]
 
-[ext_resource type="Script" uid="uid://cuhnqi5epj7k2" path="res://main.gd" id="1_ew076"]
+[ext_resource type="Script" uid="uid://cuhnqi5epj7k2" path="res://pronouns_logic.gd" id="1_ew076"]
 
 [sub_resource type="Theme" id="Theme_dmgw1"]
 Label/font_sizes/font_size = 30
@@ -250,7 +250,6 @@ text = "Save"
 [node name="load_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer2" unique_id=193778346]
 layout_mode = 2
 size_flags_horizontal = 3
-disabled = true
 text = "Load"
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=540486374]
@@ -355,3 +354,5 @@ fit_content = true
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/save_button" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer/delete_button" to="." method="_on_delete_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer/print_all_button" to="." method="_on_print_all_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer2/save_button" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer2/load_button" to="." method="_on_load_button_pressed"]
