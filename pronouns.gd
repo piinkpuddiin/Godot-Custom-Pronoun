@@ -49,9 +49,8 @@ var gender_expression:= {
 	"custom": {}
 }
 
-## Verbs
-## The verbs go from singular to plural pronoun
-
+## VERBS
+## The verbs go from singular to the plural pronoun
 var are = ["is", "are"]
 var were = ["was", "were"]
 var have = ["has", "have"]
@@ -65,7 +64,7 @@ var es = ["es", ""]
 #region SAVE/LOAD
 
 const SAVE_PATH:= "user://"
-const FILE_PATH:= ".ini"
+const FILE_PATH:= "_save.ini"
 
 func _save(save_name: String):
 	var config_file:= ConfigFile.new()

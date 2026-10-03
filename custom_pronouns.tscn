@@ -33,6 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_dmgw1")
 script = ExtResource("1_ew076")
+save_name = "1"
 subjective_line_edit = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/subjective_vbox/subjective_line_edit")
 object_line_edit = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/object_vbox/objective_line_edit")
 possessive_indep_line_edit = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/possessive_indep_vbox/possessive_indep_line_edit")
