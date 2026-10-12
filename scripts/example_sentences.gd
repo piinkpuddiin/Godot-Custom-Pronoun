@@ -74,6 +74,8 @@ func set_verb(toggled_on: bool, button: CheckButton, verb: String):
 
 ## Set the example sentences once the screen is visible
 func example_sentence() -> void:
+	Pronouns.player_pronouns[curr_pronoun]['verbs'] = {}
+	
 	update_sentence("are")
 	update_sentence("arent")
 	update_sentence("were")
@@ -86,8 +88,8 @@ func example_sentence() -> void:
 	pronoun_label()
 
 func pronoun_label():
-	var subjective_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['subjective']
-	var obbjective_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['objective']
+	var subjective_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['pronouns']['subjective']
+	var obbjective_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['pronouns']['objective']
 	current_pronoun_label.text = (
 		"Current pronoun: [b]" + 
 		subjective_pronoun.capitalize() + 
@@ -97,50 +99,49 @@ func pronoun_label():
 
 
 func update_sentence(verb: String, _type: String = "singular") -> void:
-	var subjective_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['subjective']
-	var possessive_dep_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['possessive_dep']
+	var subjective_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['pronouns']['subjective']
+	var possessive_dep_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['pronouns']['possessive_dep']
+	
+	var value: int = 0
+	
+	if _type == "singular":
+		value = 0
+	else:
+		value = 1
 	
 	match verb:
 		"are":
-			if _type == "singular":
-				are_label.text = subjective_pronoun.capitalize() + " " + Pronouns.are[0] + are_sentence
-			else:
-				are_label.text = subjective_pronoun.capitalize() + " " + Pronouns.are[1] + are_sentence
+			are_label.text = subjective_pronoun.capitalize() + " " + Pronouns.are[value] + are_sentence
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['are'] = ""
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['are'] = Pronouns.are[value]
 		"arent":
-			if _type == "singular":
-				arent_label.text = subjective_pronoun.capitalize() + " " + Pronouns.arent[0] + arent_sentence
-			else:
-				arent_label.text = subjective_pronoun.capitalize() + " " + Pronouns.arent[1] + arent_sentence
+			arent_label.text = subjective_pronoun.capitalize() + " " + Pronouns.arent[value] + arent_sentence
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['arent'] = ""
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['arent'] = Pronouns.arent[value]
 		"were":
-			if _type == "singular":
-				were_label.text = subjective_pronoun.capitalize() + " " + Pronouns.were[0] + were_sentence
-			else:
-				were_label.text = subjective_pronoun.capitalize() + " " + Pronouns.were[1] + were_sentence
+			were_label.text = subjective_pronoun.capitalize() + " " + Pronouns.were[value] + were_sentence
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['were'] = ""
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['were'] = Pronouns.were[value]
 		"have":
-			if _type == "singular":
-				have_label.text = subjective_pronoun.capitalize() + " " + Pronouns.have[0] + have_sentence
-			else:
-				have_label.text = subjective_pronoun.capitalize() + " " + Pronouns.have[1] + have_sentence
+			have_label.text = subjective_pronoun.capitalize() + " " + Pronouns.have[value] + have_sentence
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['have'] = ""
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['have'] = Pronouns.have[value]
 		"do":
-			if _type == "singular":
-				do_label.text = Pronouns.do[0].capitalize() + " " + subjective_pronoun + do_sentence
-			else:
-				do_label.text = Pronouns.do[1].capitalize() + " " + subjective_pronoun + do_sentence
+			do_label.text = Pronouns.do[value].capitalize() + " " + subjective_pronoun + do_sentence
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['do'] = ""
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['do'] = Pronouns.do[value]
 		"dont":
-			if _type == "singular":
-				dont_label.text = Pronouns.dont[0].capitalize() + " " + subjective_pronoun + dont_sentence
-			else:
-				dont_label.text = Pronouns.dont[1].capitalize() + " " + subjective_pronoun + dont_sentence
+			dont_label.text = Pronouns.dont[value].capitalize() + " " + subjective_pronoun + dont_sentence
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['dont'] = ""
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['dont'] = Pronouns.dont[value]
 		"s":
-			if _type == "singular":
-				s_label.text = subjective_pronoun.capitalize() + " " + "work" + Pronouns.s[0] + s_sentence
-			else:
-				s_label.text = subjective_pronoun.capitalize() + " " + "work" + Pronouns.s[1] + s_sentence
+			s_label.text = subjective_pronoun.capitalize() + " " + "work" + Pronouns.s[value] + s_sentence
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['s'] = ""
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['s'] = Pronouns.s[value]
 		"es":
-			if _type == "singular":
-				es_label.text = subjective_pronoun.capitalize() + " " + "do" + Pronouns.es[0] + " " + possessive_dep_pronoun + es_sentence
-			else:
-				es_label.text = subjective_pronoun.capitalize() + " " + "do" + Pronouns.es[1] + " " + possessive_dep_pronoun + es_sentence
+			es_label.text = subjective_pronoun.capitalize() + " " + "do" + Pronouns.es[value] + " " + possessive_dep_pronoun + es_sentence
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['es'] = ""
+			Pronouns.player_pronouns[curr_pronoun]['verbs']['es'] = Pronouns.es[value]
 		_:
 			print("This verb does not exist.")
 			pass
@@ -155,7 +156,3 @@ func _on_visibility_changed() -> void:
 		%AnimationPlayer.play("blur_bg")
 	else:
 		%AnimationPlayer.play("RESET")
-
-
-func _on_confirm_button_pressed() -> void:
-	pass # Replace with function body.

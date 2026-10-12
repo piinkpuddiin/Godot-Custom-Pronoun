@@ -77,7 +77,7 @@ func line_edits_text_submitted() -> void:
 # respective type.
 func update_pronouns(new_text: String, type: String) -> void:
 	check_custom()
-	Pronouns.player_pronouns[curr_custom_dict][type] = new_text.to_lower()
+	Pronouns.player_pronouns[curr_custom_dict]['pronouns'][type] = new_text.to_lower()
 	Pronouns.custom_pronouns[curr_custom_dict][type] = new_text.to_lower()
 
 
@@ -93,6 +93,7 @@ func _on_add_button_pressed() -> void:
 	button.name = custom_key
 	# Initialize the custom key with no value
 	Pronouns.player_pronouns[custom_key] = {}
+	Pronouns.player_pronouns[custom_key]['pronouns'] = {}
 	Pronouns.custom_pronouns[custom_key] = {}
 	
 	button.toggled.connect(_toggle_custom_pronoun.bind(custom_key))
@@ -157,7 +158,7 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 		line_edits_editable(true)
 		
 		if Pronouns.custom_pronouns.has(custom_pronoun):
-			Pronouns.player_pronouns[custom_pronoun] = Pronouns.custom_pronouns[custom_pronoun]
+			Pronouns.player_pronouns[custom_pronoun]['pronouns'] = Pronouns.custom_pronouns[custom_pronoun]
 		
 		# We disable editing and saving, the pronouns have all already been set.
 		delete_button.disabled = false
@@ -176,7 +177,10 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 ## Create the toggle function for the default buttons.
 func _toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
 	if toggled_on:
-		Pronouns.player_pronouns[pronoun] = Pronouns.default_pronouns[pronoun]
+		check_custom()
+		print(Pronouns.player_pronouns)
+		Pronouns.player_pronouns[pronoun] = {}
+		Pronouns.player_pronouns[pronoun]['pronouns'] = Pronouns.default_pronouns[pronoun]
 	else:
 		# Remove the pronoun key from the player dict. Does not delete the pronoun.
 		if Pronouns.player_pronouns.get(pronoun):
@@ -238,29 +242,29 @@ func display_line_edits(pronoun: String):
 	
 	for i in get_line_edits():
 		if i.name.begins_with("subjective"):
-			if Pronouns.player_pronouns[pronoun].has('subjective'):
-				i.text = Pronouns.player_pronouns[pronoun]['subjective'].to_pascal_case()
-				_on_subjective_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['subjective'])
+			if Pronouns.player_pronouns[pronoun]['pronouns'].has('subjective'):
+				i.text = Pronouns.player_pronouns[pronoun]['pronouns']['subjective'].to_pascal_case()
+				_on_subjective_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['pronouns']['subjective'])
 		
 		elif i.name.begins_with("objective"):
-			if Pronouns.player_pronouns[pronoun].has('objective'):
-				i.text = Pronouns.player_pronouns[pronoun]['objective'].to_pascal_case()
-				_on_objective_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['objective'])
+			if Pronouns.player_pronouns[pronoun]['pronouns'].has('objective'):
+				i.text = Pronouns.player_pronouns[pronoun]['pronouns']['objective'].to_pascal_case()
+				_on_objective_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['pronouns']['objective'])
 		
 		elif i.name.begins_with("possessive_dep"):
-			if Pronouns.player_pronouns[pronoun].has('possessive_dep'):
-				i.text = Pronouns.player_pronouns[pronoun]['possessive_dep'].to_pascal_case()
-				_on_possessive_dep_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['possessive_dep'])
+			if Pronouns.player_pronouns[pronoun]['pronouns'].has('possessive_dep'):
+				i.text = Pronouns.player_pronouns[pronoun]['pronouns']['possessive_dep'].to_pascal_case()
+				_on_possessive_dep_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['pronouns']['possessive_dep'])
 		
 		elif i.name.begins_with("possessive_indep"):
-			if Pronouns.player_pronouns[pronoun].has('possessive_indep'):
-				i.text = Pronouns.player_pronouns[pronoun]['possessive_indep'].to_pascal_case()
-				_on_possessive_indep_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['possessive_indep'])
+			if Pronouns.player_pronouns[pronoun]['pronouns'].has('possessive_indep'):
+				i.text = Pronouns.player_pronouns[pronoun]['pronouns']['possessive_indep'].to_pascal_case()
+				_on_possessive_indep_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['pronouns']['possessive_indep'])
 		
 		elif i.name.begins_with("reflexive"):
-			if Pronouns.player_pronouns[pronoun].has('reflexive'):
-				i.text = Pronouns.player_pronouns[pronoun]['reflexive'].to_pascal_case()
-				_on_reflexive_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['reflexive'], pronoun, curr_custom_dict)
+			if Pronouns.player_pronouns[pronoun]['pronouns'].has('reflexive'):
+				i.text = Pronouns.player_pronouns[pronoun]['pronouns']['reflexive'].to_pascal_case()
+				_on_reflexive_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['pronouns']['reflexive'], pronoun, curr_custom_dict)
 
 	if Pronouns.player_pronouns == {}:
 		for i in get_line_edits():
@@ -274,6 +278,7 @@ func display_line_edits(pronoun: String):
 func check_custom() -> void:
 	if !Pronouns.player_pronouns.has(curr_custom_dict):
 		Pronouns.player_pronouns[curr_custom_dict] = {}
+		Pronouns.player_pronouns[curr_custom_dict]['pronouns'] = {}
 		Pronouns.custom_pronouns[curr_custom_dict] = {}
 
 
@@ -329,3 +334,4 @@ func _on_delete_button_pressed() -> void:
 func _on_verbs_button_pressed() -> void:
 	Pronouns.set_sentence.emit()
 	examples_sentence.show()
+	print(Pronouns.randomize_pronoun())

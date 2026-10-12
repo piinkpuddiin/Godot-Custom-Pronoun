@@ -53,6 +53,13 @@ var gender_expression:= {
 	"custom": {}
 }
 
+## For ease of writing.
+var they = ""
+var them = ""
+var their = ""
+var theirs = ""
+var themselves = ""
+
 ## VERBS
 ## The verbs go from singular to the plural pronoun
 var are = ["is", "are"]
@@ -64,6 +71,17 @@ var do = ["does", "do"]
 var dont = ["doesn't", "don't"]
 var s = ["s", ""]
 var es = ["es", ""]
+
+func randomize_pronoun() -> String:
+	var subjective_arr:= []
+	#print("the randomize: ",player_pronouns)
+	for i in player_pronouns.keys():
+		if i == "":
+			continue
+		subjective_arr.append(player_pronouns[i]['pronouns']['subjective'])
+	subjective_arr.shuffle()
+	they = subjective_arr.pick_random()
+	return they
 
 #region SAVE/LOAD
 
@@ -97,6 +115,5 @@ func _load(save_name: String):
 	var saved_pronouns = config_file.get_value("Pronouns", "player", {})
 	load_data['pronouns'] = saved_pronouns
 	
-	#print("The loaded data: ", load_data)
 	return load_data
 #endregion

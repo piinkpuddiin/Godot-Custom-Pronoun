@@ -416,17 +416,9 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
 text = "Back"
 
-[node name="confirm_button" type="Button" parent="Panel/MarginContainer" unique_id=1807813894]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_font_sizes/font_size = 24
-text = "Confirm"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1791988761]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_bax13")
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Panel/MarginContainer/back_button" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/confirm_button" to="." method="_on_confirm_button_pressed"]
