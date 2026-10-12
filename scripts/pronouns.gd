@@ -1,7 +1,7 @@
 extends Node
 
-#NOTE: Watch out for pronoun grammar mistakes...
-#TODO: add multiple set of custom pronouns (hopefully without the need of a limit.)
+# TODO: Match the verbs with the correct pronoun, even when randomized...
+#NOTE: Watch out for pronoun grammar mistakes.
 
 signal curr_pronoun(pronoun)
 signal curr_custom(custom)
@@ -51,6 +51,9 @@ var gender_expression:= {
 	"custom": {}
 }
 
+# The current result of the randomized pronoun
+var current_pronoun: String
+
 ## For ease of writing.
 var they = ""
 var them = ""
@@ -61,6 +64,10 @@ var themselves = ""
 ## VERBS
 ## The verbs go from singular to the plural pronoun
 # TODO: add the ies verb
+
+## Verb value, 0: singular, 1: plural
+var vv: int = 0 
+
 var are = ["is", "are"]
 var were = ["was", "were"]
 var have = ["has", "have"]
@@ -70,17 +77,86 @@ var do = ["does", "do"]
 var dont = ["doesn't", "don't"]
 var s = ["s", ""]
 var es = ["es", ""]
+# TODO: to properly implement
+var ies = ["ies", ""]
 
 
-func they_randomize() -> String:
-	var subjective_arr:= []
+func _ready() -> void:
+	Dialogic.Text.about_to_show_text.connect(they_randomize)
+	Dialogic.Text.about_to_show_text.connect(them_randomize)
+	Dialogic.Text.about_to_show_text.connect(their_randomize)
+	Dialogic.Text.about_to_show_text.connect(theirs_randomize)
+	Dialogic.Text.about_to_show_text.connect(themselves_randomize)
+	
+	Dialogic.Text.about_to_show_text.connect(randomized_verbs)
+
+
+func randomized_verbs(_info: Dictionary = {}) -> int:
+	if they in player_pronouns.keys():
+		if player_pronouns[they]['verbs'].has('are'):
+			vv = player_pronouns[they]['verbs']['are']
+	print(_info['text'])
+	return vv
+
+
+func they_randomize(_info: Dictionary = {}) -> String:
+	var pronoun_arr:= []
 	for i in player_pronouns.keys():
 		if i == "":
 			continue
-		subjective_arr.append(player_pronouns[i]['pronouns']['subjective'])
-	subjective_arr.shuffle()
-	they = subjective_arr.pick_random()
+		pronoun_arr.append(player_pronouns[i]['pronouns']['subjective'])
+	pronoun_arr.shuffle()
+	they = pronoun_arr.pick_random()
 	return they
+
+
+func them_randomize(_info: Dictionary = {}) -> String:
+	var pronoun_arr:= []
+	for i in player_pronouns.keys():
+		if i == "":
+			continue
+		pronoun_arr.append(player_pronouns[i]['pronouns']['objective'])
+	pronoun_arr.shuffle()
+	them = pronoun_arr.pick_random()
+	return them
+
+
+func their_randomize(_info: Dictionary = {}) -> String:
+	var pronoun_arr:= []
+	for i in player_pronouns.keys():
+		if i == "":
+			continue
+		pronoun_arr.append(player_pronouns[i]['pronouns']['possessive_dep'])
+	pronoun_arr.shuffle()
+	their = pronoun_arr.pick_random()
+	return their
+
+
+func theirs_randomize(_info: Dictionary = {}) -> String:
+	var pronoun_arr:= []
+	for i in player_pronouns.keys():
+		if i == "":
+			continue
+		pronoun_arr.append(player_pronouns[i]['pronouns']['possessive_indep'])
+	pronoun_arr.shuffle()
+	theirs = pronoun_arr.pick_random()
+	return theirs
+
+
+func themselves_randomize(_info: Dictionary= {}) -> String:
+	var pronoun_arr:= []
+	for i in player_pronouns.keys():
+		if i == "":
+			continue
+		pronoun_arr.append(player_pronouns[i]['pronouns']['reflexive'])
+	pronoun_arr.shuffle()
+	themselves = pronoun_arr.pick_random()
+	return themselves
+
+
+func capitalize_pronoun() -> void:
+	pass
+
 
 #region SAVE/LOAD
 

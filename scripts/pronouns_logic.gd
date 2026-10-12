@@ -38,7 +38,7 @@ var custom_num := 0
 var subjective_pronoun: String
 
 func _ready() -> void:
-	Pronouns.curr_pronoun.connect(set_curr_pronoun)
+	P.curr_pronoun.connect(set_curr_pronoun)
 	line_edits_editable(false)
 	line_edits_text_submitted()
 	set_defaults()
@@ -77,8 +77,8 @@ func line_edits_text_submitted() -> void:
 # respective type.
 func update_pronouns(new_text: String, type: String) -> void:
 	check_custom()
-	Pronouns.player_pronouns[curr_custom_dict]['pronouns'][type] = new_text.to_lower()
-	Pronouns.custom_pronouns[curr_custom_dict][type] = new_text.to_lower()
+	P.player_pronouns[curr_custom_dict]['pronouns'][type] = new_text.to_lower()
+	P.custom_pronouns[curr_custom_dict][type] = new_text.to_lower()
 
 
 func _on_add_button_pressed() -> void:
@@ -92,12 +92,12 @@ func _on_add_button_pressed() -> void:
 	button.text = custom_key
 	button.name = custom_key
 	# Initialize the custom key with no value
-	Pronouns.player_pronouns[custom_key] = {}
-	Pronouns.player_pronouns[custom_key]['pronouns'] = {}
-	Pronouns.custom_pronouns[custom_key] = {}
+	P.player_pronouns[custom_key] = {}
+	P.player_pronouns[custom_key]['pronouns'] = {}
+	P.custom_pronouns[custom_key] = {}
 	
 	button.toggled.connect(_toggle_custom_pronoun.bind(custom_key))
-	button.toggled.connect(line_edits_pronouns.bind(Pronouns.custom_pronouns, custom_key))
+	button.toggled.connect(line_edits_pronouns.bind(P.custom_pronouns, custom_key))
 	# Show the pronouns on hover/focus
 	button.mouse_entered.connect(display_line_edits.bind(custom_key))
 	button.focus_entered.connect(display_line_edits.bind(custom_key))
@@ -138,7 +138,7 @@ func set_defaults() -> void:
 		if i is Button and !i.name.begins_with("custom") and !i.name.begins_with("add"):
 			var pronoun = i.name.trim_suffix("_button")
 			i.toggled.connect(_toggle_default_pronouns.bind(pronoun))
-			i.toggled.connect(line_edits_pronouns.bind(Pronouns.default_pronouns, pronoun))
+			i.toggled.connect(line_edits_pronouns.bind(P.default_pronouns, pronoun))
 			# Show the pronouns if the mouse is hovering or the button is focused.
 			i.mouse_entered.connect(display_line_edits.bind(pronoun))
 			i.focus_entered.connect(display_line_edits.bind(pronoun))
@@ -157,8 +157,8 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 		check_custom()
 		line_edits_editable(true)
 		
-		if Pronouns.custom_pronouns.has(custom_pronoun):
-			Pronouns.player_pronouns[custom_pronoun]['pronouns'] = Pronouns.custom_pronouns[custom_pronoun]
+		if P.custom_pronouns.has(custom_pronoun):
+			P.player_pronouns[custom_pronoun]['pronouns'] = P.custom_pronouns[custom_pronoun]
 		
 		# We disable editing and saving, the pronouns have all already been set.
 		delete_button.disabled = false
@@ -166,8 +166,8 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 		set_curr_pronoun(custom_pronoun)
 	else:
 		# Remove the pronoun key from the player dict. Does not delete the pronoun.
-		if Pronouns.player_pronouns.get(custom_pronoun):
-			Pronouns.player_pronouns.erase(custom_pronoun)
+		if P.player_pronouns.get(custom_pronoun):
+			P.player_pronouns.erase(custom_pronoun)
 		# Clear the previous pronouns
 		line_edits_clear()
 		curent_pronoun_label.text = " "
@@ -178,13 +178,13 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 func _toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
 	if toggled_on:
 		check_custom()
-		print(Pronouns.player_pronouns)
-		Pronouns.player_pronouns[pronoun] = {}
-		Pronouns.player_pronouns[pronoun]['pronouns'] = Pronouns.default_pronouns[pronoun]
+		print(P.player_pronouns)
+		P.player_pronouns[pronoun] = {}
+		P.player_pronouns[pronoun]['pronouns'] = P.default_pronouns[pronoun]
 	else:
 		# Remove the pronoun key from the player dict. Does not delete the pronoun.
-		if Pronouns.player_pronouns.get(pronoun):
-			Pronouns.player_pronouns.erase(pronoun)
+		if P.player_pronouns.get(pronoun):
+			P.player_pronouns.erase(pronoun)
 		curent_pronoun_label.text = " "
 		curr_custom_dict = ""
 	
@@ -199,7 +199,7 @@ func line_edits_pronouns(toggled_on: bool, dict: Dictionary, pronoun: String):
 		return
 	
 	if toggled_on:
-		Pronouns.curr_pronoun.emit(pronoun)
+		P.curr_pronoun.emit(pronoun)
 		
 		for i in get_line_edits():
 			if i.name.begins_with("subjective"):
@@ -227,7 +227,7 @@ func line_edits_pronouns(toggled_on: bool, dict: Dictionary, pronoun: String):
 					i.text = dict[pronoun]['reflexive'].to_pascal_case()
 					_on_reflexive_line_edit_text_changed(dict[pronoun]['reflexive'], pronoun, curr_custom_dict)
 	
-	if Pronouns.player_pronouns == {}:
+	if P.player_pronouns == {}:
 		for i in get_line_edits():
 			i.text = ""
 
@@ -237,36 +237,36 @@ func display_line_edits(pronoun: String):
 	line_edits_clear()
 	
 	# We only want to see pronouns the player has choosen.
-	if !Pronouns.player_pronouns.has(pronoun):
+	if !P.player_pronouns.has(pronoun):
 		return
 	
 	for i in get_line_edits():
 		if i.name.begins_with("subjective"):
-			if Pronouns.player_pronouns[pronoun]['pronouns'].has('subjective'):
-				i.text = Pronouns.player_pronouns[pronoun]['pronouns']['subjective'].to_pascal_case()
-				_on_subjective_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['pronouns']['subjective'])
+			if P.player_pronouns[pronoun]['pronouns'].has('subjective'):
+				i.text = P.player_pronouns[pronoun]['pronouns']['subjective'].to_pascal_case()
+				_on_subjective_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['subjective'])
 		
 		elif i.name.begins_with("objective"):
-			if Pronouns.player_pronouns[pronoun]['pronouns'].has('objective'):
-				i.text = Pronouns.player_pronouns[pronoun]['pronouns']['objective'].to_pascal_case()
-				_on_objective_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['pronouns']['objective'])
+			if P.player_pronouns[pronoun]['pronouns'].has('objective'):
+				i.text = P.player_pronouns[pronoun]['pronouns']['objective'].to_pascal_case()
+				_on_objective_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['objective'])
 		
 		elif i.name.begins_with("possessive_dep"):
-			if Pronouns.player_pronouns[pronoun]['pronouns'].has('possessive_dep'):
-				i.text = Pronouns.player_pronouns[pronoun]['pronouns']['possessive_dep'].to_pascal_case()
-				_on_possessive_dep_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['pronouns']['possessive_dep'])
+			if P.player_pronouns[pronoun]['pronouns'].has('possessive_dep'):
+				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_dep'].to_pascal_case()
+				_on_possessive_dep_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['possessive_dep'])
 		
 		elif i.name.begins_with("possessive_indep"):
-			if Pronouns.player_pronouns[pronoun]['pronouns'].has('possessive_indep'):
-				i.text = Pronouns.player_pronouns[pronoun]['pronouns']['possessive_indep'].to_pascal_case()
-				_on_possessive_indep_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['pronouns']['possessive_indep'])
+			if P.player_pronouns[pronoun]['pronouns'].has('possessive_indep'):
+				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_indep'].to_pascal_case()
+				_on_possessive_indep_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['possessive_indep'])
 		
 		elif i.name.begins_with("reflexive"):
-			if Pronouns.player_pronouns[pronoun]['pronouns'].has('reflexive'):
-				i.text = Pronouns.player_pronouns[pronoun]['pronouns']['reflexive'].to_pascal_case()
-				_on_reflexive_line_edit_text_changed(Pronouns.player_pronouns[pronoun]['pronouns']['reflexive'], pronoun, curr_custom_dict)
+			if P.player_pronouns[pronoun]['pronouns'].has('reflexive'):
+				i.text = P.player_pronouns[pronoun]['pronouns']['reflexive'].to_pascal_case()
+				_on_reflexive_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['reflexive'], pronoun, curr_custom_dict)
 
-	if Pronouns.player_pronouns == {}:
+	if P.player_pronouns == {}:
 		for i in get_line_edits():
 			i.text = ""
 
@@ -276,42 +276,42 @@ func display_line_edits(pronoun: String):
 #region HELPER FUNCS
 ## Creates a custom key if it already doesn't exists.
 func check_custom() -> void:
-	if !Pronouns.player_pronouns.has(curr_custom_dict):
-		Pronouns.player_pronouns[curr_custom_dict] = {}
-		Pronouns.player_pronouns[curr_custom_dict]['pronouns'] = {}
-		Pronouns.custom_pronouns[curr_custom_dict] = {}
+	if !P.player_pronouns.has(curr_custom_dict):
+		P.player_pronouns[curr_custom_dict] = {}
+		P.player_pronouns[curr_custom_dict]['pronouns'] = {}
+		P.custom_pronouns[curr_custom_dict] = {}
 
 
 ## Saves the custom pronouns input.
 func save_custom_dict():
 	for i in get_line_edits():
 		if i.name.begins_with('subjective'):
-			Pronouns.player_pronouns[curr_custom_dict]['subjective'] = i.text
+			P.player_pronouns[curr_custom_dict]['subjective'] = i.text
 		elif i.name.begins_with('objective'):
-			Pronouns.player_pronouns[curr_custom_dict]['objective'] = i.text
+			P.player_pronouns[curr_custom_dict]['objective'] = i.text
 		elif i.name.begins_with('possessive_dep'):
-			Pronouns.player_pronouns[curr_custom_dict]['possessive_dep'] = i.text
+			P.player_pronouns[curr_custom_dict]['possessive_dep'] = i.text
 		elif i.name.begins_with('possessive_indep'):
-			Pronouns.player_pronouns[curr_custom_dict]['possessive_indep'] = i.text
+			P.player_pronouns[curr_custom_dict]['possessive_indep'] = i.text
 		elif i.name.begins_with('reflexive'):
-			Pronouns.player_pronouns[curr_custom_dict]['reflexive'] = i.text
+			P.player_pronouns[curr_custom_dict]['reflexive'] = i.text
 
 
 # Save all the pronouns to the save.
 func _on_save_button_pressed() -> void:
 	save_custom_dict()
-	Pronouns._save(save_name)
+	P._save(save_name)
 
 
 # Load the pronouns from the save.
 func _on_load_button_pressed() -> void:
-	Pronouns._load(save_name)
-	Pronouns.loaded_pronouns.emit(save_name)
+	P._load(save_name)
+	P.loaded_pronouns.emit(save_name)
 
 
 # Prints the current players pronouns.
 func _on_print_all_button_pressed() -> void:
-	print_rich("[b]All the pronouns:[/b] ", JSON.stringify((Pronouns.player_pronouns), "  "))
+	print_rich("[b]All the pronouns:[/b] ", JSON.stringify((P.player_pronouns), "  "))
 
 
 # Deletes the custom pronoun.
@@ -323,8 +323,8 @@ func _on_delete_button_pressed() -> void:
 	line_edits_editable(false)
 	line_edits_clear()
 	
-	Pronouns.player_pronouns.erase(curr_custom_dict)
-	Pronouns.custom_pronouns.erase(curr_custom_dict)
+	P.player_pronouns.erase(curr_custom_dict)
+	P.custom_pronouns.erase(curr_custom_dict)
 	print("Deleted: ", curr_custom_dict)
 	curent_pronoun_label.text = " "
 	curr_custom_dict = ""
@@ -332,7 +332,8 @@ func _on_delete_button_pressed() -> void:
 
 
 func _on_verbs_button_pressed() -> void:
-	Pronouns.set_sentence.emit()
+	P.set_sentence.emit()
 	examples_sentence.show()
-	Pronouns.they_randomize()
-	print(Pronouns.they)
+	
+	P.they_randomize()
+	print(P.they)

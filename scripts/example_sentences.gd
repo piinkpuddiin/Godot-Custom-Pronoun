@@ -30,9 +30,9 @@ var curr_pronoun: String
 # TODO: Show sentences on the first showing
 
 func _ready() -> void:
-	Pronouns.set_sentence.connect(example_sentence)
-	Pronouns.curr_verb.connect(update_sentence)
-	Pronouns.curr_pronoun.connect(set_pronoun)
+	P.set_sentence.connect(example_sentence)
+	P.curr_verb.connect(update_sentence)
+	P.curr_pronoun.connect(set_pronoun)
 	set_toggle()
 
 # Returns the most recent pronoun key
@@ -67,14 +67,14 @@ func set_toggle() -> void:
 func set_verb(toggled_on: bool, button: CheckButton, verb: String):
 	if toggled_on:
 		button.text = "Plural"
-		Pronouns.curr_verb.emit(verb, "plural")
+		P.curr_verb.emit(verb, "plural")
 	else:
 		button.text = "Singular"
-		Pronouns.curr_verb.emit(verb, "singular")
+		P.curr_verb.emit(verb, "singular")
 
 ## Set the example sentences once the screen is visible
 func example_sentence() -> void:
-	Pronouns.player_pronouns[curr_pronoun]['verbs'] = {}
+	P.player_pronouns[curr_pronoun]['verbs'] = {}
 	
 	update_sentence("are")
 	update_sentence("arent")
@@ -88,8 +88,8 @@ func example_sentence() -> void:
 	pronoun_label()
 
 func pronoun_label():
-	var subjective_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['pronouns']['subjective']
-	var obbjective_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['pronouns']['objective']
+	var subjective_pronoun: String = P.player_pronouns[curr_pronoun]['pronouns']['subjective']
+	var obbjective_pronoun: String = P.player_pronouns[curr_pronoun]['pronouns']['objective']
 	current_pronoun_label.text = (
 		"Current pronoun: [b]" + 
 		subjective_pronoun.capitalize() + 
@@ -99,8 +99,8 @@ func pronoun_label():
 
 
 func update_sentence(verb: String, _type: String = "singular") -> void:
-	var subjective_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['pronouns']['subjective']
-	var possessive_dep_pronoun: String = Pronouns.player_pronouns[curr_pronoun]['pronouns']['possessive_dep']
+	var subjective_pronoun: String = P.player_pronouns[curr_pronoun]['pronouns']['subjective']
+	var possessive_dep_pronoun: String = P.player_pronouns[curr_pronoun]['pronouns']['possessive_dep']
 	
 	var value: int = 0
 	
@@ -111,37 +111,37 @@ func update_sentence(verb: String, _type: String = "singular") -> void:
 	
 	match verb:
 		"are":
-			are_label.text = subjective_pronoun.capitalize() + " " + Pronouns.are[value] + are_sentence
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['are'] = ""
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['are'] = Pronouns.are[value]
+			are_label.text = subjective_pronoun.capitalize() + " " + P.are[value] + are_sentence
+			P.player_pronouns[curr_pronoun]['verbs']['are'] = ""
+			P.player_pronouns[curr_pronoun]['verbs']['are'] = value
 		"arent":
-			arent_label.text = subjective_pronoun.capitalize() + " " + Pronouns.arent[value] + arent_sentence
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['arent'] = ""
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['arent'] = Pronouns.arent[value]
+			arent_label.text = subjective_pronoun.capitalize() + " " + P.arent[value] + arent_sentence
+			P.player_pronouns[curr_pronoun]['verbs']['arent'] = ""
+			P.player_pronouns[curr_pronoun]['verbs']['arent'] = value
 		"were":
-			were_label.text = subjective_pronoun.capitalize() + " " + Pronouns.were[value] + were_sentence
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['were'] = ""
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['were'] = Pronouns.were[value]
+			were_label.text = subjective_pronoun.capitalize() + " " + P.were[value] + were_sentence
+			P.player_pronouns[curr_pronoun]['verbs']['were'] = ""
+			P.player_pronouns[curr_pronoun]['verbs']['were'] = value
 		"have":
-			have_label.text = subjective_pronoun.capitalize() + " " + Pronouns.have[value] + have_sentence
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['have'] = ""
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['have'] = Pronouns.have[value]
+			have_label.text = subjective_pronoun.capitalize() + " " + P.have[value] + have_sentence
+			P.player_pronouns[curr_pronoun]['verbs']['have'] = ""
+			P.player_pronouns[curr_pronoun]['verbs']['have'] = value
 		"do":
-			do_label.text = Pronouns.do[value].capitalize() + " " + subjective_pronoun + do_sentence
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['do'] = ""
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['do'] = Pronouns.do[value]
+			do_label.text = P.do[value].capitalize() + " " + subjective_pronoun + do_sentence
+			P.player_pronouns[curr_pronoun]['verbs']['do'] = ""
+			P.player_pronouns[curr_pronoun]['verbs']['do'] = value
 		"dont":
-			dont_label.text = Pronouns.dont[value].capitalize() + " " + subjective_pronoun + dont_sentence
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['dont'] = ""
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['dont'] = Pronouns.dont[value]
+			dont_label.text = P.dont[value].capitalize() + " " + subjective_pronoun + dont_sentence
+			P.player_pronouns[curr_pronoun]['verbs']['dont'] = ""
+			P.player_pronouns[curr_pronoun]['verbs']['dont'] = value
 		"s":
-			s_label.text = subjective_pronoun.capitalize() + " " + "work" + Pronouns.s[value] + s_sentence
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['s'] = ""
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['s'] = Pronouns.s[value]
+			s_label.text = subjective_pronoun.capitalize() + " " + "work" + P.s[value] + s_sentence
+			P.player_pronouns[curr_pronoun]['verbs']['s'] = ""
+			P.player_pronouns[curr_pronoun]['verbs']['s'] = value
 		"es":
-			es_label.text = subjective_pronoun.capitalize() + " " + "do" + Pronouns.es[value] + " " + possessive_dep_pronoun + es_sentence
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['es'] = ""
-			Pronouns.player_pronouns[curr_pronoun]['verbs']['es'] = Pronouns.es[value]
+			es_label.text = subjective_pronoun.capitalize() + " " + "do" + P.es[value] + " " + possessive_dep_pronoun + es_sentence
+			P.player_pronouns[curr_pronoun]['verbs']['es'] = ""
+			P.player_pronouns[curr_pronoun]['verbs']['es'] = value
 		_:
 			print("This verb does not exist.")
 			pass

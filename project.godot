@@ -19,7 +19,7 @@ config/icon="uid://crhyr4sppqrcq"
 [autoload]
 
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
-Pronouns="*uid://cygrlwg1v72ld"
+P="*uid://cygrlwg1v72ld"
 
 [debug]
 
@@ -34,7 +34,10 @@ directories/dch_directory={
 directories/dtl_directory={
 "timeline_pronouns": "res://timeline_pronouns.dtl"
 }
-layout/style_directory={}
+layout/style_directory={
+"": "res://dialogic_style.tres",
+"dialogic_style": "res://dialogic_style.tres"
+}
 text/letter_speed=0.01
 text/initial_text_reveal_skippable=true
 text/text_reveal_skip_delay=0.1
@@ -52,6 +55,24 @@ choices/reveal_delay=0
 choices/reveal_by_input=false
 save/autosave_delay=60.0
 save/encryption_on_exports_only=true
+text/autopauses={}
+audio/channel_defaults={
+"": {
+"audio_bus": "",
+"fade_length": 0.0,
+"loop": false,
+"volume": 0.0
+},
+"music": {
+"audio_bus": "",
+"fade_length": 0.0,
+"loop": true,
+"volume": 0.0
+}
+}
+layout/style_list=["res://dialogic_style.tres"]
+layout/default_style="res://dialogic_style.tres"
+glossary/default_case_sensitive=true
 
 [display]
 
