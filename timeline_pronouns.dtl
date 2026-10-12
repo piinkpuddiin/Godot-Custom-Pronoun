@@ -1,14 +1,6 @@
-n: This is an example timeline.
-n: These are your subjective pronouns\: {P.they}
-n: These are your subjective pronouns again\: {P.they}
-n: This is hard.
+n: these are your subjective pronouns\: {P.they}
 {P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often.
 {P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often.
 {P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often.
 {P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often.
-{P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often.
-{P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often.
-{P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often.
-{P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often.
-n: Hopefully there was a variation.
 return
