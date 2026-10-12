@@ -334,4 +334,5 @@ func _on_delete_button_pressed() -> void:
 func _on_verbs_button_pressed() -> void:
 	Pronouns.set_sentence.emit()
 	examples_sentence.show()
-	print(Pronouns.randomize_pronoun())
+	Pronouns.they_randomize()
+	print(Pronouns.they)

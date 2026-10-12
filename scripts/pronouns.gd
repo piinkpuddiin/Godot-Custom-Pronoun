@@ -1,8 +1,6 @@
 extends Node
 
 #NOTE: Watch out for pronoun grammar mistakes...
-#TODO: add verbs... like the fucking special ones...
-#TODO: mix and match pronouns, technically done
 #TODO: add multiple set of custom pronouns (hopefully without the need of a limit.)
 
 signal curr_pronoun(pronoun)
@@ -37,7 +35,7 @@ var default_pronouns:= {
 	}
 }
 
-# Temporarily holds the custom pronouns.
+# Temporarily holds the custom inputed pronouns.
 var custom_pronouns:= {}
 
 var gender_expression:= {
@@ -62,6 +60,7 @@ var themselves = ""
 
 ## VERBS
 ## The verbs go from singular to the plural pronoun
+# TODO: add the ies verb
 var are = ["is", "are"]
 var were = ["was", "were"]
 var have = ["has", "have"]
@@ -72,9 +71,9 @@ var dont = ["doesn't", "don't"]
 var s = ["s", ""]
 var es = ["es", ""]
 
-func randomize_pronoun() -> String:
+
+func they_randomize() -> String:
 	var subjective_arr:= []
-	#print("the randomize: ",player_pronouns)
 	for i in player_pronouns.keys():
 		if i == "":
 			continue
