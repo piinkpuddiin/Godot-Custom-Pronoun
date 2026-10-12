@@ -15,5 +15,6 @@ MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 5
 MarginContainer/constants/margin_top = 5
 Panel/styles/panel = SubResource("StyleBoxFlat_f24y1")
+RichTextLabel/colors/default_color = Color(0.8431839, 0.8431839, 0.84318376, 1)
 RichTextLabel/font_sizes/normal_font_size = 22
 VBoxContainer/constants/separation = 10

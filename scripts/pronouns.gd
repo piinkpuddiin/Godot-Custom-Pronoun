@@ -8,6 +8,7 @@ extends Node
 signal curr_pronoun(pronoun)
 signal curr_custom(custom)
 signal curr_verb()
+signal set_sentence
 signal loaded_pronouns
 
 var player_pronouns:= {}
@@ -35,6 +36,9 @@ var default_pronouns:= {
 		"reflexive": "themselves",
 	}
 }
+
+# Temporarily holds the custom pronouns.
+var custom_pronouns:= {}
 
 var gender_expression:= {
 	"neutral": {
@@ -93,6 +97,6 @@ func _load(save_name: String):
 	var saved_pronouns = config_file.get_value("Pronouns", "player", {})
 	load_data['pronouns'] = saved_pronouns
 	
-	print("The loaded data: ", load_data)
+	#print("The loaded data: ", load_data)
 	return load_data
 #endregion

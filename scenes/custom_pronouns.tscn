@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://8v6rjdnw80di"]
 
-[ext_resource type="Script" uid="uid://cuhnqi5epj7k2" path="res://pronouns_logic.gd" id="1_ew076"]
+[ext_resource type="Script" uid="uid://cuhnqi5epj7k2" path="res://scripts/pronouns_logic.gd" id="1_ghr00"]
 
 [sub_resource type="Theme" id="Theme_dmgw1"]
 Label/font_sizes/font_size = 30
@@ -24,7 +24,7 @@ corner_radius_top_right = 35
 corner_radius_bottom_right = 35
 corner_radius_bottom_left = 35
 
-[node name="CustomPronouns" type="Control" unique_id=78342683 node_paths=PackedStringArray("subjective_line_edit", "object_line_edit", "possessive_indep_line_edit", "possessive_dep_line_edit", "reflexive_line_edit", "subjective_example", "object_example", "possessive_indep_example", "possessive_dep_example", "reflexive_example", "line_edit_vbox", "pronoun_choice_hbox", "pronoun_choice_scroll_container", "curent_pronoun_label", "delete_button", "save_button")]
+[node name="CustomPronouns" type="Control" unique_id=78342683 node_paths=PackedStringArray("subjective_line_edit", "object_line_edit", "possessive_indep_line_edit", "possessive_dep_line_edit", "reflexive_line_edit", "subjective_example", "object_example", "possessive_indep_example", "possessive_dep_example", "reflexive_example", "line_edit_vbox", "pronoun_choice_hbox", "player_pronouns_hbox", "pronoun_choice_scroll_container", "curent_pronoun_label", "delete_button", "save_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +32,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_dmgw1")
-script = ExtResource("1_ew076")
+script = ExtResource("1_ghr00")
 save_name = "1"
 subjective_line_edit = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/subjective_vbox/subjective_line_edit")
 object_line_edit = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/object_vbox/objective_line_edit")
@@ -46,6 +46,7 @@ possessive_dep_example = NodePath("HBoxContainer/MarginContainer2/example_panel/
 reflexive_example = NodePath("HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/reflexive_vbox/reflexive_example_label")
 line_edit_vbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox")
 pronoun_choice_hbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox")
+player_pronouns_hbox = NodePath("MarginContainer/HBoxContainer/ScrollContainer/player_pronouns_hbox")
 pronoun_choice_scroll_container = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer")
 curent_pronoun_label = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/curent_pronoun_label")
 delete_button = NodePath("HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer/delete_button")
@@ -91,6 +92,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -110,7 +112,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "[current pronouns]"
+text = " "
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -291,7 +293,7 @@ text = "Subjective"
 [node name="subject_example_label" type="RichTextLabel" parent="HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/subjective_vbox" unique_id=1791170443]
 layout_mode = 2
 bbcode_enabled = true
-text = "[b]She[/b] did the job."
+text = "[b]___[/b] did the job."
 fit_content = true
 
 [node name="object_vbox" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer" unique_id=42194196]
@@ -304,7 +306,7 @@ text = "Objective"
 [node name="object_example_label" type="RichTextLabel" parent="HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/object_vbox" unique_id=1348326675]
 layout_mode = 2
 bbcode_enabled = true
-text = "Are you talking to [b]her[/b]?"
+text = "Are you talking to [b]___[/b]?"
 fit_content = true
 
 [node name="possessive_dep_vbox" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer" unique_id=1034481844]
@@ -317,7 +319,7 @@ text = "Possessive Dependant"
 [node name="possesive_dependant_label" type="RichTextLabel" parent="HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/possessive_dep_vbox" unique_id=790767130]
 layout_mode = 2
 bbcode_enabled = true
-text = "Working is [b]her[/b] only driving force."
+text = "Working is [b]___[/b] only driving force."
 fit_content = true
 
 [node name="possessive_indep_vbox" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer" unique_id=321333463]
@@ -330,7 +332,7 @@ text = "Possessive Independent"
 [node name="possesive_independant_label" type="RichTextLabel" parent="HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/possessive_indep_vbox" unique_id=1168573891]
 layout_mode = 2
 bbcode_enabled = true
-text = "This book is [b]hers[/b]."
+text = "This book is [b]___[/b]."
 fit_content = true
 
 [node name="reflexive_vbox" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer" unique_id=902478335]
@@ -343,8 +345,52 @@ text = "Reflexive"
 [node name="reflexive_example_label" type="RichTextLabel" parent="HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/reflexive_vbox" unique_id=2117123697]
 layout_mode = 2
 bbcode_enabled = true
-text = "She took charge all by [b]herself[/b]."
+text = "She took charge all by [b]___[/b]."
 fit_content = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=219037680]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="verbs_button" type="Button" parent="MarginContainer" unique_id=1150730478]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Verbs"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=984093856]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=1769298413]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Pronoun(s):"
+fit_content = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer" unique_id=1096751016]
+custom_minimum_size = Vector2(410, 35)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="player_pronouns_hbox" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ScrollContainer" unique_id=1105918655]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox/add_button" to="." method="_on_add_button_pressed"]
 [connection signal="text_changed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/subjective_vbox/subjective_line_edit" to="." method="_on_subjective_line_edit_text_changed"]
@@ -357,3 +403,4 @@ fit_content = true
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer/print_all_button" to="." method="_on_print_all_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer2/save_button" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer2/load_button" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="MarginContainer/verbs_button" to="." method="_on_verbs_button_pressed"]

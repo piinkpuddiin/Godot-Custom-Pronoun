@@ -1,0 +1,432 @@
+[gd_scene format=3 uid="uid://c33dl8n5kstxm"]
+
+[ext_resource type="Script" uid="uid://cwh34fi1bulsx" path="res://scripts/example_sentences.gd" id="1_o2fwr"]
+[ext_resource type="Shader" uid="uid://g122rjbh0i7b" path="res://shaders/blur.gdshader" id="2_iyick"]
+[ext_resource type="Theme" uid="uid://hn1qglo51or4" path="res://pronoun_theme.tres" id="2_o2fwr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aek14"]
+shader = ExtResource("2_iyick")
+shader_parameter/amount = 1.8000001
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 0.7490196)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi1ct"]
+bg_color = Color(0.08468992, 0.08468994, 0.08468988, 0.8)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p7k8k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2fwr"]
+
+[sub_resource type="Animation" id="Animation_o2fwr"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blur_color_rect:material:shader_parameter/amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.8000001, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_iyick"]
+resource_name = "blur_bg"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blur_color_rect:material:shader_parameter/amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(-9.5, -0.25, 0, 0.4, 13, 1.8000001, -0.40000004, -2.3000002, 0, 0),
+"times": PackedFloat32Array(-0.033333335, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bax13"]
+_data = {
+&"RESET": SubResource("Animation_o2fwr"),
+&"blur_bg": SubResource("Animation_iyick")
+}
+
+[node name="ExampleSentences" type="Control" unique_id=733475182 node_paths=PackedStringArray("vbox_container", "current_pronoun_label", "are_label", "arent_label", "were_label", "have_label", "do_label", "dont_label", "s_label", "es_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o2fwr")
+vbox_container = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer")
+current_pronoun_label = NodePath("Panel/MarginContainer/current_pronoun_label")
+are_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer/are_label")
+arent_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer/arent_label")
+were_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer/were_label")
+have_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer/have_label")
+do_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer/do_label")
+dont_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer/dont_label")
+s_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer/s_label")
+es_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer/es_label")
+
+[node name="blur_color_rect" type="ColorRect" parent="." unique_id=152564983]
+material = SubResource("ShaderMaterial_aek14")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=7624072]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=2042163947]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="current_pronoun_label" type="RichTextLabel" parent="Panel/MarginContainer" unique_id=1313239238]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/normal_font_size = 34
+bbcode_enabled = true
+text = "Current pronoun: [b]They/Them"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer" unique_id=1534172627]
+custom_minimum_size = Vector2(700, 410)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi1ct")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel" unique_id=921037064]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer" unique_id=1576903788]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="are_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=752861319]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o2fwr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel" unique_id=835521096]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer" unique_id=1356366565]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o2fwr")
+
+[node name="are_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer" unique_id=120486461]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="are_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer" unique_id=1345413435]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="arent_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=392040169]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o2fwr")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p7k8k")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel" unique_id=1918421839]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer" unique_id=1324578717]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o2fwr")
+
+[node name="arent_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=1930773529]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="arent_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=629490013]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="were_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1429795574]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o2fwr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel" unique_id=1268965587]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer" unique_id=142141983]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o2fwr")
+
+[node name="were_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer" unique_id=113410060]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="were_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer" unique_id=317367285]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="have_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=996886174]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o2fwr")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_o2fwr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel" unique_id=1951477763]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer" unique_id=389630915]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o2fwr")
+
+[node name="have_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=1267480670]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="have_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=10616149]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="do_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1917274669]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o2fwr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel" unique_id=941610490]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer" unique_id=359900955]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o2fwr")
+
+[node name="do_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=684988593]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="do_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=615695145]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="dont_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1922918899]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o2fwr")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p7k8k")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel" unique_id=1963239310]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer" unique_id=389023409]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o2fwr")
+
+[node name="dont_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=787641833]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="dont_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=1785237839]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="s_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1698498893]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o2fwr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel" unique_id=1519066035]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer" unique_id=1102479837]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o2fwr")
+
+[node name="s_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer" unique_id=1507978596]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="s_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer" unique_id=533750109]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="es_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1215786053]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_o2fwr")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p7k8k")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel" unique_id=617036124]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer" unique_id=169491524]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_o2fwr")
+
+[node name="es_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer" unique_id=2130984321]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet consecitur..."
+fit_content = true
+
+[node name="es_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer" unique_id=951941832]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Singular"
+
+[node name="back_button" type="Button" parent="Panel/MarginContainer" unique_id=1109656006]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[node name="confirm_button" type="Button" parent="Panel/MarginContainer" unique_id=1807813894]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Confirm"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1791988761]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_bax13")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="Panel/MarginContainer/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/confirm_button" to="." method="_on_confirm_button_pressed"]
