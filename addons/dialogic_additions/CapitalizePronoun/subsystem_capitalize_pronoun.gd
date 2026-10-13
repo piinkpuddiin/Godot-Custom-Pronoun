@@ -31,9 +31,12 @@ func modifier_capitalize_pronoun(text: String) -> String:
 		first_letter = i.left(1)
 		
 		if first_letter == " ":
-			first_letter = first_letter.replace(" ", "")
+			#first_letter = first_letter.replace(" ", "")
 			first_letter = i.left(2)
-			i = i.erase(2)
+			if first_letter.contains(" "):
+				first_letter = first_letter.erase(0)
+			print("The first letter: /",first_letter,"/")
+			i = i.erase(0, 2)
 		else:
 			i = i.erase(0)
 		
