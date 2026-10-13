@@ -43,6 +43,13 @@ func _ready() -> void:
 	line_edits_text_submitted()
 	set_defaults()
 
+#func _process(_delta: float) -> void:
+	#for i in pronoun_choice_hbox.get_children():
+		#if i.name == curr_custom_dict:
+			#if P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
+				#i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize()
+
+
 #region LINEEDITS
 ## Return all the line edits.
 func get_line_edits() -> Array[LineEdit]:
@@ -115,6 +122,15 @@ func _on_add_button_pressed() -> void:
 func _on_subjective_line_edit_text_changed(new_text: String) -> void:
 	subjective_example.text = "[b]" + new_text.capitalize() + "[/b] did the job."
 	subjective_pronoun = new_text
+	current_pronoun_label.text = new_text.capitalize()
+
+
+func _on_subjective_line_edit_editing_toggled(_toggled_on: bool) -> void:
+	for i in pronoun_choice_hbox.get_children():
+		if i.name == curr_custom_dict:
+			if P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
+				i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize()
+
 
 func _on_objective_line_edit_text_changed(new_text: String) -> void:
 	object_example.text = "Are you talking to [b]" + new_text.to_lower() + "[/b]?"
@@ -151,7 +167,7 @@ func set_curr_pronoun(custom_pronoun: String) -> void:
 	current_pronoun_label.text = custom_pronoun.capitalize()
 
 
-## A helper function for the toggle signal in the custom button
+## The function for the toggle signal in the custom button.
 func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 	if toggled_on:
 		check_custom()
@@ -196,7 +212,7 @@ func _toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
 	save_button.disabled = true
 
 
-## Sets the line_edit for both the custom and default pronouns.
+## Sets the line_edit for both the custom and default pronouns button.
 func line_edits_pronouns(toggled_on: bool, dict: Dictionary, pronoun: String):
 	if !dict.has(pronoun):
 		return
@@ -234,6 +250,7 @@ func line_edits_pronouns(toggled_on: bool, dict: Dictionary, pronoun: String):
 		for i in get_line_edits():
 			i.text = ""
 
+
 ## Only shows the currently hovered/focused pronouns.
 func display_line_edits(pronoun: String):
 	# We remove the previous pronouns.
@@ -242,6 +259,9 @@ func display_line_edits(pronoun: String):
 	# We only want to see pronouns the player has choosen.
 	if !P.player_pronouns.has(pronoun):
 		return
+	
+	if P.player_pronouns[pronoun]['pronouns'].has('subjective'):
+		current_pronoun_label.text = P.player_pronouns[pronoun]['pronouns']['subjective'].capitalize()
 	
 	for i in get_line_edits():
 		if i.name.begins_with("subjective"):
@@ -289,15 +309,15 @@ func check_custom() -> void:
 func save_custom_dict():
 	for i in get_line_edits():
 		if i.name.begins_with('subjective'):
-			P.player_pronouns[curr_custom_dict]['subjective'] = i.text
+			P.player_pronouns[curr_custom_dict]['pronouns']['subjective'] = i.text
 		elif i.name.begins_with('objective'):
-			P.player_pronouns[curr_custom_dict]['objective'] = i.text
+			P.player_pronouns[curr_custom_dict]['pronouns']['objective'] = i.text
 		elif i.name.begins_with('possessive_dep'):
-			P.player_pronouns[curr_custom_dict]['possessive_dep'] = i.text
+			P.player_pronouns[curr_custom_dict]['pronouns']['possessive_dep'] = i.text
 		elif i.name.begins_with('possessive_indep'):
-			P.player_pronouns[curr_custom_dict]['possessive_indep'] = i.text
+			P.player_pronouns[curr_custom_dict]['pronouns']['possessive_indep'] = i.text
 		elif i.name.begins_with('reflexive'):
-			P.player_pronouns[curr_custom_dict]['reflexive'] = i.text
+			P.player_pronouns[curr_custom_dict]['pronouns']['reflexive'] = i.text
 
 
 # Save all the pronouns to the save.
@@ -334,11 +354,6 @@ func _on_delete_button_pressed() -> void:
 #endregion
 
 
-func _on_verbs_button_pressed() -> void:
-	P.set_sentence.emit()
-	examples_sentence.show()
-	set_new_keys()
-
 ## Set the player_pronouns custom_foo keys as their subjective pronoun.
 ## "custom_1" : {'pronouns': {'subjective': 'doll'}} becomes -> "doll" : {'pronouns': {'subjective': 'doll'}}
 func set_new_keys() -> void:
@@ -347,3 +362,9 @@ func set_new_keys() -> void:
 			var new_key = P.player_pronouns[i]['pronouns']['subjective'] 
 			P.player_pronouns[new_key] = P.player_pronouns[i]
 			P.player_pronouns.erase(i)
+
+
+func _on_verbs_button_pressed() -> void:
+	P.set_sentence.emit()
+	examples_sentence.show()
+	set_new_keys() 
