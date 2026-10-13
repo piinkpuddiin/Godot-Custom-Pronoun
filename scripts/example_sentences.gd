@@ -72,7 +72,7 @@ func set_verb(toggled_on: bool, button: CheckButton, verb: String):
 		button.text = "Singular"
 		P.curr_verb.emit(verb, "singular")
 
-## Set the example sentences once the screen is visible
+## Set the example sentences once the screen is shown.
 func example_sentence() -> void:
 	P.player_pronouns[curr_pronoun]['verbs'] = {}
 	
@@ -111,35 +111,35 @@ func update_sentence(verb: String, _type: String = "singular") -> void:
 	
 	match verb:
 		"are":
-			are_label.text = subjective_pronoun.capitalize() + " " + P.are[value] + are_sentence
+			are_label.text = subjective_pronoun.capitalize() + " " + P.are_arr[value] + are_sentence
 			P.player_pronouns[curr_pronoun]['verbs']['are'] = ""
 			P.player_pronouns[curr_pronoun]['verbs']['are'] = value
 		"arent":
-			arent_label.text = subjective_pronoun.capitalize() + " " + P.arent[value] + arent_sentence
+			arent_label.text = subjective_pronoun.capitalize() + " " + P.arent_arr[value] + arent_sentence
 			P.player_pronouns[curr_pronoun]['verbs']['arent'] = ""
 			P.player_pronouns[curr_pronoun]['verbs']['arent'] = value
 		"were":
-			were_label.text = subjective_pronoun.capitalize() + " " + P.were[value] + were_sentence
+			were_label.text = subjective_pronoun.capitalize() + " " + P.were_arr[value] + were_sentence
 			P.player_pronouns[curr_pronoun]['verbs']['were'] = ""
 			P.player_pronouns[curr_pronoun]['verbs']['were'] = value
 		"have":
-			have_label.text = subjective_pronoun.capitalize() + " " + P.have[value] + have_sentence
+			have_label.text = subjective_pronoun.capitalize() + " " + P.have_arr[value] + have_sentence
 			P.player_pronouns[curr_pronoun]['verbs']['have'] = ""
 			P.player_pronouns[curr_pronoun]['verbs']['have'] = value
 		"do":
-			do_label.text = P.do[value].capitalize() + " " + subjective_pronoun + do_sentence
+			do_label.text = P.do_arr[value].capitalize() + " " + subjective_pronoun + do_sentence
 			P.player_pronouns[curr_pronoun]['verbs']['do'] = ""
 			P.player_pronouns[curr_pronoun]['verbs']['do'] = value
 		"dont":
-			dont_label.text = P.dont[value].capitalize() + " " + subjective_pronoun + dont_sentence
+			dont_label.text = P.dont_arr[value].capitalize() + " " + subjective_pronoun + dont_sentence
 			P.player_pronouns[curr_pronoun]['verbs']['dont'] = ""
 			P.player_pronouns[curr_pronoun]['verbs']['dont'] = value
 		"s":
-			s_label.text = subjective_pronoun.capitalize() + " " + "work" + P.s[value] + s_sentence
+			s_label.text = subjective_pronoun.capitalize() + " " + "work" + P.s_arr[value] + s_sentence
 			P.player_pronouns[curr_pronoun]['verbs']['s'] = ""
 			P.player_pronouns[curr_pronoun]['verbs']['s'] = value
 		"es":
-			es_label.text = subjective_pronoun.capitalize() + " " + "do" + P.es[value] + " " + possessive_dep_pronoun + es_sentence
+			es_label.text = subjective_pronoun.capitalize() + " " + "do" + P.es_arr[value] + " " + possessive_dep_pronoun + es_sentence
 			P.player_pronouns[curr_pronoun]['verbs']['es'] = ""
 			P.player_pronouns[curr_pronoun]['verbs']['es'] = value
 		_:

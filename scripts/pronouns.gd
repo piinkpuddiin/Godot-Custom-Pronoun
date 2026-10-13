@@ -5,8 +5,11 @@ extends Node
 
 signal curr_pronoun(pronoun)
 signal curr_custom(custom)
+# Emitted to set the proper verb to the current pronoun
 signal curr_verb()
+# Emitted once the verbs button is clicked.
 signal set_sentence
+# Emitted once the pronouns have been loaded.
 signal loaded_pronouns
 
 var player_pronouns:= {}
@@ -38,6 +41,7 @@ var default_pronouns:= {
 # Temporarily holds the custom inputed pronouns.
 var custom_pronouns:= {}
 
+# TODO: To finish.
 var gender_expression:= {
 	"neutral": {
 		"compliment_1": "Good looking",
@@ -62,23 +66,33 @@ var theirs = ""
 var themselves = ""
 
 ## VERBS
-## The verbs go from singular to the plural pronoun
-# TODO: add the ies verb
+## The verbs array go from singular to the plural pronoun
+var are = ""
+var are_arr = ["is", "are"]
 
-## Verb value, 0: singular, 1: plural
-var vv: int = 0 
+var arent = ""
+var arent_arr = ["isn't", "aren't"]
 
-var are = ["is", "are"]
-var were = ["was", "were"]
-var have = ["has", "have"]
-var havent = ["hasn't", "haven't"]
-var arent = ["isn't", "aren't"]
-var do = ["does", "do"]
-var dont = ["doesn't", "don't"]
-var s = ["s", ""]
-var es = ["es", ""]
-# TODO: to properly implement
-var ies = ["ies", ""]
+var were = ""
+var were_arr = ["was", "were"]
+
+var have = ""
+var have_arr = ["has", "have"]
+
+var havent = ""
+var havent_arr = ["hasn't", "haven't"]
+
+var do = ""
+var do_arr = ["does", "do"]
+
+var dont = ""
+var dont_arr = ["doesn't", "don't"]
+
+var s = ""
+var s_arr = ["s", ""]
+
+var es = ""
+var es_arr = ["es", ""]
 
 
 func _ready() -> void:
@@ -88,17 +102,77 @@ func _ready() -> void:
 	Dialogic.Text.about_to_show_text.connect(theirs_randomize)
 	Dialogic.Text.about_to_show_text.connect(themselves_randomize)
 	
-	Dialogic.Text.about_to_show_text.connect(randomized_verbs)
+	Dialogic.Text.about_to_show_text.connect(randomized_are)
+	Dialogic.Text.about_to_show_text.connect(randomized_arent)
+	Dialogic.Text.about_to_show_text.connect(randomized_were)
+	Dialogic.Text.about_to_show_text.connect(randomized_have)
+	Dialogic.Text.about_to_show_text.connect(randomized_havent)
+	Dialogic.Text.about_to_show_text.connect(randomized_do)
+	Dialogic.Text.about_to_show_text.connect(randomized_dont)
+	Dialogic.Text.about_to_show_text.connect(randomized_s)
+	Dialogic.Text.about_to_show_text.connect(randomized_es)
 
-
-func randomized_verbs(_info: Dictionary = {}) -> int:
+#region VERBS functions
+# TODO: Make one general randomized function.
+func randomized_are(_info: Dictionary = {}) -> String:
 	if they in player_pronouns.keys():
 		if player_pronouns[they]['verbs'].has('are'):
-			vv = player_pronouns[they]['verbs']['are']
-	print(_info['text'])
-	return vv
+			are = are_arr[player_pronouns[they]['verbs']['are']]
+	return are
+
+func randomized_arent(_info: Dictionary = {}) -> String:
+	if they in player_pronouns.keys():
+		if player_pronouns[they]['verbs'].has('arent'):
+			arent = arent_arr[player_pronouns[they]['verbs']['arent']]
+	return arent
+
+func randomized_dont(_info: Dictionary = {}) -> String:
+	if they in player_pronouns.keys():
+		if player_pronouns[they]['verbs'].has('dont'):
+			dont = dont_arr[player_pronouns[they]['verbs']['dont']]
+	print("The don't verb: ",dont)
+	return dont
+
+func randomized_were(_info: Dictionary = {}) -> String:
+	if they in player_pronouns.keys():
+		if player_pronouns[they]['verbs'].has('dont'):
+			were = were_arr[player_pronouns[they]['verbs']['were']]
+	return dont
+
+func randomized_have(_info: Dictionary = {}) -> String:
+	if they in player_pronouns.keys():
+		if player_pronouns[they]['verbs'].has('dont'):
+			have = dont_arr[player_pronouns[they]['verbs']['have']]
+	return have
+
+func randomized_havent(_info: Dictionary = {}) -> String:
+	if they in player_pronouns.keys():
+		if player_pronouns[they]['verbs'].has('havent'):
+			havent = havent_arr[player_pronouns[they]['verbs']['havent']]
+	return havent
+
+func randomized_do(_info: Dictionary = {}) -> String:
+	if they in player_pronouns.keys():
+		if player_pronouns[they]['verbs'].has('do'):
+			do = do_arr[player_pronouns[they]['verbs']['do']]
+	return do
+
+func randomized_s(_info: Dictionary = {}) -> String:
+	if they in player_pronouns.keys():
+		if player_pronouns[they]['verbs'].has('s'):
+			s = s_arr[player_pronouns[they]['verbs']['s']]
+	return s
+
+func randomized_es(_info: Dictionary = {}) -> String:
+	if they in player_pronouns.keys():
+		if player_pronouns[they]['verbs'].has('es'):
+			es = es_arr[player_pronouns[they]['verbs']['es']]
+	return es
+#endregion
 
 
+#region PRONOUNS functons
+# TODO: idem
 func they_randomize(_info: Dictionary = {}) -> String:
 	var pronoun_arr:= []
 	for i in player_pronouns.keys():
@@ -153,20 +227,19 @@ func themselves_randomize(_info: Dictionary= {}) -> String:
 	themselves = pronoun_arr.pick_random()
 	return themselves
 
-
-func capitalize_pronoun() -> void:
-	pass
+#endregion
 
 
 #region SAVE/LOAD
-
 const SAVE_PATH:= "user://"
 const FILE_PATH:= "_save.ini"
 
+# An example on how to save the players pronouns.
 func _save(save_name: String):
 	var config_file:= ConfigFile.new()
 	var error
 	
+	# Everything is stored in the `players_pronouns` dict.
 	config_file.set_value("Pronouns", "player", player_pronouns)
 	error = config_file.save(SAVE_PATH + save_name + FILE_PATH)
 	

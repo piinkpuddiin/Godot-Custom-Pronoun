@@ -9,7 +9,6 @@ func start_dialogue() -> void:
 		return
 	
 	Dialogic.start(timeline)
-	print("The dialogue started!")
 
 
 func _on_button_pressed() -> void:

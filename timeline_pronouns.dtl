@@ -1,6 +1,6 @@
-{P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often. {P.they} isn't as easy as I hoped...
-n: these are your subjective pronouns\: {P.they}
-{P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often.
-{P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often.
-{P.they} nodded to {P.themselves}. {P.they} {P.dont[P.vv]} do this often.
+n: These are your subjective pronouns\: {P.they}
+{P.they} nodded to {P.themselves}. {P.they} {P.dont} do this often. {P.they} isn't as easy as I hoped...
+{P.themselves} nodded to {P.their}. {P.they} {P.dont} do this often.
+{P.they} nodded to {P.themselves}. {P.they} {P.dont} do this often.
+{P.they} nodded to {P.themselves}. {P.they} {P.dont} do this often.
 return

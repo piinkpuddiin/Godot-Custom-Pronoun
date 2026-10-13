@@ -24,7 +24,7 @@ corner_radius_top_right = 35
 corner_radius_bottom_right = 35
 corner_radius_bottom_left = 35
 
-[node name="CustomPronouns" type="Control" unique_id=78342683 node_paths=PackedStringArray("subjective_line_edit", "object_line_edit", "possessive_indep_line_edit", "possessive_dep_line_edit", "reflexive_line_edit", "subjective_example", "object_example", "possessive_indep_example", "possessive_dep_example", "reflexive_example", "line_edit_vbox", "pronoun_choice_hbox", "player_pronouns_hbox", "pronoun_choice_scroll_container", "curent_pronoun_label", "delete_button", "save_button")]
+[node name="CustomPronouns" type="Control" unique_id=78342683 node_paths=PackedStringArray("subjective_line_edit", "object_line_edit", "possessive_indep_line_edit", "possessive_dep_line_edit", "reflexive_line_edit", "subjective_example", "object_example", "possessive_indep_example", "possessive_dep_example", "reflexive_example", "line_edit_vbox", "pronoun_choice_hbox", "player_pronouns_hbox", "pronoun_choice_scroll_container", "current_pronoun_label", "delete_button", "save_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,7 +48,7 @@ line_edit_vbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit
 pronoun_choice_hbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox")
 player_pronouns_hbox = NodePath("MarginContainer/HBoxContainer/ScrollContainer/player_pronouns_hbox")
 pronoun_choice_scroll_container = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer")
-curent_pronoun_label = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/curent_pronoun_label")
+current_pronoun_label = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/current_pronoun_label")
 delete_button = NodePath("HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer/delete_button")
 save_button = NodePath("HBoxContainer/pronoun_panel/MarginContainer/save_button")
 
@@ -108,7 +108,7 @@ theme_override_font_sizes/font_size = 35
 text = "PRONOUNS"
 horizontal_alignment = 1
 
-[node name="curent_pronoun_label" type="RichTextLabel" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox" unique_id=115434550]
+[node name="current_pronoun_label" type="RichTextLabel" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox" unique_id=115434550]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
@@ -345,7 +345,7 @@ text = "Reflexive"
 [node name="reflexive_example_label" type="RichTextLabel" parent="HBoxContainer/MarginContainer2/example_panel/MarginContainer/VBoxContainer/reflexive_vbox" unique_id=2117123697]
 layout_mode = 2
 bbcode_enabled = true
-text = "She took charge all by [b]___[/b]."
+text = "___ took charge all by [b]___[/b]."
 fit_content = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=219037680]

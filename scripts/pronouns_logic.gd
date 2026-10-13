@@ -28,7 +28,7 @@ extends Control
 @export var pronoun_choice_scroll_container: ScrollContainer
 
 @export_category("Custom")
-@export var curent_pronoun_label: RichTextLabel
+@export var current_pronoun_label: RichTextLabel
 @export var delete_button: Button
 @export var save_button: Button
 
@@ -148,7 +148,7 @@ func set_defaults() -> void:
 func set_curr_pronoun(custom_pronoun: String) -> void:
 	print_rich("The current custom pronoun: [b]", custom_pronoun)
 	curr_custom_dict = custom_pronoun
-	curent_pronoun_label.text = custom_pronoun.capitalize()
+	current_pronoun_label.text = custom_pronoun.capitalize()
 
 
 ## A helper function for the toggle signal in the custom button
@@ -158,7 +158,10 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 		line_edits_editable(true)
 		
 		if P.custom_pronouns.has(custom_pronoun):
-			P.player_pronouns[custom_pronoun]['pronouns'] = P.custom_pronouns[custom_pronoun]
+			if !P.player_pronouns.has(custom_pronoun):
+				P.player_pronouns[custom_pronoun] = {}
+				P.player_pronouns[custom_pronoun]['pronouns'] = {}
+				P.player_pronouns[custom_pronoun]['pronouns'] = P.custom_pronouns[custom_pronoun]
 		
 		# We disable editing and saving, the pronouns have all already been set.
 		delete_button.disabled = false
@@ -170,7 +173,7 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 			P.player_pronouns.erase(custom_pronoun)
 		# Clear the previous pronouns
 		line_edits_clear()
-		curent_pronoun_label.text = " "
+		current_pronoun_label.text = " "
 		curr_custom_dict = ""
 
 
@@ -178,14 +181,14 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 func _toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
 	if toggled_on:
 		check_custom()
-		print(P.player_pronouns)
+		#print(P.player_pronouns)
 		P.player_pronouns[pronoun] = {}
 		P.player_pronouns[pronoun]['pronouns'] = P.default_pronouns[pronoun]
 	else:
 		# Remove the pronoun key from the player dict. Does not delete the pronoun.
 		if P.player_pronouns.get(pronoun):
 			P.player_pronouns.erase(pronoun)
-		curent_pronoun_label.text = " "
+		current_pronoun_label.text = " "
 		curr_custom_dict = ""
 	
 	line_edits_editable(false)
@@ -326,7 +329,7 @@ func _on_delete_button_pressed() -> void:
 	P.player_pronouns.erase(curr_custom_dict)
 	P.custom_pronouns.erase(curr_custom_dict)
 	print("Deleted: ", curr_custom_dict)
-	curent_pronoun_label.text = " "
+	current_pronoun_label.text = " "
 	curr_custom_dict = ""
 #endregion
 
@@ -334,6 +337,13 @@ func _on_delete_button_pressed() -> void:
 func _on_verbs_button_pressed() -> void:
 	P.set_sentence.emit()
 	examples_sentence.show()
-	
-	P.they_randomize()
-	print(P.they)
+	set_new_keys()
+
+## Set the player_pronouns custom_foo keys as their subjective pronoun.
+## "custom_1" : {'pronouns': {'subjective': 'doll'}} becomes -> "doll" : {'pronouns': {'subjective': 'doll'}}
+func set_new_keys() -> void:
+	for i in P.player_pronouns.keys():
+		if i.begins_with("custom_"):
+			var new_key = P.player_pronouns[i]['pronouns']['subjective'] 
+			P.player_pronouns[new_key] = P.player_pronouns[i]
+			P.player_pronouns.erase(i)
