@@ -19,26 +19,37 @@ func _load_state(load_flag:=LoadFlags.FULL_LOAD) -> void:
 ####################################################################################################
 
 func modifier_capitalize_pronoun(text: String) -> String:
-	#... we have to use regex good lord...
-	var text_array = text.split(".")
+	#... we HAVE to use regex good lord...
 	var new_array: Array[String]
+	var new_text: String = ""
 	
-	for i in text_array:
-		var first_letter: String = i.left(1)
+	var r:= RegEx.new()
+	#r.compile("\\s*[!?\\.]\\s*")
+	r.compile("([^\\.!?]*[\\.!?])")
+	
+	for i in r.search_all(text):
+		#print("'", i.get_string(), "'")
+		var r_string: String = i.get_string()
+		var first_letter: String
 		
-		# Checks if there is blank space before the first word in the sentence.
-		if first_letter == " ":
-			first_letter = i.left(2)
-			#print("The first letter: /",first_letter,"/")
-			i = i.erase(0, 2)
+		if r_string[0] == " ":
+			first_letter = r_string[1]
+			r_string = r_string.erase(0,2)
+			r_string = " " + first_letter.to_upper() + r_string
+			
+			#print("the first letter", first_letter.to_upper())
+			#print("deleted first letter", r_string)
 		else:
-			i = i.erase(0)
+			first_letter = r_string[0]
+			r_string = r_string.erase(0)
+			r_string = first_letter.to_upper() + r_string
 		
-		i = first_letter.to_upper() + i
-		#print("The sentence: ",i)
-		new_array.append(i)
+		new_array.append(r_string)
+		print("The r_string: ", r_string)
 	
-	var new_text = ".".join(new_array)
+	for i in new_array:
+		new_text += i
+	
 	return new_text
 
 
