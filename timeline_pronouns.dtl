@@ -1,7 +1,7 @@
 # Make sensical and logical sentences examples...
 n: These are your subjective pronouns\: {P.they}
-{P.they} nodded to {P.themselves}. {P.they} {P.dont} do this often. {P.they} isn't as easy as I hoped...
-{P.themselves} nodded to {P.their}. {P.they} {P.dont} do this often.
-{P.they} nodded to {P.themselves}. {P.they} {P.dont} do this often.
-{P.they} nodded to {P.themselves}. {P.they} {P.dont} do this often.
+n: {P.were} {P.they} ready? {P.they} nodded to {P.themselves}. {P.they} {P.were}.
+{P.they} slept through {P.their} alarm. Which is why their friend didn't see {P.them}.
+{P.they} clean{P.s} {P.their} room quite often.
+{P.they} {P.dont} know the address. Which is why {P.they} asked {P.their} friend.
 return

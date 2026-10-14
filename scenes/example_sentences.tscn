@@ -205,6 +205,7 @@ theme = ExtResource("2_o2fwr")
 [node name="arent_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=1930773529]
 layout_mode = 2
 size_flags_horizontal = 3
+bbcode_enabled = true
 text = "___ walking to class."
 fit_content = true
 
@@ -271,6 +272,7 @@ theme = ExtResource("2_o2fwr")
 [node name="have_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=1267480670]
 layout_mode = 2
 size_flags_horizontal = 3
+bbcode_enabled = true
 text = "___ run out of time."
 fit_content = true
 
@@ -303,6 +305,7 @@ theme = ExtResource("2_o2fwr")
 [node name="do_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=684988593]
 layout_mode = 2
 size_flags_horizontal = 3
+bbcode_enabled = true
 text = "___ like coffee?"
 fit_content = true
 
@@ -336,6 +339,7 @@ theme = ExtResource("2_o2fwr")
 [node name="dont_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=787641833]
 layout_mode = 2
 size_flags_horizontal = 3
+bbcode_enabled = true
 text = "___ like candy?"
 fit_content = true
 
@@ -368,6 +372,7 @@ theme = ExtResource("2_o2fwr")
 [node name="s_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer" unique_id=1507978596]
 layout_mode = 2
 size_flags_horizontal = 3
+bbcode_enabled = true
 text = "___ like a machine."
 fit_content = true
 
@@ -401,6 +406,7 @@ theme = ExtResource("2_o2fwr")
 [node name="es_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer" unique_id=2130984321]
 layout_mode = 2
 size_flags_horizontal = 3
+bbcode_enabled = true
 text = "___ homework every day."
 fit_content = true
 

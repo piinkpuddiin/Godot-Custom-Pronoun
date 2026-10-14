@@ -1,7 +1,6 @@
 extends Node
 
-# TODO: Match the verbs with the correct pronoun, even when randomized...
-#NOTE: Watch out for pronoun grammar mistakes.
+# NOTE: Watch out for pronoun grammar mistakes.
 
 signal curr_pronoun(pronoun)
 signal curr_custom(custom)
@@ -115,7 +114,6 @@ func _ready() -> void:
 	Dialogic.Text.about_to_show_text.connect(randomized_es)
 
 #region VERBS functions
-# TODO: Make one general randomized function.
 func randomized_are(_info: Dictionary = {}) -> String:
 	if they in player_pronouns.keys():
 		if player_pronouns[they]['verbs'].has('are'):
@@ -175,7 +173,6 @@ func randomized_es(_info: Dictionary = {}) -> String:
 # TODO add seed to make certain pronouns appear moe often than others.
 
 #region PRONOUNS functons
-# TODO: idem
 func they_randomize(_info: Dictionary = {}) -> String:
 	var pronoun_arr:= []
 	for i in player_pronouns.keys():

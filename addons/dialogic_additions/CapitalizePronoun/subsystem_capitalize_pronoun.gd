@@ -19,6 +19,7 @@ func _load_state(load_flag:=LoadFlags.FULL_LOAD) -> void:
 ####################################################################################################
 
 func modifier_capitalize_pronoun(text: String) -> String:
+	#... we have to use regex good lord...
 	var text_array = text.split(".")
 	var new_array: Array[String]
 	
