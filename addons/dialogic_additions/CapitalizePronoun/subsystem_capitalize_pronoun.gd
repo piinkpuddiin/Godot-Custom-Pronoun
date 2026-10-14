@@ -1,7 +1,7 @@
 extends DialogicSubsystem
 
-## Checks where the pronouns are. If at the start of the sentence or
-## in front of a period, capitalize.
+## Capitalizes every first word of each sentence. If at the start of the sentence or
+## in front of a period, capitalize. And makes sure the bbcode is still in place.
 
 #region STATE
 ####################################################################################################
@@ -24,9 +24,6 @@ func modifier_capitalize_pronoun(text: String) -> String:
 	var bbcode_array: Array
 	var new_text: String = ""
 	
-	# TODO: get the bbcodes, their index, and the length of them + their closing tag, 
-	# and its placement
-	
 	# Strip the bbcode from the string. 
 	# https://github.com/godotengine/godot-proposals/issues/5056
 	var regex = RegEx.new()
@@ -35,10 +32,7 @@ func modifier_capitalize_pronoun(text: String) -> String:
 	for i in regex.search_all(text):
 		var bbcode = i.get_start()
 		bbcode_dict[bbcode] = i.get_string()
-		
-		print("bbcode: ", i.get_string())
-		print("bbcode idx: ", bbcode)
-	print("bbcode dict: ", bbcode_dict)
+	#print("bbcode dict: ", bbcode_dict)
 	
 	# We remove the bbcode from the text.
 	text = regex.sub(text, "", true)
