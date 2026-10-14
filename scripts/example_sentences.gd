@@ -3,6 +3,7 @@ extends Control
 @export var main: Node
 @export var dialogue: Node
 @export var pronouns: Node
+@export var _notification: Node
 @export var vbox_container: VBoxContainer
 
 @export_category("Sentences")
@@ -111,15 +112,16 @@ func set_verb(toggled_on: bool, button: CheckButton, verb: String):
 ## If the pronoun already has verbs set, show them if it's selected.
 func check_pronoun_verbs():
 	pronoun_label()
-	if P.player_pronouns[curr_pronoun].has('verbs'):
-		update_sentence(curr_pronoun, "are", P.player_pronouns[curr_pronoun]['verbs']['are'])
-		update_sentence(curr_pronoun, "arent", P.player_pronouns[curr_pronoun]['verbs']['arent'])
-		update_sentence(curr_pronoun, "were", P.player_pronouns[curr_pronoun]['verbs']['were'])
-		update_sentence(curr_pronoun, "have", P.player_pronouns[curr_pronoun]['verbs']['have'])
-		update_sentence(curr_pronoun, "do", P.player_pronouns[curr_pronoun]['verbs']['do'])
-		update_sentence(curr_pronoun, "dont", P.player_pronouns[curr_pronoun]['verbs']['dont'])
-		update_sentence(curr_pronoun, "s", P.player_pronouns[curr_pronoun]['verbs']['s'])
-		update_sentence(curr_pronoun, "es", P.player_pronouns[curr_pronoun]['verbs']['es'])
+	if P.player_pronouns.has(curr_pronoun):
+		if P.player_pronouns[curr_pronoun].has('verbs'):
+			update_sentence(curr_pronoun, "are", P.player_pronouns[curr_pronoun]['verbs']['are'])
+			update_sentence(curr_pronoun, "arent", P.player_pronouns[curr_pronoun]['verbs']['arent'])
+			update_sentence(curr_pronoun, "were", P.player_pronouns[curr_pronoun]['verbs']['were'])
+			update_sentence(curr_pronoun, "have", P.player_pronouns[curr_pronoun]['verbs']['have'])
+			update_sentence(curr_pronoun, "do", P.player_pronouns[curr_pronoun]['verbs']['do'])
+			update_sentence(curr_pronoun, "dont", P.player_pronouns[curr_pronoun]['verbs']['dont'])
+			update_sentence(curr_pronoun, "s", P.player_pronouns[curr_pronoun]['verbs']['s'])
+			update_sentence(curr_pronoun, "es", P.player_pronouns[curr_pronoun]['verbs']['es'])
 
 
 ## Set the example sentences once the screen is shown.
@@ -219,6 +221,9 @@ func update_sentence(pronoun: String, verb: String, value: int = 0) -> void:
 
 
 func _on_back_button_pressed() -> void:
+	# Only call when the pronouns need to be reset.
+	#P.player_pronouns.clear()
+	#pronouns.clear()
 	self.hide()
 
 
@@ -230,5 +235,4 @@ func _on_visibility_changed() -> void:
 
 
 func _on_timeline_test_button_pressed() -> void:
-	dialogue.start_dialogue()
-	pronouns.set_new_keys()
+	_notification.show()

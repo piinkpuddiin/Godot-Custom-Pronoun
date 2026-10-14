@@ -1,7 +1,7 @@
 n: This the test timeline.
+n: [color=pink]{P.they} slept through {P.their} alarm. Which is why their friend didn't see {P.them} at the meeting spot.
 n: {P.were} {P.they} ready? {P.they} nodded to {P.themselves}. {P.they} {P.were}.
-n: {P.they} slept through {P.their} alarm. Which is why their friend didn't see {P.them} at the meeting spot.
-n: {P.they} clean{P.s} {P.their} room quite often. {P.they} {P.are} very cleanly.
 n: {P.they} {P.dont} know the address. Which is why {P.they} asked {P.their} friend.
+n: {P.they} clean{P.s} {P.their} room quite often. {P.they} {P.are} very cleanly.
 [end_timeline]
 return

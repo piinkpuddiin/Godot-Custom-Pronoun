@@ -21,11 +21,19 @@ func _load_state(load_flag:=LoadFlags.FULL_LOAD) -> void:
 func modifier_capitalize_pronoun(text: String) -> String:
 	var text_array: Array[String]
 	var new_text: String = ""
+	print("the og:", text)
+	
+	# Strip the bbcode from the string. 
+	# https://github.com/godotengine/godot-proposals/issues/5056
+	#var regex = RegEx.new()
+	#regex.compile("\\[.+?\\]")
+	#text = regex.sub(text, "", true)
+	#print("parsed text...: ", text)
 	
 	var r:= RegEx.new()
 	# RedEx: This is a capturing group, it will begin with the start of the sentence and look 
 	# for any of the punctuations to close the group. Matches the literal punctuations as well. 
-	# (To re-explain later)
+	# (To re-explain/comment later)
 	r.compile("([^\\.!?]*[\\.!?])")
 	
 	for i in r.search_all(text):
@@ -49,10 +57,21 @@ func modifier_capitalize_pronoun(text: String) -> String:
 		text_array.append(r_string)
 		#print("The r_string: ", r_string)
 	
-	# Recreate the new sentence.
+	# Create the new sentence.
 	for i in text_array:
+		# We're adding the bbcode for visuals here.
+		#if i.contains(P.their):
+			#var i_pos = i.find(P.their)
+			#i = i.insert(i_pos,'[color=pink]')
+			#i = i.insert(i_pos + P.their.length() + len('[color=pink]'), '[/color]')
+		#if i.contains(P.they):
+			#var i_pos = i.find(P.they)
+			#i = i.insert(i_pos,'[color=black]')
+			#i = i.insert(i_pos + P.they.length() + len('[color=black]'), '[/color]')
+		
 		new_text += i
 	
+	print(new_text)
 	return new_text
 
 

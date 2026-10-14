@@ -409,3 +409,13 @@ func set_new_keys() -> void:
 				P.player_pronouns[new_key] = P.player_pronouns[i]
 				P.player_pronouns.erase(i)
 				print("new keys set: ", JSON.stringify((P.player_pronouns), "  "))
+
+func clear():
+	custom_num = 0
+	
+	for i in pronoun_choice_hbox.get_children():
+		if i.name == curr_custom_dict:
+			i.call_deferred("queue_free")
+	
+	for i in pronoun_choice_hbox.get_children():
+		i.button_pressed = false

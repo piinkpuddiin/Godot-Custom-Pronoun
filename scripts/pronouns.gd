@@ -113,6 +113,13 @@ func _ready() -> void:
 	Dialogic.Text.about_to_show_text.connect(randomized_s)
 	Dialogic.Text.about_to_show_text.connect(randomized_es)
 
+
+func clear() -> void:
+	for i in player_pronouns.keys():
+		player_pronouns.erase(i)
+	player_pronouns = {}
+
+
 #region VERBS functions
 func randomized_are(_info: Dictionary = {}) -> String:
 	if they in player_pronouns.keys():
@@ -130,7 +137,7 @@ func randomized_dont(_info: Dictionary = {}) -> String:
 	if they in player_pronouns.keys():
 		if player_pronouns[they]['verbs'].has('dont'):
 			dont = dont_arr[player_pronouns[they]['verbs']['dont']]
-	print("The don't verb: ",dont)
+	#print("The don't verb: ",dont)
 	return dont
 
 func randomized_were(_info: Dictionary = {}) -> String:
