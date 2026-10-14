@@ -20,15 +20,28 @@ func _load_state(load_flag:=LoadFlags.FULL_LOAD) -> void:
 
 func modifier_capitalize_pronoun(text: String) -> String:
 	var text_array: Array[String]
+	var bbcode_dict: Dictionary
+	var bbcode_array: Array
 	var new_text: String = ""
-	print("the og:", text)
+	
+	# TODO: get the bbcodes, their index, and the length of them + their closing tag, 
+	# and its placement
 	
 	# Strip the bbcode from the string. 
 	# https://github.com/godotengine/godot-proposals/issues/5056
-	#var regex = RegEx.new()
-	#regex.compile("\\[.+?\\]")
-	#text = regex.sub(text, "", true)
-	#print("parsed text...: ", text)
+	var regex = RegEx.new()
+	regex.compile("\\[.+?\\]")
+	# Store the bbcodes and their index in the dict.
+	for i in regex.search_all(text):
+		var bbcode = i.get_start()
+		bbcode_dict[bbcode] = i.get_string()
+		
+		print("bbcode: ", i.get_string())
+		print("bbcode idx: ", bbcode)
+	print("bbcode dict: ", bbcode_dict)
+	
+	# We remove the bbcode from the text.
+	text = regex.sub(text, "", true)
 	
 	var r:= RegEx.new()
 	# RedEx: This is a capturing group, it will begin with the start of the sentence and look 
@@ -59,17 +72,11 @@ func modifier_capitalize_pronoun(text: String) -> String:
 	
 	# Create the new sentence.
 	for i in text_array:
-		# We're adding the bbcode for visuals here.
-		#if i.contains(P.their):
-			#var i_pos = i.find(P.their)
-			#i = i.insert(i_pos,'[color=pink]')
-			#i = i.insert(i_pos + P.their.length() + len('[color=pink]'), '[/color]')
-		#if i.contains(P.they):
-			#var i_pos = i.find(P.they)
-			#i = i.insert(i_pos,'[color=black]')
-			#i = i.insert(i_pos + P.they.length() + len('[color=black]'), '[/color]')
-		
 		new_text += i
+	
+	# We add the bbcode back.
+	for i in bbcode_dict.keys():
+		new_text = new_text.insert(i, bbcode_dict[i])
 	
 	print(new_text)
 	return new_text

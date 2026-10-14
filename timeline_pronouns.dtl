@@ -1,7 +1,7 @@
 n: This the test timeline.
-n: [color=pink]{P.they} slept through {P.their} alarm. Which is why their friend didn't see {P.them} at the meeting spot.
-n: {P.were} {P.they} ready? {P.they} nodded to {P.themselves}. {P.they} {P.were}.
-n: {P.they} {P.dont} know the address. Which is why {P.they} asked {P.their} friend.
-n: {P.they} clean{P.s} {P.their} room quite often. {P.they} {P.are} very cleanly.
+n: [color=pink]{P.they}[/color] slept through [color=pink]{P.their}[/color] alarm. Which is why [color=pink]{P.their}[/color] friend didn't see [color=pink]{P.them}[/color] at the meeting spot.
+n: [color=green]{P.were}[/color] [color=pink]{P.they}[/color] ready? [color=pink]{P.they}[/color] nodded to [color=pink]{P.themselves}[/color]. [color=pink]{P.they}[/color] [color=blue]{P.were}[/color].
+n: [color=pink]{P.they}[/color] [color=blue]{P.dont}[/color] know the address. Which is why [color=pink]{P.they}[/color] asked [color=pink]{P.their}[/color] friend.
+n: [color=pink]{P.they}[/color] clean[color=blue]{P.s}[/color] [color=pink]{P.their}[/color] room quite often. [color=pink]{P.they}[/color] [color=blue]{P.are}[/color] very cleanly.
 [end_timeline]
 return
