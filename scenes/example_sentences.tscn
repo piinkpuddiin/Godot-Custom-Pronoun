@@ -62,7 +62,7 @@ _data = {
 &"blur_bg": SubResource("Animation_iyick")
 }
 
-[node name="ExampleSentences" type="Control" unique_id=733475182 node_paths=PackedStringArray("vbox_container", "current_pronoun_label", "are_label", "arent_label", "were_label", "have_label", "do_label", "dont_label", "s_label", "es_label")]
+[node name="ExampleSentences" type="Control" unique_id=733475182 node_paths=PackedStringArray("vbox_container", "current_pronoun_label", "are_label", "arent_label", "were_label", "have_label", "do_label", "dont_label", "s_label", "es_label", "custom_pronouns")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -80,6 +80,7 @@ do_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/d
 dont_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer/dont_label")
 s_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer/s_label")
 es_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer/es_label")
+custom_pronouns = NodePath("Panel/MarginContainer/VBoxContainer/custom_pronouns")
 
 [node name="blur_color_rect" type="ColorRect" parent="." unique_id=152564983]
 material = SubResource("ShaderMaterial_aek14")
@@ -171,7 +172,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 bbcode_enabled = true
-text = "Lorem ipsum dolor sit amet consecitur..."
+text = "___ running in the woods."
 fit_content = true
 
 [node name="are_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer" unique_id=1345413435]
@@ -204,7 +205,7 @@ theme = ExtResource("2_o2fwr")
 [node name="arent_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=1930773529]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Lorem ipsum dolor sit amet consecitur..."
+text = "___ walking to class."
 fit_content = true
 
 [node name="arent_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=629490013]
@@ -237,7 +238,7 @@ theme = ExtResource("2_o2fwr")
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-text = "Lorem ipsum dolor sit amet consecitur..."
+text = "___ aware of the extent of the damage."
 fit_content = true
 
 [node name="were_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer" unique_id=317367285]
@@ -270,7 +271,7 @@ theme = ExtResource("2_o2fwr")
 [node name="have_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=1267480670]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Lorem ipsum dolor sit amet consecitur..."
+text = "___ run out of time."
 fit_content = true
 
 [node name="have_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=10616149]
@@ -302,7 +303,7 @@ theme = ExtResource("2_o2fwr")
 [node name="do_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=684988593]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Lorem ipsum dolor sit amet consecitur..."
+text = "___ like coffee?"
 fit_content = true
 
 [node name="do_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=615695145]
@@ -335,7 +336,7 @@ theme = ExtResource("2_o2fwr")
 [node name="dont_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=787641833]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Lorem ipsum dolor sit amet consecitur..."
+text = "___ like candy?"
 fit_content = true
 
 [node name="dont_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=1785237839]
@@ -367,7 +368,7 @@ theme = ExtResource("2_o2fwr")
 [node name="s_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer" unique_id=1507978596]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Lorem ipsum dolor sit amet consecitur..."
+text = "___ like a machine."
 fit_content = true
 
 [node name="s_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer" unique_id=533750109]
@@ -400,7 +401,7 @@ theme = ExtResource("2_o2fwr")
 [node name="es_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer" unique_id=2130984321]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Lorem ipsum dolor sit amet consecitur..."
+text = "___ homework every day."
 fit_content = true
 
 [node name="es_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer" unique_id=951941832]
@@ -409,6 +410,22 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Singular"
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1389435485]
+custom_maximum_size = Vector2(-1, 600)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="all_pronouns_label" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer" unique_id=1830316307]
+custom_minimum_size = Vector2(193, 50)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[b]Pronoun(s):"
+
+[node name="custom_pronouns" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=854538277]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="back_button" type="Button" parent="Panel/MarginContainer" unique_id=1109656006]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -416,9 +433,16 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
 text = "Back"
 
+[node name="timeline_test_button" type="Button" parent="Panel/MarginContainer" unique_id=896515120]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Timeline test"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1791988761]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_bax13")
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Panel/MarginContainer/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/timeline_test_button" to="." method="_on_timeline_test_button_pressed"]

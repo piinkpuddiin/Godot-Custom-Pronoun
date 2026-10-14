@@ -12,8 +12,10 @@ signal set_sentence
 # Emitted once the pronouns have been loaded.
 signal loaded_pronouns
 
+# Stores all the pronouns and the pronouns correct verbs.
 var player_pronouns:= {}
 
+# The default pronouns, need to match the ones in the custom_pronouns hbox.
 var default_pronouns:= {
 	"she": {
 		"subjective": "she",
@@ -170,6 +172,7 @@ func randomized_es(_info: Dictionary = {}) -> String:
 	return es
 #endregion
 
+# TODO add seed to make certain pronouns appear moe often than others.
 
 #region PRONOUNS functons
 # TODO: idem
@@ -178,7 +181,8 @@ func they_randomize(_info: Dictionary = {}) -> String:
 	for i in player_pronouns.keys():
 		if i == "":
 			continue
-		pronoun_arr.append(player_pronouns[i]['pronouns']['subjective'])
+		if player_pronouns[i]['pronouns'].has('subjective'):
+			pronoun_arr.append(player_pronouns[i]['pronouns']['subjective'])
 	pronoun_arr.shuffle()
 	they = pronoun_arr.pick_random()
 	return they
@@ -189,7 +193,8 @@ func them_randomize(_info: Dictionary = {}) -> String:
 	for i in player_pronouns.keys():
 		if i == "":
 			continue
-		pronoun_arr.append(player_pronouns[i]['pronouns']['objective'])
+		if player_pronouns[i]['pronouns'].has('objective'):
+			pronoun_arr.append(player_pronouns[i]['pronouns']['objective'])
 	pronoun_arr.shuffle()
 	them = pronoun_arr.pick_random()
 	return them
@@ -200,7 +205,8 @@ func their_randomize(_info: Dictionary = {}) -> String:
 	for i in player_pronouns.keys():
 		if i == "":
 			continue
-		pronoun_arr.append(player_pronouns[i]['pronouns']['possessive_dep'])
+		if player_pronouns[i]['pronouns'].has('possessive_dep'):
+			pronoun_arr.append(player_pronouns[i]['pronouns']['possessive_dep'])
 	pronoun_arr.shuffle()
 	their = pronoun_arr.pick_random()
 	return their
@@ -211,7 +217,8 @@ func theirs_randomize(_info: Dictionary = {}) -> String:
 	for i in player_pronouns.keys():
 		if i == "":
 			continue
-		pronoun_arr.append(player_pronouns[i]['pronouns']['possessive_indep'])
+		if player_pronouns[i]['pronouns'].has('possessive_indep'):
+			pronoun_arr.append(player_pronouns[i]['pronouns']['possessive_indep'])
 	pronoun_arr.shuffle()
 	theirs = pronoun_arr.pick_random()
 	return theirs
@@ -222,11 +229,11 @@ func themselves_randomize(_info: Dictionary= {}) -> String:
 	for i in player_pronouns.keys():
 		if i == "":
 			continue
-		pronoun_arr.append(player_pronouns[i]['pronouns']['reflexive'])
+		if player_pronouns[i]['pronouns'].has('reflexive'):
+			pronoun_arr.append(player_pronouns[i]['pronouns']['reflexive'])
 	pronoun_arr.shuffle()
 	themselves = pronoun_arr.pick_random()
 	return themselves
-
 #endregion
 
 

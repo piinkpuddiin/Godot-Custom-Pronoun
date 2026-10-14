@@ -9,7 +9,3 @@ func start_dialogue() -> void:
 		return
 	
 	Dialogic.start(timeline)
-
-
-func _on_button_pressed() -> void:
-	start_dialogue()

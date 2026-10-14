@@ -1,7 +1,8 @@
 extends Control
 
-# TODO: make it work in a text/dialogic setting
-# TODO: make the custom dict, show the subjective pronoun
+# TODO: Adjust pronouns UI, etc... make it simpler.
+# NOTE: Verbs is a new screen, allow for (potential) changes on the verbs screen.
+# Allow to change pronouns once set. Set the new key once everything has been saved and set.
 
 @export var main: Node
 @export var examples_sentence: Control
@@ -31,10 +32,11 @@ extends Control
 @export var current_pronoun_label: RichTextLabel
 @export var delete_button: Button
 @export var save_button: Button
+@export var next_button: Button
 
 var curr_custom_dict: String
 var curr_custom: String
-var custom_num := 0
+var custom_num:= 0
 var subjective_pronoun: String
 
 func _ready() -> void:
@@ -42,13 +44,7 @@ func _ready() -> void:
 	line_edits_editable(false)
 	line_edits_text_submitted()
 	set_defaults()
-
-#func _process(_delta: float) -> void:
-	#for i in pronoun_choice_hbox.get_children():
-		#if i.name == curr_custom_dict:
-			#if P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
-				#i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize()
-
+	check_verb()
 
 #region LINEEDITS
 ## Return all the line edits.
@@ -78,10 +74,27 @@ func line_edits_text_submitted() -> void:
 		# Save all the changes to the correct dict
 		i.text_submitted.connect(update_pronouns.bind(pronoun_type))
 		i.text_changed.connect(update_pronouns.bind(pronoun_type))
+
+## Check every line_edits text to see wheter or not it is empty.
+func line_edit_verbs() -> bool:
+	var bool_arr: Array[bool]
+	
+	for i in get_line_edits():
+		bool_arr.append(i.text.is_empty())
+	
+	if bool_arr.count(false) >= 5:
+		return false
+	else:
+		return true
+
+
+## Check wheter editing the verbs is possible.
+func check_verb() -> void:
+	next_button.disabled = line_edit_verbs()
 #endregion
 
-# Add the pronoun if it doesn't exist to the dict. Add the pronoun to it's
-# respective type.
+## Add the pronoun if it doesn't exist to the dict. Adds the pronoun to it's
+## respective type.
 func update_pronouns(new_text: String, type: String) -> void:
 	check_custom()
 	P.player_pronouns[curr_custom_dict]['pronouns'][type] = new_text.to_lower()
@@ -101,6 +114,7 @@ func _on_add_button_pressed() -> void:
 	# Initialize the custom key with no value
 	P.player_pronouns[custom_key] = {}
 	P.player_pronouns[custom_key]['pronouns'] = {}
+	P.player_pronouns[custom_key]['verbs'] = {}
 	P.custom_pronouns[custom_key] = {}
 	
 	button.toggled.connect(_toggle_custom_pronoun.bind(custom_key))
@@ -108,7 +122,6 @@ func _on_add_button_pressed() -> void:
 	# Show the pronouns on hover/focus
 	button.mouse_entered.connect(display_line_edits.bind(custom_key))
 	button.focus_entered.connect(display_line_edits.bind(custom_key))
-
 	
 	pronoun_choice_hbox.add_child(button)
 	await get_tree().process_frame
@@ -122,27 +135,47 @@ func _on_add_button_pressed() -> void:
 func _on_subjective_line_edit_text_changed(new_text: String) -> void:
 	subjective_example.text = "[b]" + new_text.capitalize() + "[/b] did the job."
 	subjective_pronoun = new_text
-	current_pronoun_label.text = new_text.capitalize()
+	check_verb()
 
-
+# Rename the button with it's subjective and/or subjective pronoun from the current pronoun dict key.
 func _on_subjective_line_edit_editing_toggled(_toggled_on: bool) -> void:
-	for i in pronoun_choice_hbox.get_children():
-		if i.name == curr_custom_dict:
-			if P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
-				i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize()
+	set_button_name()
+	check_verb()
 
 
 func _on_objective_line_edit_text_changed(new_text: String) -> void:
 	object_example.text = "Are you talking to [b]" + new_text.to_lower() + "[/b]?"
+	check_verb()
+
+# Rename the button with it's subjective and/or subjective pronoun from the current pronoun dict key.
+func _on_objective_line_edit_editing_toggled(_toggled_on: bool) -> void:
+	set_button_name()
+	check_verb()
+
 
 func _on_possessive_dep_line_edit_text_changed(new_text: String) -> void:
 	possessive_dep_example.text = "Working is [b]" + new_text + "[/b] only driving force."
+	check_verb()
 
 func _on_possessive_indep_line_edit_text_changed(new_text: String) -> void:
 	possessive_indep_example.text = "This book is [b]" + new_text + "[/b]."
+	check_verb()
 
 func _on_reflexive_line_edit_text_changed(new_text: String, _pronoun = "", _custom = "") -> void:
 	reflexive_example.text = subjective_pronoun.capitalize() + " will take care of [b]" + new_text + "[/b]."
+	check_verb()
+
+func set_button_name() -> void:
+	for i in pronoun_choice_hbox.get_children():
+			if i.name == curr_custom_dict:
+				if P.player_pronouns[curr_custom_dict]['pronouns'].has('objective') and P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
+					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize() + "/" + P.player_pronouns[curr_custom_dict]['pronouns']['objective'].capitalize()
+				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('objective'):
+					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['objective'].capitalize()
+				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
+					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize()
+				# Set the current pronoun label to the button name as well.
+				current_pronoun_label.text = i.text
 #endregion
 
 
@@ -176,7 +209,7 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 		if P.custom_pronouns.has(custom_pronoun):
 			if !P.player_pronouns.has(custom_pronoun):
 				P.player_pronouns[custom_pronoun] = {}
-				P.player_pronouns[custom_pronoun]['pronouns'] = {}
+				P.player_pronouns[custom_pronoun]['verbs'] = {}
 				P.player_pronouns[custom_pronoun]['pronouns'] = P.custom_pronouns[custom_pronoun]
 		
 		# We disable editing and saving, the pronouns have all already been set.
@@ -197,13 +230,14 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 func _toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
 	if toggled_on:
 		check_custom()
-		#print(P.player_pronouns)
 		P.player_pronouns[pronoun] = {}
 		P.player_pronouns[pronoun]['pronouns'] = P.default_pronouns[pronoun]
+		P.player_pronouns[pronoun]['verbs'] = {}
 	else:
 		# Remove the pronoun key from the player dict. Does not delete the pronoun.
 		if P.player_pronouns.get(pronoun):
 			P.player_pronouns.erase(pronoun)
+			print("erased: ",P.player_pronouns)
 		current_pronoun_label.text = " "
 		curr_custom_dict = ""
 	
@@ -302,6 +336,7 @@ func check_custom() -> void:
 	if !P.player_pronouns.has(curr_custom_dict):
 		P.player_pronouns[curr_custom_dict] = {}
 		P.player_pronouns[curr_custom_dict]['pronouns'] = {}
+		P.player_pronouns[curr_custom_dict]['verbs'] = {}
 		P.custom_pronouns[curr_custom_dict] = {}
 
 
@@ -354,17 +389,23 @@ func _on_delete_button_pressed() -> void:
 #endregion
 
 
+func _on_next_button_pressed() -> void:
+	# NOTE: creates so many bugs, set only after all the pronouns have been set.
+	#set_new_keys()
+	#P.set_sentence.emit()
+	
+	# Delete the empty key.
+	P.player_pronouns.erase("")
+	examples_sentence.add_pronouns()
+	examples_sentence.show()
+
 ## Set the player_pronouns custom_foo keys as their subjective pronoun.
 ## "custom_1" : {'pronouns': {'subjective': 'doll'}} becomes -> "doll" : {'pronouns': {'subjective': 'doll'}}
 func set_new_keys() -> void:
 	for i in P.player_pronouns.keys():
 		if i.begins_with("custom_"):
-			var new_key = P.player_pronouns[i]['pronouns']['subjective'] 
-			P.player_pronouns[new_key] = P.player_pronouns[i]
-			P.player_pronouns.erase(i)
-
-
-func _on_verbs_button_pressed() -> void:
-	P.set_sentence.emit()
-	examples_sentence.show()
-	set_new_keys() 
+			if P.player_pronouns[i]['pronouns'].has('subjective'):
+				var new_key: String = P.player_pronouns[i]['pronouns']['subjective'] 
+				P.player_pronouns[new_key] = P.player_pronouns[i]
+				P.player_pronouns.erase(i)
+				print("new keys set: ", JSON.stringify((P.player_pronouns), "  "))

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c33dl8n5kstxm" path="res://scenes/example_sentences.tscn" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://mpl860we857m" path="res://scripts/dialogue.gd" id="4_tbgi4"]
 [ext_resource type="Resource" uid="uid://sxyrib2w8nmd" path="res://timeline_pronouns.dtl" id="5_tefeu"]
+[ext_resource type="PackedScene" uid="uid://drnqufsnlehxk" path="res://scenes/debug.tscn" id="6_tefeu"]
 
 [node name="Node" type="Node" unique_id=437644318]
 script = ExtResource("1_sugp2")
@@ -12,6 +13,12 @@ script = ExtResource("1_sugp2")
 [node name="CustomPronouns" parent="." unique_id=78342683 node_paths=PackedStringArray("main", "examples_sentence") instance=ExtResource("2_jyhfs")]
 main = NodePath("..")
 examples_sentence = NodePath("../ExampleSentences")
+
+[node name="ExampleSentences" parent="." unique_id=733475182 node_paths=PackedStringArray("main", "dialogue", "pronouns") instance=ExtResource("3_tbgi4")]
+visible = false
+main = NodePath("..")
+dialogue = NodePath("../Dialogue")
+pronouns = NodePath("../CustomPronouns")
 
 [node name="Dialogue" type="Control" parent="." unique_id=704991212]
 layout_mode = 3
@@ -23,14 +30,4 @@ offset_bottom = 50.248703
 script = ExtResource("4_tbgi4")
 timeline = ExtResource("5_tefeu")
 
-[node name="timeline_button" type="Button" parent="Dialogue" unique_id=1049157091]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Timeline test"
-
-[node name="ExampleSentences" parent="." unique_id=733475182 node_paths=PackedStringArray("main") instance=ExtResource("3_tbgi4")]
-visible = false
-main = NodePath("..")
-
-[connection signal="pressed" from="Dialogue/timeline_button" to="Dialogue" method="_on_button_pressed"]
+[node name="Debug" parent="." unique_id=559146899 instance=ExtResource("6_tefeu")]
