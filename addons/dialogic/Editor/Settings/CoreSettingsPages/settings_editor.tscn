@@ -81,8 +81,8 @@ layout_mode = 2
 rounded = true
 allow_greater = true
 update_on_text_changed = true
-select_all_on_focus = true
 suffix = "px"
+select_all_on_focus = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=2053565497]
 layout_mode = 2
@@ -102,8 +102,8 @@ layout_mode = 2
 rounded = true
 allow_greater = true
 update_on_text_changed = true
-select_all_on_focus = true
 suffix = "px"
+select_all_on_focus = true
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="." unique_id=1463499383]
 layout_mode = 2

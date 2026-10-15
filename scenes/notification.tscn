@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://gyqyp87jsk4k"]
+
+[ext_resource type="Script" uid="uid://hvf6qhpasxlt" path="res://scripts/notification.gd" id="1_j6hwb"]
+[ext_resource type="Shader" uid="uid://g122rjbh0i7b" path="res://shaders/blur.gdshader" id="2_mfwk2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bax13"]
+shader = ExtResource("2_mfwk2")
+shader_parameter/amount = 4.00000019
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtxbf"]
+bg_color = Color(0.06469653, 0.064696535, 0.06469648, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Notification" type="Control" unique_id=1326836657]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j6hwb")
+
+[node name="blur_color_rect" type="ColorRect" parent="." unique_id=16081384]
+material = SubResource("ShaderMaterial_bax13")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1245587280]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -274.46063
+offset_top = -110.18857
+offset_right = 274.46063
+offset_bottom = 110.18857
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mtxbf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=996032248]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24261719
+anchor_top = 0.16808331
+anchor_right = 0.7573828
+anchor_bottom = 0.8319167
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="notification_label" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=1618624380]
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]NOTIFICATION"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="Panel/VBoxContainer" unique_id=1445366453]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+
+[node name="notification_message_label" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=2095449140]
+layout_mode = 2
+bbcode_enabled = true
+text = "This will save your pronouns and their verbs. Proceed?"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=144389069]
+layout_mode = 2
+
+[node name="confirm_button" type="Button" parent="Panel/VBoxContainer/HBoxContainer" unique_id=2033260143]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "YES"
+
+[node name="close_button" type="Button" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1119435890]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NO"
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/confirm_button" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/close_button" to="." method="_on_close_button_pressed"]

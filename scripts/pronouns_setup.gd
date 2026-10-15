@@ -1,8 +1,7 @@
 extends Control
 
 # TODO: Adjust pronouns UI, etc... make it simpler.
-# NOTE: Verbs is a new screen, allow for (potential) changes on the verbs screen.
-# Allow to change pronouns once set. Set the new key once everything has been saved and set.
+# TODO: Reset the example lines to empty, if the pronoun set is missing them.
 
 @export var main: Node
 @export var examples_sentence: Control
@@ -24,27 +23,32 @@ extends Control
 
 @export_category("Containers")
 @export var line_edit_vbox: VBoxContainer
+@export var example_vbox: VBoxContainer
 @export var pronoun_choice_hbox: HBoxContainer
 @export var player_pronouns_hbox: HBoxContainer
 @export var pronoun_choice_scroll_container: ScrollContainer
 
-@export_category("Custom")
+@export_category("Misc")
 @export var current_pronoun_label: RichTextLabel
 @export var delete_button: Button
-@export var save_button: Button
 @export var next_button: Button
 
 var curr_custom_dict: String
+## The current pronoun key.
 var curr_custom: String
+## The number of custom pronoun dict keys.
 var custom_num:= 0
 var subjective_pronoun: String
+## Stores all the original example lines with "___".
+var example_labels_array: Array[String]
 
 func _ready() -> void:
 	P.curr_pronoun.connect(set_curr_pronoun)
-	line_edits_editable(false)
 	line_edits_text_submitted()
 	set_defaults()
 	check_verb()
+	# Get all the example labels and store them in the array.
+	get_example_labels_text()
 
 #region LINEEDITS
 ## Return all the line edits.
@@ -74,6 +78,7 @@ func line_edits_text_submitted() -> void:
 		# Save all the changes to the correct dict
 		i.text_submitted.connect(update_pronouns.bind(pronoun_type))
 		i.text_changed.connect(update_pronouns.bind(pronoun_type))
+		i.text_changed.connect(check_verb)
 
 ## Check every line_edits text to see wheter or not it is empty.
 func line_edit_verbs() -> bool:
@@ -87,25 +92,87 @@ func line_edit_verbs() -> bool:
 	else:
 		return true
 
-
 ## Check wheter editing the verbs is possible.
-func check_verb() -> void:
+func check_verb(_new_text: String = "") -> void:
 	next_button.disabled = line_edit_verbs()
 #endregion
 
-## Add the pronoun if it doesn't exist to the dict. Adds the pronoun to it's
-## respective type.
-func update_pronouns(new_text: String, type: String) -> void:
-	check_custom()
-	P.player_pronouns[curr_custom_dict]['pronouns'][type] = new_text.to_lower()
-	P.custom_pronouns[curr_custom_dict][type] = new_text.to_lower()
+#region RICHTEXTLABEL
+func get_example_labels() -> Array[RichTextLabel]:
+	var example_array: Array[RichTextLabel]
+	for i in example_vbox.get_children(true):
+		if i.get_child_count() >= 1:
+			for x in i.get_children():
+				if x is RichTextLabel:
+					example_array.append(x)
+	return example_array
+
+func get_example_labels_text():
+	var text_array: Array[String]
+	for i in get_example_labels():
+		text_array.append(i.text)
+	example_labels_array = text_array
+#endregion
+
+#region Line Edits EXAMPLES
+func _on_subjective_line_edit_text_changed(new_text: String) -> void:
+	subjective_example.text = "[b]" + new_text.capitalize() + "[/b] did the job."
+	subjective_pronoun = new_text
+
+# Rename the button with it's subjective and/or subjective pronoun from the current pronoun dict key.
+func _on_subjective_line_edit_editing_toggled(_toggled_on: bool) -> void:
+	set_button_name()
 
 
+func _on_objective_line_edit_text_changed(new_text: String) -> void:
+	object_example.text = "Are you talking to [b]" + new_text.to_lower() + "[/b]?"
+
+# Rename the button with it's subjective and/or subjective pronoun from the current pronoun dict key.
+func _on_objective_line_edit_editing_toggled(_toggled_on: bool) -> void:
+	set_button_name()
+
+func _on_possessive_dep_line_edit_text_changed(new_text: String) -> void:
+	possessive_dep_example.text = "Working is [b]" + new_text.to_lower() + "[/b] only driving force."
+
+func _on_possessive_indep_line_edit_text_changed(new_text: String) -> void:
+	possessive_indep_example.text = "This book is [b]" + new_text.to_lower() + "[/b]."
+
+func _on_reflexive_line_edit_text_changed(new_text: String) -> void:
+	reflexive_example.text = subjective_pronoun.capitalize() + " will take care of [b]" + new_text.to_lower() + "[/b]."
+
+func set_button_name() -> void:
+	for i in pronoun_choice_hbox.get_children():
+			if i.name == curr_custom_dict:
+				if P.player_pronouns[curr_custom_dict]['pronouns'].has('objective') and P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
+					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize() + "/" + P.player_pronouns[curr_custom_dict]['pronouns']['objective'].capitalize()
+				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('objective'):
+					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['objective'].capitalize()
+				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
+					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize()
+				if i.text.begins_with("custom_"):
+					return
+				# Set the current pronoun label to the button name as well.
+				current_pronoun_label.text = i.text
+#endregion
+
+#region DEFAULTS
+## Creates the default pronoun buttons.
+func set_defaults() -> void:
+	for i in pronoun_choice_hbox.get_children():
+		if i is Button and !i.name.begins_with("custom") and !i.name.begins_with("add"):
+			var pronoun = i.name.trim_suffix("_button")
+			i.toggled.connect(_toggle_default_pronouns.bind(pronoun))
+			i.toggled.connect(line_edits_pronouns.bind(P.default_pronouns, pronoun))
+			# Show the pronouns if the mouse is hovering or the button is focused.
+			i.mouse_entered.connect(display_line_edits.bind(pronoun))
+			i.focus_entered.connect(display_line_edits.bind(pronoun))
+
+## Creates a new custom button.
 func _on_add_button_pressed() -> void:
 	var button = Button.new()
 	button.toggle_mode = true
 	
-	# Keep adding to the custom dicitionary counter
+	# Keep incrementing to the custom dict counter
 	custom_num += 1
 	
 	var custom_key =  "custom_" + str(custom_num)
@@ -128,83 +195,23 @@ func _on_add_button_pressed() -> void:
 	pronoun_choice_scroll_container.ensure_control_visible(button)
 	pronoun_choice_hbox.move_child(%add_button, -1)
 	
-	line_edits_editable(false)
+	#line_edits_editable(false)
 	line_edits_clear()
-
-#region Line Edits EXAMPLES
-func _on_subjective_line_edit_text_changed(new_text: String) -> void:
-	subjective_example.text = "[b]" + new_text.capitalize() + "[/b] did the job."
-	subjective_pronoun = new_text
-	check_verb()
-
-# Rename the button with it's subjective and/or subjective pronoun from the current pronoun dict key.
-func _on_subjective_line_edit_editing_toggled(_toggled_on: bool) -> void:
-	set_button_name()
-	check_verb()
-
-
-func _on_objective_line_edit_text_changed(new_text: String) -> void:
-	object_example.text = "Are you talking to [b]" + new_text.to_lower() + "[/b]?"
-	check_verb()
-
-# Rename the button with it's subjective and/or subjective pronoun from the current pronoun dict key.
-func _on_objective_line_edit_editing_toggled(_toggled_on: bool) -> void:
-	set_button_name()
-	check_verb()
-
-
-func _on_possessive_dep_line_edit_text_changed(new_text: String) -> void:
-	possessive_dep_example.text = "Working is [b]" + new_text + "[/b] only driving force."
-	check_verb()
-
-func _on_possessive_indep_line_edit_text_changed(new_text: String) -> void:
-	possessive_indep_example.text = "This book is [b]" + new_text + "[/b]."
-	check_verb()
-
-func _on_reflexive_line_edit_text_changed(new_text: String, _pronoun = "", _custom = "") -> void:
-	reflexive_example.text = subjective_pronoun.capitalize() + " will take care of [b]" + new_text + "[/b]."
-	check_verb()
-
-func set_button_name() -> void:
-	for i in pronoun_choice_hbox.get_children():
-			if i.name == curr_custom_dict:
-				if P.player_pronouns[curr_custom_dict]['pronouns'].has('objective') and P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
-					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize() + "/" + P.player_pronouns[curr_custom_dict]['pronouns']['objective'].capitalize()
-				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('objective'):
-					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['objective'].capitalize()
-				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
-					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize()
-				# Set the current pronoun label to the button name as well.
-				current_pronoun_label.text = i.text
-#endregion
-
-
-#region DEFAULTS
-
-## Create the default pronoun buttons and add their functions.
-func set_defaults() -> void:
-	for i in pronoun_choice_hbox.get_children():
-		if i is Button and !i.name.begins_with("custom") and !i.name.begins_with("add"):
-			var pronoun = i.name.trim_suffix("_button")
-			i.toggled.connect(_toggle_default_pronouns.bind(pronoun))
-			i.toggled.connect(line_edits_pronouns.bind(P.default_pronouns, pronoun))
-			# Show the pronouns if the mouse is hovering or the button is focused.
-			i.mouse_entered.connect(display_line_edits.bind(pronoun))
-			i.focus_entered.connect(display_line_edits.bind(pronoun))
 
 
 ## Set the current pronoun dict key, and display it on the label.
 func set_curr_pronoun(custom_pronoun: String) -> void:
 	print_rich("The current custom pronoun: [b]", custom_pronoun)
 	curr_custom_dict = custom_pronoun
-	current_pronoun_label.text = custom_pronoun.capitalize()
+	if P.player_pronouns.has(custom_pronoun):
+		if P.player_pronouns[custom_pronoun]['pronouns'].has('subjective') and P.player_pronouns[custom_pronoun]['pronouns'].has('objective'):
+			current_pronoun_label.text = P.player_pronouns[custom_pronoun]['pronouns']['subjective'].capitalize() + "/" + P.player_pronouns[custom_pronoun]['pronouns']['objective'].capitalize()
 
 
 ## The function for the toggle signal in the custom button.
 func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 	if toggled_on:
 		check_custom()
-		line_edits_editable(true)
 		
 		if P.custom_pronouns.has(custom_pronoun):
 			if !P.player_pronouns.has(custom_pronoun):
@@ -212,9 +219,8 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 				P.player_pronouns[custom_pronoun]['verbs'] = {}
 				P.player_pronouns[custom_pronoun]['pronouns'] = P.custom_pronouns[custom_pronoun]
 		
-		# We disable editing and saving, the pronouns have all already been set.
+		# We disable deleting, the pronouns have all already been set.
 		delete_button.disabled = false
-		save_button.disabled = false
 		set_curr_pronoun(custom_pronoun)
 	else:
 		# Remove the pronoun key from the player dict. Does not delete the pronoun.
@@ -241,9 +247,7 @@ func _toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
 		current_pronoun_label.text = " "
 		curr_custom_dict = ""
 	
-	line_edits_editable(false)
 	delete_button.disabled = true
-	save_button.disabled = true
 
 
 ## Sets the line_edit for both the custom and default pronouns button.
@@ -278,11 +282,26 @@ func line_edits_pronouns(toggled_on: bool, dict: Dictionary, pronoun: String):
 			elif i.name.begins_with("reflexive"):
 				if dict[pronoun].has('reflexive'):
 					i.text = dict[pronoun]['reflexive'].to_pascal_case()
-					_on_reflexive_line_edit_text_changed(dict[pronoun]['reflexive'], pronoun, curr_custom_dict)
+					_on_reflexive_line_edit_text_changed(dict[pronoun]['reflexive'])
 	
 	if P.player_pronouns == {}:
 		for i in get_line_edits():
 			i.text = ""
+
+
+## Checks if either of the subjective and objective pronouns exist.[br]
+## Returns one of the pronouns or both of them.
+func check_pronouns_exist(dict_key: String) -> String:
+	var pronouns: String
+	if P.player_pronouns[dict_key]['pronouns'].has('subjective') and P.player_pronouns[dict_key]['pronouns'].has('objective'):
+		pronouns = P.player_pronouns[dict_key]['pronouns']['subjective'].capitalize() + "/" + P.player_pronouns[dict_key]['pronouns']['objective'].capitalize()
+	elif P.player_pronouns[dict_key]['pronouns'].has('subjective'):
+		pronouns = P.player_pronouns[dict_key]['pronouns']['subjective'].capitalize()
+	elif P.player_pronouns[dict_key]['pronouns'].has('objective'):
+		pronouns = P.player_pronouns[dict_key]['pronouns']['objective'].capitalize()
+	if pronouns == "":
+		pronouns = " "
+	return pronouns
 
 
 ## Only shows the currently hovered/focused pronouns.
@@ -290,55 +309,100 @@ func display_line_edits(pronoun: String):
 	# We remove the previous pronouns.
 	line_edits_clear()
 	
+	# Resets the example lines to the original one.
+	for i in get_example_labels():
+		i.text = example_labels_array.get(get_example_labels().find(i))
+	
 	# We only want to see pronouns the player has choosen.
 	if !P.player_pronouns.has(pronoun):
 		return
 	
-	if P.player_pronouns[pronoun]['pronouns'].has('subjective'):
-		current_pronoun_label.text = P.player_pronouns[pronoun]['pronouns']['subjective'].capitalize()
+	current_pronoun_label.text = check_pronouns_exist(pronoun)
 	
 	for i in get_line_edits():
 		if i.name.begins_with("subjective"):
 			if P.player_pronouns[pronoun]['pronouns'].has('subjective'):
 				i.text = P.player_pronouns[pronoun]['pronouns']['subjective'].to_pascal_case()
 				_on_subjective_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['subjective'])
-		
+			
 		elif i.name.begins_with("objective"):
 			if P.player_pronouns[pronoun]['pronouns'].has('objective'):
 				i.text = P.player_pronouns[pronoun]['pronouns']['objective'].to_pascal_case()
 				_on_objective_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['objective'])
-		
+			
 		elif i.name.begins_with("possessive_dep"):
 			if P.player_pronouns[pronoun]['pronouns'].has('possessive_dep'):
 				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_dep'].to_pascal_case()
 				_on_possessive_dep_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['possessive_dep'])
-		
+			
 		elif i.name.begins_with("possessive_indep"):
 			if P.player_pronouns[pronoun]['pronouns'].has('possessive_indep'):
 				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_indep'].to_pascal_case()
 				_on_possessive_indep_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['possessive_indep'])
-		
+			
 		elif i.name.begins_with("reflexive"):
 			if P.player_pronouns[pronoun]['pronouns'].has('reflexive'):
 				i.text = P.player_pronouns[pronoun]['pronouns']['reflexive'].to_pascal_case()
-				_on_reflexive_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['reflexive'], pronoun, curr_custom_dict)
+				_on_reflexive_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['reflexive'])
 
 	if P.player_pronouns == {}:
 		for i in get_line_edits():
 			i.text = ""
-
 #endregion
 
+# Save all the pronouns to the save.
+func _on_save_button_pressed() -> void:
+	save_custom_dict()
+	P._save(save_name)
+
+# Load the pronouns from the save.
+func _on_load_button_pressed() -> void:
+	P._load(save_name)
+	P.loaded_pronouns.emit(save_name)
+
+# Prints the current players pronouns.
+func _on_print_all_button_pressed() -> void:
+	print_rich("[b]All the pronouns:[/b] ", JSON.stringify((P.player_pronouns), "  "))
+
+# Deletes the custom pronoun.
+func _on_delete_button_pressed() -> void:
+	for i in pronoun_choice_hbox.get_children():
+		if i.name == curr_custom_dict:
+			i.call_deferred("queue_free")
+	
+	#line_edits_editable(false)
+	line_edits_clear()
+	
+	P.player_pronouns.erase(curr_custom_dict)
+	P.custom_pronouns.erase(curr_custom_dict)
+	current_pronoun_label.text = " "
+	curr_custom_dict = ""
+	print("Deleted: ", curr_custom_dict)
+
+func _on_next_button_pressed() -> void:
+	# NOTE: creates so many bugs, set only after all the pronouns have been set.
+	#set_new_keys()
+	
+	# Delete the empty key.
+	P.player_pronouns.erase("")
+	examples_sentence.add_pronouns()
+	examples_sentence.show()
 
 #region HELPER FUNCS
+## Add the pronoun type if it doesn't exist to the dict.
+func update_pronouns(new_text: String, type: String) -> void:
+	check_custom()
+	P.player_pronouns[curr_custom_dict]['pronouns'][type] = new_text.to_lower()
+	P.custom_pronouns[curr_custom_dict][type] = new_text.to_lower()
+
 ## Creates a custom key if it already doesn't exists.
 func check_custom() -> void:
 	if !P.player_pronouns.has(curr_custom_dict):
 		P.player_pronouns[curr_custom_dict] = {}
 		P.player_pronouns[curr_custom_dict]['pronouns'] = {}
 		P.player_pronouns[curr_custom_dict]['verbs'] = {}
+		
 		P.custom_pronouns[curr_custom_dict] = {}
-
 
 ## Saves the custom pronouns input.
 func save_custom_dict():
@@ -355,50 +419,6 @@ func save_custom_dict():
 			P.player_pronouns[curr_custom_dict]['pronouns']['reflexive'] = i.text
 
 
-# Save all the pronouns to the save.
-func _on_save_button_pressed() -> void:
-	save_custom_dict()
-	P._save(save_name)
-
-
-# Load the pronouns from the save.
-func _on_load_button_pressed() -> void:
-	P._load(save_name)
-	P.loaded_pronouns.emit(save_name)
-
-
-# Prints the current players pronouns.
-func _on_print_all_button_pressed() -> void:
-	print_rich("[b]All the pronouns:[/b] ", JSON.stringify((P.player_pronouns), "  "))
-
-
-# Deletes the custom pronoun.
-func _on_delete_button_pressed() -> void:
-	for i in pronoun_choice_hbox.get_children():
-		if i.name == curr_custom_dict:
-			i.call_deferred("queue_free")
-	
-	line_edits_editable(false)
-	line_edits_clear()
-	
-	P.player_pronouns.erase(curr_custom_dict)
-	P.custom_pronouns.erase(curr_custom_dict)
-	print("Deleted: ", curr_custom_dict)
-	current_pronoun_label.text = " "
-	curr_custom_dict = ""
-#endregion
-
-
-func _on_next_button_pressed() -> void:
-	# NOTE: creates so many bugs, set only after all the pronouns have been set.
-	#set_new_keys()
-	#P.set_sentence.emit()
-	
-	# Delete the empty key.
-	P.player_pronouns.erase("")
-	examples_sentence.add_pronouns()
-	examples_sentence.show()
-
 ## Set the player_pronouns custom_foo keys as their subjective pronoun.
 ## "custom_1" : {'pronouns': {'subjective': 'doll'}} becomes -> "doll" : {'pronouns': {'subjective': 'doll'}}
 func set_new_keys() -> void:
@@ -410,6 +430,8 @@ func set_new_keys() -> void:
 				P.player_pronouns.erase(i)
 				print("new keys set: ", JSON.stringify((P.player_pronouns), "  "))
 
+
+## Clears the screen from the previous choices and resets the custom_num counter.
 func clear():
 	custom_num = 0
 	
@@ -419,3 +441,5 @@ func clear():
 	
 	for i in pronoun_choice_hbox.get_children():
 		i.button_pressed = false
+
+#endregion

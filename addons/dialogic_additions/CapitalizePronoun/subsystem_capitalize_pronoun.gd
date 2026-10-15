@@ -28,17 +28,16 @@ func modifier_capitalize_pronoun(text: String) -> String:
 	# https://github.com/godotengine/godot-proposals/issues/5056
 	var regex = RegEx.new()
 	regex.compile("\\[.+?\\]")
-	# Store the bbcodes and their index in the dict.
+	# Store the bbcodes and their index in the string, in the dict.
 	for i in regex.search_all(text):
 		var bbcode = i.get_start()
 		bbcode_dict[bbcode] = i.get_string()
-	#print("bbcode dict: ", bbcode_dict)
 	
 	# We remove the bbcode from the text.
 	text = regex.sub(text, "", true)
 	
 	var r:= RegEx.new()
-	# RedEx: This is a capturing group, it will begin with the start of the sentence and look 
+	# This is a capturing group, it will begin with the start of the sentence and look 
 	# for any of the punctuations to close the group. Matches the literal punctuations as well. 
 	# (To re-explain/comment later)
 	r.compile("([^\\.!?]*[\\.!?])")
@@ -50,6 +49,7 @@ func modifier_capitalize_pronoun(text: String) -> String:
 		# Usually any sentence after the first one. Looks to see if there 
 		# is empty space in the beginning of the sentence.
 		if r_string[0] == " ":
+			# Get the first letter from the string.
 			first_letter = r_string[1]
 			# Erase both the white space and the first letter.
 			r_string = r_string.erase(0,2)
@@ -72,7 +72,7 @@ func modifier_capitalize_pronoun(text: String) -> String:
 	for i in bbcode_dict.keys():
 		new_text = new_text.insert(i, bbcode_dict[i])
 	
-	print(new_text)
+	#print(new_text)
 	return new_text
 
 

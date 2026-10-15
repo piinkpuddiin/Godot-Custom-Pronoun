@@ -144,7 +144,7 @@ func randomized_were(_info: Dictionary = {}) -> String:
 	if they in player_pronouns.keys():
 		if player_pronouns[they]['verbs'].has('dont'):
 			were = were_arr[player_pronouns[they]['verbs']['were']]
-	return dont
+	return were
 
 func randomized_have(_info: Dictionary = {}) -> String:
 	if they in player_pronouns.keys():
@@ -177,8 +177,7 @@ func randomized_es(_info: Dictionary = {}) -> String:
 	return es
 #endregion
 
-# TODO add seed to make certain pronouns appear moe often than others.
-
+# TODO add seed to make certain pronouns appear more often than others.
 #region PRONOUNS functons
 func they_randomize(_info: Dictionary = {}) -> String:
 	var pronoun_arr:= []

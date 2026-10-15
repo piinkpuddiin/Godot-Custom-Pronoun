@@ -24,7 +24,7 @@ corner_radius_top_right = 35
 corner_radius_bottom_right = 35
 corner_radius_bottom_left = 35
 
-[node name="CustomPronouns" type="Control" unique_id=78342683 node_paths=PackedStringArray("subjective_line_edit", "object_line_edit", "possessive_indep_line_edit", "possessive_dep_line_edit", "reflexive_line_edit", "subjective_example", "object_example", "possessive_indep_example", "possessive_dep_example", "reflexive_example", "line_edit_vbox", "pronoun_choice_hbox", "player_pronouns_hbox", "pronoun_choice_scroll_container", "current_pronoun_label", "delete_button", "save_button", "next_button")]
+[node name="CustomPronouns" type="Control" unique_id=78342683 node_paths=PackedStringArray("subjective_line_edit", "object_line_edit", "possessive_indep_line_edit", "possessive_dep_line_edit", "reflexive_line_edit", "subjective_example", "object_example", "possessive_indep_example", "possessive_dep_example", "reflexive_example", "line_edit_vbox", "example_vbox", "pronoun_choice_hbox", "player_pronouns_hbox", "pronoun_choice_scroll_container", "current_pronoun_label", "delete_button", "next_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,12 +45,12 @@ possessive_indep_example = NodePath("HBoxContainer/example_margin_container/exam
 possessive_dep_example = NodePath("HBoxContainer/example_margin_container/example_panel/MarginContainer/example_vbox/possessive_dep_vbox/possesive_dependant_label")
 reflexive_example = NodePath("HBoxContainer/example_margin_container/example_panel/MarginContainer/example_vbox/reflexive_vbox/reflexive_example_label")
 line_edit_vbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox")
+example_vbox = NodePath("HBoxContainer/example_margin_container/example_panel/MarginContainer/example_vbox")
 pronoun_choice_hbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer/pronoun_choice_hbox")
 player_pronouns_hbox = NodePath("MarginContainer/HBoxContainer/ScrollContainer/player_pronouns_hbox")
 pronoun_choice_scroll_container = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/ScrollContainer")
 current_pronoun_label = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/current_pronoun_label")
 delete_button = NodePath("HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer/delete_button")
-save_button = NodePath("HBoxContainer/pronoun_panel/MarginContainer/save_button")
 next_button = NodePath("MarginContainer/next_button")
 
 [node name="Panel" type="Panel" parent="." unique_id=1604500296]
@@ -208,13 +208,6 @@ text = "Reflexive"
 layout_mode = 2
 max_length = 32
 
-[node name="save_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer" unique_id=24158198]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-text = "Save"
-
 [node name="debug_vbox" type="VBoxContainer" parent="HBoxContainer/pronoun_panel/MarginContainer" unique_id=1961412174]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -241,11 +234,13 @@ text = "Print All"
 layout_mode = 2
 
 [node name="save_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer2" unique_id=1428034911]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save"
 
 [node name="load_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer2" unique_id=193778346]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Load"
@@ -396,7 +391,6 @@ size_flags_vertical = 3
 [connection signal="text_changed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/possessive_dep_vbox/possessive_dep_line_edit" to="." method="_on_possessive_dep_line_edit_text_changed"]
 [connection signal="text_changed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/possessive_indep_vbox/possessive_indep_line_edit" to="." method="_on_possessive_indep_line_edit_text_changed"]
 [connection signal="text_changed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/reflexive_vbox/reflexive_line_edit" to="." method="_on_reflexive_line_edit_text_changed"]
-[connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/save_button" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer/delete_button" to="." method="_on_delete_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer/print_all_button" to="." method="_on_print_all_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/HBoxContainer2/save_button" to="." method="_on_save_button_pressed"]

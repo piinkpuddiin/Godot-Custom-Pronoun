@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://1bwc32uk448w"]
+
+[ext_resource type="Script" uid="uid://docqxn722tk2a" path="res://scripts/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="Shader" uid="uid://g122rjbh0i7b" path="res://shaders/blur.gdshader" id="2_bqqt6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wu84c"]
+shader = ExtResource("2_bqqt6")
+shader_parameter/amount = 4.00000019
+
+[node name="MainMenu" type="Control" unique_id=2008582098]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ekxnf")
+
+[node name="blur_color_rect" type="ColorRect" parent="." unique_id=1323513184]
+material = SubResource("ShaderMaterial_wu84c")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=689828127]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.5
+offset_top = -50.5
+offset_right = 41.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="pronouns_button" type="Button" parent="VBoxContainer" unique_id=1736199844]
+layout_mode = 2
+text = "Pronouns"
+
+[node name="load_button" type="Button" parent="VBoxContainer" unique_id=1190039379]
+layout_mode = 2
+text = "Load"
+
+[node name="dialogue_button" type="Button" parent="VBoxContainer" unique_id=150812753]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Dialogue"
+
+[connection signal="pressed" from="VBoxContainer/pronouns_button" to="." method="_on_pronouns_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/load_button" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/dialogue_button" to="." method="_on_dialogue_button_pressed"]

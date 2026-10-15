@@ -234,5 +234,5 @@ func _on_visibility_changed() -> void:
 		%AnimationPlayer.play("RESET")
 
 
-func _on_timeline_test_button_pressed() -> void:
+func _on_confirm_button_pressed() -> void:
 	_notification.show()
