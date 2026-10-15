@@ -1,7 +1,7 @@
 extends Control
 
-# TODO: Adjust pronouns UI, etc... make it simpler.
-# TODO: Reset the example lines to empty, if the pronoun set is missing them.
+# TODO: Add delete key input for the custom buttons.
+
 
 @export var main: Node
 @export var examples_sentence: Control
@@ -166,6 +166,11 @@ func set_defaults() -> void:
 			# Show the pronouns if the mouse is hovering or the button is focused.
 			i.mouse_entered.connect(display_line_edits.bind(pronoun))
 			i.focus_entered.connect(display_line_edits.bind(pronoun))
+			# Checks if all the line_edits have words in them (always true)
+			i.mouse_entered.connect(check_verb)
+			i.focus_entered.connect(check_verb)
+			i.mouse_exited.connect(check_verb)
+			i.focus_exited.connect(check_verb)
 
 ## Creates a new custom button.
 func _on_add_button_pressed() -> void:
@@ -186,6 +191,7 @@ func _on_add_button_pressed() -> void:
 	
 	button.toggled.connect(_toggle_custom_pronoun.bind(custom_key))
 	button.toggled.connect(line_edits_pronouns.bind(P.custom_pronouns, custom_key))
+	button.pressed.connect(check_verb)
 	# Show the pronouns on hover/focus
 	button.mouse_entered.connect(display_line_edits.bind(custom_key))
 	button.focus_entered.connect(display_line_edits.bind(custom_key))
@@ -206,7 +212,8 @@ func set_curr_pronoun(custom_pronoun: String) -> void:
 	if P.player_pronouns.has(custom_pronoun):
 		if P.player_pronouns[custom_pronoun]['pronouns'].has('subjective') and P.player_pronouns[custom_pronoun]['pronouns'].has('objective'):
 			current_pronoun_label.text = P.player_pronouns[custom_pronoun]['pronouns']['subjective'].capitalize() + "/" + P.player_pronouns[custom_pronoun]['pronouns']['objective'].capitalize()
-
+	#else:
+		#current_pronoun_label.text = " "
 
 ## The function for the toggle signal in the custom button.
 func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
@@ -243,7 +250,7 @@ func _toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
 		# Remove the pronoun key from the player dict. Does not delete the pronoun.
 		if P.player_pronouns.get(pronoun):
 			P.player_pronouns.erase(pronoun)
-			print("erased: ",P.player_pronouns)
+			print("Erased: ",P.player_pronouns)
 		current_pronoun_label.text = " "
 		curr_custom_dict = ""
 	
@@ -313,8 +320,9 @@ func display_line_edits(pronoun: String):
 	for i in get_example_labels():
 		i.text = example_labels_array.get(get_example_labels().find(i))
 	
-	# We only want to see pronouns the player has choosen.
+	# We only show the pronouns the player has choosen.
 	if !P.player_pronouns.has(pronoun):
+		current_pronoun_label.text = " "
 		return
 	
 	current_pronoun_label.text = check_pronouns_exist(pronoun)
@@ -428,7 +436,7 @@ func set_new_keys() -> void:
 				var new_key: String = P.player_pronouns[i]['pronouns']['subjective'] 
 				P.player_pronouns[new_key] = P.player_pronouns[i]
 				P.player_pronouns.erase(i)
-				print("new keys set: ", JSON.stringify((P.player_pronouns), "  "))
+				#print("New keys set: ", JSON.stringify((P.player_pronouns), "  "))
 
 
 ## Clears the screen from the previous choices and resets the custom_num counter.

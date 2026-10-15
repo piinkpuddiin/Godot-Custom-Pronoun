@@ -16,6 +16,7 @@ func _on_dialogue_button_pressed() -> void:
 	dialogue.start_dialogue()
 
 func _on_load_button_pressed() -> void:
+	P.player_pronouns = {}
 	P.loaded_pronouns.emit(custom_pronouns.save_name)
 
 func load_data(save_name):

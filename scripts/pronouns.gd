@@ -3,7 +3,6 @@ extends Node
 # NOTE: Watch out for pronoun grammar mistakes.
 
 signal curr_pronoun(pronoun)
-signal curr_custom(custom)
 # Emitted to set the proper verb to the current pronoun
 signal curr_verb()
 # Emitted once the verbs button is clicked.
@@ -137,7 +136,6 @@ func randomized_dont(_info: Dictionary = {}) -> String:
 	if they in player_pronouns.keys():
 		if player_pronouns[they]['verbs'].has('dont'):
 			dont = dont_arr[player_pronouns[they]['verbs']['dont']]
-	#print("The don't verb: ",dont)
 	return dont
 
 func randomized_were(_info: Dictionary = {}) -> String:

@@ -10,8 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://bsg7e0mhcch2v" path="res://images/bg_quick.png" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://1bwc32uk448w" path="res://scenes/main_menu.tscn" id="9_choun"]
 
-[node name="Node" type="Node" unique_id=437644318]
+[node name="Main" type="Node" unique_id=437644318 node_paths=PackedStringArray("custom_pronouns", "main_menu")]
 script = ExtResource("1_sugp2")
+custom_pronouns = NodePath("CustomPronouns")
+main_menu = NodePath("MainMenu")
 
 [node name="Background" type="Control" parent="." unique_id=1526023556]
 layout_mode = 3
@@ -35,11 +37,11 @@ expand_mode = 1
 main = NodePath("..")
 examples_sentence = NodePath("../ExampleSentences")
 
-[node name="ExampleSentences" parent="." unique_id=733475182 node_paths=PackedStringArray("main", "dialogue", "pronouns", "_notification") instance=ExtResource("3_tbgi4")]
+[node name="ExampleSentences" parent="." unique_id=733475182 node_paths=PackedStringArray("main", "dialogue", "custom_pronouns", "_notification") instance=ExtResource("3_tbgi4")]
 visible = false
 main = NodePath("..")
 dialogue = NodePath("../Dialogue")
-pronouns = NodePath("../CustomPronouns")
+custom_pronouns = NodePath("../CustomPronouns")
 _notification = NodePath("../Notification")
 
 [node name="Dialogue" type="Control" parent="." unique_id=704991212]
@@ -53,7 +55,6 @@ script = ExtResource("4_tbgi4")
 timeline = ExtResource("5_tefeu")
 
 [node name="Debug" parent="." unique_id=559146899 instance=ExtResource("6_tefeu")]
-visible = false
 
 [node name="Notification" parent="." unique_id=1326836657 node_paths=PackedStringArray("dialogue", "custom_pronouns", "example_sentences") instance=ExtResource("8_85g3d")]
 dialogue = NodePath("../Dialogue")

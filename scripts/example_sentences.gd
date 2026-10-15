@@ -2,9 +2,8 @@ extends Control
 
 @export var main: Node
 @export var dialogue: Node
-@export var pronouns: Node
+@export var custom_pronouns: Node
 @export var _notification: Node
-@export var vbox_container: VBoxContainer
 
 @export_category("Sentences")
 @export var are_sentence = " running in the woods."
@@ -15,6 +14,7 @@ extends Control
 @export var dont_sentence = " like candy?"
 @export var s_sentence = " like a machine."
 @export var es_sentence = " homework every day."
+
 @export_category("RichTextLabel")
 @export var current_pronoun_label: RichTextLabel
 @export var are_label: RichTextLabel
@@ -26,8 +26,11 @@ extends Control
 @export var s_label: RichTextLabel
 @export var es_label: RichTextLabel
 
+@export_category("VBoxContainer")
+@export var vbox_container: VBoxContainer
+@export var custom_pronouns_vbox: VBoxContainer
+
 var curr_pronoun: String
-@export var custom_pronouns: VBoxContainer
 
 
 func _ready() -> void:
@@ -39,33 +42,29 @@ func _ready() -> void:
 ## Adds all the players pronouns as buttons to set the verbs through.
 func add_pronouns() -> void:
 	# Clear the previous buttons.
-	if custom_pronouns.get_child_count() >= 0:
-		for i in custom_pronouns.get_children():
+	if custom_pronouns_vbox.get_child_count() >= 0:
+		for i in custom_pronouns_vbox.get_children():
 			i.queue_free()
 	
 	for i in P.player_pronouns.keys():
 		if P.player_pronouns[i]['pronouns'].has('subjective'):
 			print("All the pronouns: ", i)
 			var button:= Button.new()
-			button.text = P.player_pronouns[i]['pronouns']['subjective'] + "/" + P.player_pronouns[i]['pronouns']['objective']
+			button.text = (
+				P.player_pronouns[i]['pronouns']['subjective'].capitalize() +
+				 "/" + 
+				P.player_pronouns[i]['pronouns']['objective'].capitalize()
+				)
 			button.name = button.text
 			
 			button.tree_entered.connect(P.set_sentence.emit)
+			# Set the current pronoun to the button.
+			button.pressed.connect(set_pronoun.bind(i))
 			button.pressed.connect(pronoun_label)
-			
-			# Set the current pronoun to the hovered/focused button.
-			button.focus_entered.connect(set_pronoun.bind(i))
-			button.focus_exited.connect(set_pronoun.bind(i))
-			button.mouse_exited.connect(set_pronoun.bind(i))
-			button.mouse_entered.connect(set_pronoun.bind(i))
-			
 			# Check the pronoun verbs of the current pronoun.
-			button.focus_entered.connect(check_pronoun_verbs)
-			button.focus_exited.connect(check_pronoun_verbs)
-			button.mouse_exited.connect(check_pronoun_verbs)
-			button.mouse_entered.connect(check_pronoun_verbs)
+			button.pressed.connect(check_pronoun_verbs)
 			
-			custom_pronouns.add_child(button)
+			custom_pronouns_vbox.add_child(button)
 
 
 ## Sets the curr_pronoun to the most recently pressed pronoun.
@@ -92,7 +91,7 @@ func get_label_examples() -> Array[Label]:
 				label_array.append(x)
 	return label_array
 
-
+## Sets the toggle signal in all the checkbuttons
 func set_toggle() -> void:
 	for i in get_check_buttons():
 		var verb = i.name.trim_suffix("_button")
@@ -124,7 +123,7 @@ func check_pronoun_verbs():
 			update_sentence(curr_pronoun, "es", P.player_pronouns[curr_pronoun]['verbs']['es'])
 
 
-## Set the example sentences once the screen is shown.
+## Set the example sentences the first time time the screen is shown.
 func example_sentence() -> void:
 	pronoun_label()
 	
@@ -236,3 +235,4 @@ func _on_visibility_changed() -> void:
 
 func _on_confirm_button_pressed() -> void:
 	_notification.show()
+	P._save(custom_pronouns.save_name)
