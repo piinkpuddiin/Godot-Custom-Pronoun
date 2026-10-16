@@ -149,6 +149,7 @@ func clear() -> void:
 	for i in player_pronouns.keys():
 		player_pronouns.erase(i)
 	player_pronouns = {}
+	print("The dictionary is cleared: ", player_pronouns)
 
 
 #region VERBS functions

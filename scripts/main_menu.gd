@@ -7,6 +7,7 @@ func _ready() -> void:
 	self.show()
 	%dialogue_button.disabled = true
 	P.loaded_pronouns.connect(load_data)
+	%version_label.text = "V." + str(ProjectSettings.get_setting("application/config/version"))
 
 func _on_pronouns_button_pressed() -> void:
 	P.clear()
@@ -23,9 +24,8 @@ func _on_load_button_pressed() -> void:
 	P.clear()
 	P._load(custom_pronouns.save_name)
 	P.loaded_pronouns.emit(custom_pronouns.save_name)
-	print(custom_pronouns.save_name)
 
 func load_data(save_name):
 	P.player_pronouns = P._load(save_name).get("pronouns")
 	%dialogue_button.disabled = false
-	print(P.player_pronouns)
+	print_rich("[b]Loaded pronouns:[/b] ",JSON.stringify((P.player_pronouns), "  "))

@@ -16,10 +16,15 @@ general/updates_per_second=100
 [application]
 
 config/name="Dialogic Custom Pronoun"
+config/description="Change the players pronouns."
+config/version="1.0"
 config/tags=PackedStringArray("completed", "visual_novel")
 run/main_scene="uid://bkoi1o4txqnfo"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="uid://crhyr4sppqrcq"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/stretch_mode=0
+boot_splash/image="uid://b8872ktl2arq4"
+config/icon="uid://blnmehfr86rxo"
 
 [autoload]
 
@@ -84,6 +89,7 @@ variables={}
 
 window/size/viewport_width=1200
 window/size/viewport_height=700
+window/size/sharp_corners=true
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

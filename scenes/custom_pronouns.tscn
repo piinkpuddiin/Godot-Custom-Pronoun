@@ -164,6 +164,46 @@ tooltip_text = "Add a new custom pronoun set."
 theme_type_variation = &"LightButton"
 text = "+"
 
+[node name="Label" type="Label" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox" unique_id=1681264125]
+layout_mode = 2
+text = "text"
+
+[node name="Label2" type="Label" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox" unique_id=734465306]
+layout_mode = 2
+text = "text"
+
+[node name="Label3" type="Label" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox" unique_id=2144981085]
+layout_mode = 2
+text = "text"
+
+[node name="Label4" type="Label" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox" unique_id=1185989978]
+layout_mode = 2
+text = "text"
+
+[node name="Label5" type="Label" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox" unique_id=1326614152]
+layout_mode = 2
+text = "text"
+
+[node name="Label6" type="Label" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox" unique_id=631826845]
+layout_mode = 2
+text = "text"
+
+[node name="Label7" type="Label" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox" unique_id=996486598]
+layout_mode = 2
+text = "text"
+
+[node name="Label8" type="Label" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox" unique_id=1732603056]
+layout_mode = 2
+text = "text"
+
+[node name="Label9" type="Label" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox" unique_id=844062368]
+layout_mode = 2
+text = "text"
+
+[node name="Label10" type="Label" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox" unique_id=912213942]
+layout_mode = 2
+text = "text"
+
 [node name="Control" type="Control" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox" unique_id=1290925109]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2

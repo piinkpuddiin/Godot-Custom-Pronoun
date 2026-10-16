@@ -8,15 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://7xc6vehj0ph5" path="res://images/circle_1.png" id="4_muem4"]
 [ext_resource type="Script" uid="uid://mpl860we857m" path="res://scripts/dialogue.gd" id="4_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://1gmg6ovvwdj4" path="res://images/cloud_3.png" id="5_muem4"]
-[ext_resource type="Resource" uid="uid://sxyrib2w8nmd" path="res://timeline_pronouns.dtl" id="5_tefeu"]
+[ext_resource type="Resource" uid="uid://sxyrib2w8nmd" path="res://timeline/timeline_pronouns.dtl" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://c5fo78esx0odx" path="res://images/cloud_1.png" id="6_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://drnqufsnlehxk" path="res://scenes/debug.tscn" id="6_tefeu"]
 [ext_resource type="Texture2D" uid="uid://dry62qqgpqlpm" path="res://images/rounded_square.png" id="7_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://gyqyp87jsk4k" path="res://scenes/notification.tscn" id="8_85g3d"]
-[ext_resource type="Texture2D" uid="uid://bsg7e0mhcch2v" path="res://images/bg_quick.png" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://1bwc32uk448w" path="res://scenes/main_menu.tscn" id="9_choun"]
-[ext_resource type="Theme" uid="uid://qpir2awu1mnv" path="res://themes/simplistic.tres" id="11_eb6dy"]
-[ext_resource type="Script" uid="uid://blcah2y7rr1km" path="res://scripts/saved_pronouns.gd" id="12_trceg"]
+[ext_resource type="PackedScene" uid="uid://t1oyhp6laii4" path="res://scenes/saved_pronouns.tscn" id="15_jkv2x"]
 
 [sub_resource type="Animation" id="Animation_ya4ey"]
 length = 0.001
@@ -190,18 +188,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Background" unique_id=1528989936]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("9_85g3d")
-expand_mode = 1
-
-[node name="ColorRect" type="ColorRect" parent="Background" unique_id=454999708]
+[node name="black_color_rect" type="ColorRect" parent="Background" unique_id=454999708]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -324,7 +311,6 @@ custom_pronouns = NodePath("../CustomPronouns")
 example_sentences = NodePath("../ExampleSentences")
 
 [node name="MainMenu" parent="." unique_id=2008582098 node_paths=PackedStringArray("custom_pronouns", "dialogue") instance=ExtResource("9_choun")]
-visible = false
 custom_pronouns = NodePath("../CustomPronouns")
 dialogue = NodePath("../Dialogue")
 
@@ -332,44 +318,10 @@ dialogue = NodePath("../Dialogue")
 layer = 2
 
 [node name="Debug" parent="CanvasLayer" unique_id=559146899 instance=ExtResource("6_tefeu")]
-
-[node name="SavedPronouns" type="Control" parent="CanvasLayer" unique_id=1255026749 node_paths=PackedStringArray("pronouns_vbox")]
 visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -210.0
-offset_top = -284.0
-offset_right = 210.0
-offset_bottom = -178.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = ExtResource("11_eb6dy")
-script = ExtResource("12_trceg")
-pronouns_vbox = NodePath("pronouns_vbox")
 
-[node name="pronouns_vbox" type="VBoxContainer" parent="CanvasLayer/SavedPronouns" unique_id=794414493]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/SavedPronouns/pronouns_vbox" unique_id=395609211]
-layout_mode = 2
-theme_override_font_sizes/bold_font_size = 32
-bbcode_enabled = true
-text = "[b]Your pronoun(s):"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="SavedPronouns" parent="CanvasLayer" unique_id=1996028071 instance=ExtResource("15_jkv2x")]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=413948421]
 unique_name_in_owner = true

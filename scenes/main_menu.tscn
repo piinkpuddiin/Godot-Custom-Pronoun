@@ -103,6 +103,29 @@ layout_mode = 2
 disabled = true
 text = "Dialogue"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=551562396]
+layout_mode = 0
+offset_left = 491.0
+offset_top = 464.0
+offset_right = 709.0
+offset_bottom = 489.0
+
+[node name="version_label" type="RichTextLabel" parent="HBoxContainer" unique_id=1789798515]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 13
+bbcode_enabled = true
+text = "V.1.0"
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer" unique_id=66779961]
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.9607843, 0.67058825, 0.93333334, 1)
+theme_override_colors/font_hover_color = Color(0.9607843, 0.67058825, 0.93333334, 1)
+theme_override_font_sizes/font_size = 14
+text = "@piinkpuddiin"
+uri = "https://piinkpuddiin.itch.io/"
+
 [connection signal="pressed" from="Panel/VBoxContainer/pronouns_button" to="." method="_on_pronouns_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/load_button" to="." method="_on_load_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/dialogue_button" to="." method="_on_dialogue_button_pressed"]

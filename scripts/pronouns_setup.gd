@@ -432,14 +432,9 @@ func _on_delete_button_pressed() -> void:
 	delete_custom()
 
 func _on_next_button_pressed() -> void:
-	# NOTE: creates so many bugs, set only after all the pronouns have been set.
-	#set_new_keys()
-	
 	# Delete the empty key.
 	P.player_pronouns.erase("")
-	#if len(P.player_pronouns.keys()) >= 2:
-		#P.curr_pronoun.emit(P.player_pronouns.keys()[-1])
-	#else:
+	
 	P.curr_pronoun.emit(P.player_pronouns.keys()[0])
 	examples_sentence.add_pronouns()
 	examples_sentence.show()

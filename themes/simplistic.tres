@@ -393,6 +393,31 @@ shadow_offset = Vector2(4.41, 3)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ugyyk"]
 bg_color = Color(0.96035105, 0.96035105, 0.96035093, 0.22745098)
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_nrtdf"]
+color = Color(0.74978, 0.74978, 0.74977994, 0.9647059)
+thickness = 7
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ejccq"]
+color = Color(1, 1, 1, 1)
+thickness = 7
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kw875"]
+color = Color(0.74978, 0.74978, 0.74977994, 0.9647059)
+thickness = 7
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_7avwq"]
+color = Color(1, 1, 1, 0.18431373)
+thickness = 7
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_fqtv2"]
+color = Color(1, 1, 1, 0.18431373)
+thickness = 7
+vertical = true
+
 [resource]
 default_font = ExtResource("1_yo20m")
 default_font_size = 18
@@ -483,3 +508,8 @@ RichTextLabel/fonts/bold_font = ExtResource("5_wjltc")
 RichTextLabel/fonts/bold_italics_font = ExtResource("6_nrtdf")
 RichTextLabel/fonts/italics_font = ExtResource("7_nu3nf")
 RichTextLabel/fonts/normal_font = ExtResource("1_yo20m")
+VScrollBar/styles/grabber = SubResource("StyleBoxLine_nrtdf")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxLine_ejccq")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxLine_kw875")
+VScrollBar/styles/scroll = SubResource("StyleBoxLine_7avwq")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxLine_fqtv2")
