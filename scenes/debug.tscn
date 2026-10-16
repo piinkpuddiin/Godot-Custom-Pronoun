@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://btuy73xn15aq2" path="res://scripts/debug.gd" id="1_lgrwq"]
 
 [node name="Debug" type="Control" unique_id=559146899]
+modulate = Color(1, 1, 1, 0.6313726)
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -11,13 +12,12 @@ grow_horizontal = 0
 script = ExtResource("1_lgrwq")
 
 [node name="Panel" type="Panel" parent="." unique_id=1589884645]
-modulate = Color(0.7137255, 1, 1, 0.49803922)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -194.60898
-offset_bottom = 107.64142
+offset_bottom = 144.0
 grow_horizontal = 0
 mouse_filter = 2
 
@@ -30,6 +30,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="print_all_button" type="Button" parent="Panel/VBoxContainer" unique_id=514449032]
+layout_mode = 2
+text = "Print all"
+
 [node name="curr_pronoun" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=71049639]
 unique_name_in_owner = true
 layout_mode = 2
@@ -38,8 +42,16 @@ bbcode_enabled = true
 text = "curr_pronoun: "
 fit_content = true
 
-[node name="print_all_button" type="Button" parent="Panel/VBoxContainer" unique_id=514449032]
+[node name="are_label" type="Label" parent="Panel/VBoxContainer" unique_id=1072971195]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Print all"
+
+[node name="were_label" type="Label" parent="Panel/VBoxContainer" unique_id=1326898133]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="s_label" type="Label" parent="Panel/VBoxContainer" unique_id=1612458851]
+unique_name_in_owner = true
+layout_mode = 2
 
 [connection signal="pressed" from="Panel/VBoxContainer/print_all_button" to="." method="_on_print_all_button_pressed"]

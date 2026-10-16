@@ -10,6 +10,9 @@ func get_pronoun(pronoun) -> void:
 
 func _process(_delta: float) -> void:
 	%curr_pronoun.text = "curr_pronoun: " + curr_pronoun
+	%are_label.text = P.are
+	%were_label.text = P.were
+	%s_label.text = P.s
 
 
 func _on_print_all_button_pressed() -> void:

@@ -37,7 +37,7 @@ directories/dch_directory={
 "n": "res://characters/n.dch"
 }
 directories/dtl_directory={
-"timeline_pronouns": "res://timeline_pronouns.dtl"
+"timeline/timeline_pronouns": "res://timeline/timeline_pronouns.dtl"
 }
 layout/style_directory={
 "": "res://dialogic_style.tres",
@@ -84,7 +84,6 @@ variables={}
 
 window/size/viewport_width=1200
 window/size/viewport_height=700
-window/size/always_on_top=true
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

@@ -34,12 +34,12 @@ var curr_pronoun: String
 
 
 func _ready() -> void:
+	P.curr_pronoun.connect(set_pronoun)
 	P.set_sentence.connect(example_sentence)
 	P.curr_verb.connect(update_sentence)
-	P.curr_pronoun.connect(set_pronoun)
 	set_toggle()
 
-## Adds all the players pronouns as buttons to set the verbs through.
+## Adds all the players pronouns buttons.
 func add_pronouns() -> void:
 	# Clear the previous buttons.
 	if custom_pronouns_vbox.get_child_count() >= 0:
@@ -56,7 +56,7 @@ func add_pronouns() -> void:
 				 "/" + 
 				P.player_pronouns[i]['pronouns']['objective'].capitalize()
 				)
-			button.name = button.text
+			button.name = P.player_pronouns[i]['pronouns']['subjective'] + "_button"
 			
 			button.tree_entered.connect(P.set_sentence.emit)
 			# Set the current pronoun to the button.
@@ -66,6 +66,7 @@ func add_pronouns() -> void:
 			button.pressed.connect(check_pronoun_verbs)
 			
 			custom_pronouns_vbox.add_child(button)
+			custom_pronouns_vbox.move_child(button, -1)
 
 
 ## Sets the curr_pronoun to the most recently pressed pronoun.
@@ -124,11 +125,16 @@ func check_pronoun_verbs():
 			update_sentence(curr_pronoun, "es", P.player_pronouns[curr_pronoun]['verbs']['es'])
 
 
-## Set the example sentences the first time time the screen is shown.
+## Set the example sentences the first time the screen is shown.
 func example_sentence() -> void:
 	pronoun_label()
 	
+	var reversed_keys: Array
 	for i in P.player_pronouns.keys():
+		reversed_keys.append(i)
+	reversed_keys.reverse()
+	
+	for i in reversed_keys:
 		var value:= 0
 		if i == "they":
 			value = 1
@@ -163,55 +169,57 @@ func update_sentence(pronoun: String, verb: String, value: int = 0) -> void:
 	var subjective_pronoun: String
 	var possessive_dep_pronoun: String
 	
-	if P.player_pronouns[pronoun]['pronouns'].has('subjective'):
-		subjective_pronoun = P.player_pronouns[pronoun]['pronouns']['subjective']
-		possessive_dep_pronoun = P.player_pronouns[pronoun]['pronouns']['possessive_dep']
+	if P.player_pronouns.has(pronoun):
+		if P.player_pronouns[pronoun]['pronouns'].has('subjective'):
+			subjective_pronoun = P.player_pronouns[pronoun]['pronouns']['subjective']
+			possessive_dep_pronoun = P.player_pronouns[pronoun]['pronouns']['possessive_dep']
 	
 	# O: Singular, 1: Plural
 	var pressed: bool = value
 	
 	match verb:
 		"are":
-			are_label.text = subjective_pronoun.capitalize() + " [b]" + P.are_arr[value] + "[/b]" + are_sentence
+			are_label.text = subjective_pronoun.capitalize() + " [u][i]" + P.are_arr[value] + "[/i][/u]" + are_sentence
 			# NOTE: To fix
 			# Gets the checkbuttons in the order they are added to the list.
 			# And set the button_pressed parameter to the right value.
 			get_check_buttons().get(0).button_pressed = pressed
 			# Create the verb key, and add the value.
+			#P.player_pronouns[pronoun]['verbs'] = "are"
 			P.player_pronouns[pronoun]['verbs']['are'] = ""
 			P.player_pronouns[pronoun]['verbs']['are'] = value
 		"arent":
-			arent_label.text = subjective_pronoun.capitalize() + " [b]" + P.arent_arr[value] + "[/b]" + arent_sentence
+			arent_label.text = subjective_pronoun.capitalize() + " [u][i]" + P.arent_arr[value] + "[/i][/u]" + arent_sentence
 			get_check_buttons().get(1).button_pressed = pressed
 			P.player_pronouns[pronoun]['verbs']['arent'] = ""
 			P.player_pronouns[pronoun]['verbs']['arent'] = value
 		"were":
-			were_label.text = subjective_pronoun.capitalize() + " [b]" + P.were_arr[value] + "[/b]" + were_sentence
+			were_label.text = subjective_pronoun.capitalize() + " [u][i]" + P.were_arr[value] + "[/i][/u]" + were_sentence
 			get_check_buttons().get(2).button_pressed = pressed
 			P.player_pronouns[pronoun]['verbs']['were'] = ""
 			P.player_pronouns[pronoun]['verbs']['were'] = value
 		"have":
-			have_label.text = subjective_pronoun.capitalize() + " [b]" + P.have_arr[value] + "[/b]" + have_sentence
+			have_label.text = subjective_pronoun.capitalize() + " [u][i]" + P.have_arr[value] + "[/i][/u]" + have_sentence
 			get_check_buttons().get(3).button_pressed = pressed
 			P.player_pronouns[pronoun]['verbs']['have'] = ""
 			P.player_pronouns[pronoun]['verbs']['have'] = value
 		"do":
-			do_label.text = "[b]" + P.do_arr[value].capitalize() + "[/b] " + subjective_pronoun + do_sentence
+			do_label.text = "[u][i]" + P.do_arr[value].capitalize() + "[/i][/u] " + subjective_pronoun + do_sentence
 			get_check_buttons().get(4).button_pressed = pressed
 			P.player_pronouns[pronoun]['verbs']['do'] = ""
 			P.player_pronouns[pronoun]['verbs']['do'] = value
 		"dont":
-			dont_label.text = "[b]" + P.dont_arr[value].capitalize() + "[/b] " + subjective_pronoun + dont_sentence
+			dont_label.text = "[u][i]" + P.dont_arr[value].capitalize() + "[/i][/u] " + subjective_pronoun + dont_sentence
 			get_check_buttons().get(5).button_pressed = pressed
 			P.player_pronouns[pronoun]['verbs']['dont'] = ""
 			P.player_pronouns[pronoun]['verbs']['dont'] = value
 		"s":
-			s_label.text = subjective_pronoun.capitalize() + " " + "work" + "[b]" + P.s_arr[value] + "[/b]" + s_sentence
+			s_label.text = subjective_pronoun.capitalize() + " " + "work" + "[u][i]" + P.s_arr[value] + "[/i][/u]" + s_sentence
 			get_check_buttons().get(6).button_pressed = pressed
 			P.player_pronouns[pronoun]['verbs']['s'] = ""
 			P.player_pronouns[pronoun]['verbs']['s'] = value
 		"es":
-			es_label.text = subjective_pronoun.capitalize() + " " + "do[b]" + P.es_arr[value] + "[/b] " + possessive_dep_pronoun + es_sentence
+			es_label.text = subjective_pronoun.capitalize() + " " + "do[u][i]" + P.es_arr[value] + "[/i][/u] " + possessive_dep_pronoun + es_sentence
 			get_check_buttons().get(7).button_pressed = pressed
 			P.player_pronouns[pronoun]['verbs']['es'] = ""
 			P.player_pronouns[pronoun]['verbs']['es'] = value
@@ -236,4 +244,5 @@ func _on_visibility_changed() -> void:
 
 func _on_confirm_button_pressed() -> void:
 	_notification.show()
+	custom_pronouns.set_new_keys()
 	P._save(custom_pronouns.save_name)

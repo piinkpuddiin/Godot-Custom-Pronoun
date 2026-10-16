@@ -2,31 +2,28 @@
 
 [ext_resource type="Script" uid="uid://b5lufh74gl71q" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://8v6rjdnw80di" path="res://scenes/custom_pronouns.tscn" id="2_jyhfs"]
-[ext_resource type="Texture2D" uid="uid://jhdvw3bmsvw6" path="res://icon.svg" id="3_choun"]
+[ext_resource type="Texture2D" uid="uid://vvt6sex2ctoq" path="res://images/circle_2.png" id="3_jkv2x"]
 [ext_resource type="PackedScene" uid="uid://c33dl8n5kstxm" path="res://scenes/example_sentences.tscn" id="3_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://dxo7j707uuork" path="res://images/cloud_2.png" id="4_jbj1t"]
+[ext_resource type="Texture2D" uid="uid://7xc6vehj0ph5" path="res://images/circle_1.png" id="4_muem4"]
 [ext_resource type="Script" uid="uid://mpl860we857m" path="res://scripts/dialogue.gd" id="4_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://1gmg6ovvwdj4" path="res://images/cloud_3.png" id="5_muem4"]
 [ext_resource type="Resource" uid="uid://sxyrib2w8nmd" path="res://timeline_pronouns.dtl" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://c5fo78esx0odx" path="res://images/cloud_1.png" id="6_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://drnqufsnlehxk" path="res://scenes/debug.tscn" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://dry62qqgpqlpm" path="res://images/rounded_square.png" id="7_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://gyqyp87jsk4k" path="res://scenes/notification.tscn" id="8_85g3d"]
 [ext_resource type="Texture2D" uid="uid://bsg7e0mhcch2v" path="res://images/bg_quick.png" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://1bwc32uk448w" path="res://scenes/main_menu.tscn" id="9_choun"]
-
-[sub_resource type="Gradient" id="Gradient_85g3d"]
-interpolation_mode = 2
-interpolation_color_space = 2
-offsets = PackedFloat32Array(0.38060537, 0.5913677, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.14509805, 0.1882353, 0.29803923, 1, 0.9490196, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_choun"]
-gradient = SubResource("Gradient_85g3d")
-fill_to = Vector2(1, 0.7345086)
+[ext_resource type="Theme" uid="uid://qpir2awu1mnv" path="res://themes/simplistic.tres" id="11_eb6dy"]
+[ext_resource type="Script" uid="uid://blcah2y7rr1km" path="res://scripts/saved_pronouns.gd" id="12_trceg"]
 
 [sub_resource type="Animation" id="Animation_ya4ey"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Background/TextureRect3:position")
+tracks/0/path = NodePath("Background/circle:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,22 +32,142 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(576, 270)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/rounded_square:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.1697447]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/circle2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/circle2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Background/teal_corner2:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Background/rounded_square:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-102, -153)]
+}
 
 [sub_resource type="Animation" id="Animation_eb6dy"]
 resource_name = "bg_shapes"
-length = 10.0
+length = 55.0
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Background/TextureRect3:position")
+tracks/0/path = NodePath("Background/circle:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 9.9),
+"times": PackedFloat32Array(0, 55),
 "transitions": PackedFloat32Array(1.1486988, 1.9318742),
 "update": 0,
 "values": [Vector2(900, 270), Vector2(900, 129)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/rounded_square:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 55),
+"transitions": PackedFloat32Array(0.61557215, 1.7411027),
+"update": 0,
+"values": [-0.1697447, 3.3108895]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/circle2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 55),
+"transitions": PackedFloat32Array(1, 2.5491211),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.6, 0.6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/circle2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.44705883)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Background/teal_corner2:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6333333, 55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Background/rounded_square:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 25.156708, 55),
+"transitions": PackedFloat32Array(0.08246929, 3.7321339, 0.1961461),
+"update": 0,
+"values": [Vector2(-102, -153), Vector2(22.999977, -243.00002), Vector2(205, -204.99994)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_trceg"]
@@ -84,26 +201,101 @@ grow_vertical = 2
 texture = ExtResource("9_85g3d")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Background" unique_id=1025452533]
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=454999708]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_choun")
-expand_mode = 1
+color = Color(0, 0, 0, 1)
 
-[node name="TextureRect3" type="TextureRect" parent="Background" unique_id=841516863]
+[node name="circle" type="TextureRect" parent="Background" unique_id=841516863]
 layout_mode = 0
 offset_left = 576.0
 offset_top = 270.0
-offset_right = 789.0
-offset_bottom = 498.9996
+offset_right = 2496.0
+offset_bottom = 1350.0
 rotation = 0.45819244
-texture = ExtResource("3_choun")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_jkv2x")
+
+[node name="teal_corner" type="TextureRect" parent="Background" unique_id=463660841]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_muem4")
+expand_mode = 1
+
+[node name="blue_cloud" type="TextureRect" parent="Background" unique_id=1151581435]
+modulate = Color(1, 1, 1, 0.24705882)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_jbj1t")
+expand_mode = 1
+
+[node name="purple_corner" type="TextureRect" parent="Background" unique_id=1708651718]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_dp3eg")
+expand_mode = 1
+
+[node name="rounded_square" type="TextureRect" parent="Background" unique_id=1025452533]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -102.0
+offset_top = -153.0
+offset_right = -102.0
+offset_bottom = -153.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.1697447
+scale = Vector2(0.7, 0.7)
+pivot_offset_ratio = Vector2(0.5, 0.615)
+texture = ExtResource("7_jbj1t")
+expand_mode = 1
+
+[node name="circle2" type="TextureRect" parent="Background" unique_id=307851369]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -804.00006
+offset_top = 156.0
+offset_right = -804.00006
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.1697447
+pivot_offset_ratio = Vector2(0.72, 0.4)
+texture = ExtResource("4_muem4")
+expand_mode = 1
+
+[node name="teal_corner2" type="TextureRect" parent="Background" unique_id=781559524]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_muem4")
+expand_mode = 1
 
 [node name="CustomPronouns" parent="." unique_id=78342683 node_paths=PackedStringArray("main", "examples_sentence") instance=ExtResource("2_jyhfs")]
+visible = false
 main = NodePath("..")
 examples_sentence = NodePath("../ExampleSentences")
 
@@ -115,6 +307,7 @@ custom_pronouns = NodePath("../CustomPronouns")
 _notification = NodePath("../Notification")
 
 [node name="Dialogue" type="Control" parent="." unique_id=704991212]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 13.176895
@@ -135,11 +328,49 @@ visible = false
 custom_pronouns = NodePath("../CustomPronouns")
 dialogue = NodePath("../Dialogue")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=413948421]
-unique_name_in_owner = true
-libraries/ = SubResource("AnimationLibrary_trceg")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1598013482]
 layer = 2
 
 [node name="Debug" parent="CanvasLayer" unique_id=559146899 instance=ExtResource("6_tefeu")]
+
+[node name="SavedPronouns" type="Control" parent="CanvasLayer" unique_id=1255026749 node_paths=PackedStringArray("pronouns_vbox")]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -284.0
+offset_right = 210.0
+offset_bottom = -178.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("11_eb6dy")
+script = ExtResource("12_trceg")
+pronouns_vbox = NodePath("pronouns_vbox")
+
+[node name="pronouns_vbox" type="VBoxContainer" parent="CanvasLayer/SavedPronouns" unique_id=794414493]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/SavedPronouns/pronouns_vbox" unique_id=395609211]
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]Your pronoun(s):"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=413948421]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_trceg")

@@ -9,6 +9,8 @@ signal curr_verb()
 signal set_sentence
 # Emitted once the pronouns have been loaded.
 signal loaded_pronouns
+# Emitted once the pronouns have been saved.
+signal saved_pronouns
 
 # Stores all the pronouns and the pronouns correct verbs.
 var player_pronouns:= {}
@@ -38,7 +40,7 @@ var default_pronouns:= {
 		"possessive_indep": "aers",
 		"reflexive": "aerself",
 	},
-	"its": {
+	"it": {
 		"subjective": "it",
 		"objective": "it",
 		"possessive_dep": "its",
@@ -104,25 +106,25 @@ var arent = ""
 var arent_arr = ["isn't", "aren't"]
 
 var were = ""
-var were_arr = ["was", "were"]
+var were_arr:= ["was", "were"]
 
 var have = ""
-var have_arr = ["has", "have"]
+var have_arr:= ["has", "have"]
 
 var havent = ""
-var havent_arr = ["hasn't", "haven't"]
+var havent_arr:= ["hasn't", "haven't"]
 
 var do = ""
-var do_arr = ["does", "do"]
+var do_arr:= ["does", "do"]
 
 var dont = ""
-var dont_arr = ["doesn't", "don't"]
+var dont_arr:= ["doesn't", "don't"]
 
 var s = ""
-var s_arr = ["s", ""]
+var s_arr:= ["s", ""]
 
 var es = ""
-var es_arr = ["es", ""]
+var es_arr:= ["es", ""]
 
 
 func _ready() -> void:
@@ -284,6 +286,7 @@ func _save(save_name: String):
 	if error:
 		print("An error happened while saving data: ", error)
 	
+	saved_pronouns.emit()
 	print("Succesfully saved! Save: " + save_name + ".")
 
 
@@ -298,8 +301,10 @@ func _load(save_name: String):
 		print("An error happened while loading data: ", error)
 		return
 	
-	var saved_pronouns = config_file.get_value("Pronouns", "player", {})
-	load_data['pronouns'] = saved_pronouns
+	var _pronouns = config_file.get_value("Pronouns", "player", {})
+	load_data['pronouns'] = _pronouns
 	
+	#loaded_pronouns.emit(save_name)
 	return load_data
+
 #endregion

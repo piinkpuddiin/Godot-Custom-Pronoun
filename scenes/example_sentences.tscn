@@ -6,6 +6,14 @@
 [ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="4_mtxbf"]
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="5_kpbhc"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aek14"]
+shader = ExtResource("2_iyick")
+shader_parameter/amount = 1.8000001
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmgw1"]
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="Resource" id="Resource_bax13"]
 script = ExtResource("4_mtxbf")
 color = Color(1, 1, 1, 0.41568628)
@@ -33,16 +41,6 @@ borders = Array[ExtResource("4_mtxbf")]([SubResource("Resource_bax13"), SubResou
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 metadata/_custom_type_script = "uid://bkl6g25jwb47h"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_aek14"]
-shader = ExtResource("2_iyick")
-shader_parameter/amount = 1.8000001
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmgw1"]
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
 
 [sub_resource type="Resource" id="Resource_fqtv2"]
 script = ExtResource("4_mtxbf")
@@ -75,7 +73,7 @@ content_margin_top = -1.0
 content_margin_right = -1.0
 content_margin_bottom = -1.0
 script = ExtResource("5_kpbhc")
-color = Color(1, 1, 1, 0.14901961)
+color = Color(1, 1, 1, 0.25490198)
 borders = Array[ExtResource("4_mtxbf")]([SubResource("Resource_fqtv2"), SubResource("Resource_ugv3e"), SubResource("Resource_a7lbn")])
 corner_radius_top_left = 15
 corner_radius_top_right = 15
@@ -167,6 +165,16 @@ s_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/
 es_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer/es_label")
 vbox_container = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer")
 custom_pronouns_vbox = NodePath("pronouns_panel/MarginContainer/VBoxContainer/custom_pronouns_vbox")
+
+[node name="blur_panel" type="Panel" parent="." unique_id=1563202113]
+material = SubResource("ShaderMaterial_aek14")
+custom_minimum_size = Vector2(240, 360)
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 554.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_dmgw1")
 
 [node name="pronouns_panel" type="Panel" parent="." unique_id=1633314076]
 custom_minimum_size = Vector2(240, 360)
@@ -309,6 +317,7 @@ theme = SubResource("Theme_mtxbf")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/bold_font_size = 22
 bbcode_enabled = true
 text = "___ running in the woods."
@@ -318,6 +327,7 @@ fit_content = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
 text = "Singular"
 
 [node name="arent_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=392040169]
@@ -343,6 +353,7 @@ theme = SubResource("Theme_mtxbf")
 [node name="arent_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=1930773529]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/bold_font_size = 22
 bbcode_enabled = true
 text = "___ walking to class."
@@ -352,6 +363,7 @@ fit_content = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
 text = "Singular"
 
 [node name="were_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1429795574]
@@ -377,6 +389,7 @@ theme = SubResource("Theme_mtxbf")
 [node name="were_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer" unique_id=113410060]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/bold_font_size = 22
 bbcode_enabled = true
 text = "___ aware of the extent of the damage."
@@ -386,6 +399,7 @@ fit_content = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
 text = "Singular"
 
 [node name="have_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=996886174]
@@ -411,6 +425,7 @@ theme = SubResource("Theme_mtxbf")
 [node name="have_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=1267480670]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/bold_font_size = 22
 bbcode_enabled = true
 text = "___ run out of time."
@@ -420,6 +435,7 @@ fit_content = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
 text = "Singular"
 
 [node name="do_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1917274669]
@@ -445,6 +461,7 @@ theme = SubResource("Theme_mtxbf")
 [node name="do_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=684988593]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/bold_font_size = 22
 bbcode_enabled = true
 text = "___ like coffee?"
@@ -454,6 +471,7 @@ fit_content = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
 text = "Singular"
 
 [node name="dont_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1922918899]
@@ -479,6 +497,7 @@ theme = SubResource("Theme_mtxbf")
 [node name="dont_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=787641833]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/bold_font_size = 22
 bbcode_enabled = true
 text = "___ like candy?"
@@ -488,6 +507,7 @@ fit_content = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
 text = "Singular"
 
 [node name="s_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1698498893]
@@ -513,6 +533,7 @@ theme = SubResource("Theme_mtxbf")
 [node name="s_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer" unique_id=1507978596]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/bold_font_size = 22
 bbcode_enabled = true
 text = "___ like a machine."
@@ -522,6 +543,7 @@ fit_content = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
 text = "Singular"
 
 [node name="es_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1215786053]
@@ -547,6 +569,7 @@ theme = SubResource("Theme_mtxbf")
 [node name="es_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer" unique_id=2130984321]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/bold_font_size = 22
 bbcode_enabled = true
 text = "___ homework every day."
@@ -556,6 +579,7 @@ fit_content = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
 text = "Singular"
 
 [node name="Panel" type="Panel" parent="." unique_id=7624072]

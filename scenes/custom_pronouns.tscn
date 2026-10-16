@@ -266,6 +266,7 @@ theme_type_variation = &"LightButton"
 text = "Load"
 
 [node name="print_all_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox" unique_id=1622229197]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
@@ -438,6 +439,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_type_variation = &"LightButton"
+disabled = true
 text = "Next"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=984093856]

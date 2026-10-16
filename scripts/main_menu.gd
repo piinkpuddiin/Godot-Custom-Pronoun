@@ -21,8 +21,11 @@ func _on_dialogue_button_pressed() -> void:
 
 func _on_load_button_pressed() -> void:
 	P.clear()
+	P._load(custom_pronouns.save_name)
 	P.loaded_pronouns.emit(custom_pronouns.save_name)
+	print(custom_pronouns.save_name)
 
 func load_data(save_name):
 	P.player_pronouns = P._load(save_name).get("pronouns")
 	%dialogue_button.disabled = false
+	print(P.player_pronouns)

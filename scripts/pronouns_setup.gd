@@ -45,6 +45,7 @@ var example_labels_array: Array[String]
 
 func _ready() -> void:
 	self.hide()
+	#check_verb()
 	set_defaults()
 	line_edits_editable(false)
 	P.curr_pronoun.connect(set_curr_pronoun)
@@ -98,8 +99,31 @@ func line_edit_verbs() -> bool:
 ## Check wheter editing the verbs is possible.
 func check_verb(_new_text: String = "") -> void:
 	await get_tree().process_frame
-	next_button.disabled = line_edit_verbs()
+	#next_button.disabled = line_edit_verbs()
+	
+	var filled_arr: Array
+	# Check if all the types aren't empty.
+	for i in P.player_pronouns.keys():
+		# Skip the empty key.
+		if i == "":
+			continue
+		for x in P.player_pronouns[i]['pronouns'].keys():
+			if !P.player_pronouns[i]['pronouns'][x].is_empty():
+				filled_arr.append(false)
+			else:
+				filled_arr.append(true)
+	
+	if filled_arr.is_empty():
+		next_button.disabled = true
+	elif filled_arr.count(true) >= 1:
+		next_button.disabled = true
+	# We multiply the player_pronuns keys times 5, for the 5 types in the pronouns (subjective, objective, etc...)
+	# We remove 5 to account for the empty key.
+	elif filled_arr.count(false) == (len(P.player_pronouns.keys()) * 5) - 5:
+		next_button.disabled = false
+	
 #endregion
+
 
 #region RICHTEXTLABEL
 func get_example_labels() -> Array[RichTextLabel]:
@@ -121,7 +145,6 @@ func get_example_labels_text():
 func reset_example_labels():
 	for i in get_example_labels():
 		i.text = example_labels_array.get(get_example_labels().find(i))
-	
 #endregion
 
 #region Line Edits EXAMPLES
@@ -132,7 +155,6 @@ func _on_subjective_line_edit_text_changed(new_text: String) -> void:
 # Rename the button with it's subjective and/or subjective pronoun from the current pronoun dict key.
 func _on_subjective_line_edit_editing_toggled(_toggled_on: bool) -> void:
 	set_button_name()
-
 
 func _on_objective_line_edit_text_changed(new_text: String) -> void:
 	object_example.text = "Are you talking to [u][i]" + new_text.to_lower() + "[/i][/u]?"
@@ -221,6 +243,9 @@ func _on_add_button_pressed() -> void:
 	# Enable editing custom pronouns.
 	button.focus_entered.connect(line_edits_editable.bind(true))
 	button.mouse_entered.connect(line_edits_editable.bind(true))
+	# Set the custom pronouns dict.
+	button.focus_entered.connect(set_curr_pronoun.bind(custom_key))
+	button.mouse_entered.connect(set_curr_pronoun.bind(custom_key))
 	
 	pronoun_choice_hbox.add_child(button)
 	await get_tree().process_frame
@@ -229,8 +254,6 @@ func _on_add_button_pressed() -> void:
 	
 	line_edits_editable(false)
 	line_edits_clear()
-
-
 
 
 ## Set the current pronoun dict key, and display it on the label.
@@ -297,6 +320,10 @@ func line_edits_pronouns(toggled_on: bool, dict: Dictionary, pronoun: String):
 		P.curr_pronoun.emit(pronoun)
 		
 		for i in get_line_edits():
+			# Don't save empty pronoun lines
+			if i.text.is_empty():
+				continue
+			
 			if i.name.begins_with("subjective"):
 				if dict[pronoun].has('subjective'):
 					i.text = dict[pronoun]['subjective'].to_pascal_case()
@@ -395,7 +422,6 @@ func _on_save_button_pressed() -> void:
 # Load the pronouns from the save.
 func _on_load_button_pressed() -> void:
 	P._load(save_name)
-	P.loaded_pronouns.emit(save_name)
 
 # Prints the current players pronouns.
 func _on_print_all_button_pressed() -> void:
@@ -411,8 +437,13 @@ func _on_next_button_pressed() -> void:
 	
 	# Delete the empty key.
 	P.player_pronouns.erase("")
+	#if len(P.player_pronouns.keys()) >= 2:
+		#P.curr_pronoun.emit(P.player_pronouns.keys()[-1])
+	#else:
+	P.curr_pronoun.emit(P.player_pronouns.keys()[0])
 	examples_sentence.add_pronouns()
 	examples_sentence.show()
+	
 	self.hide()
 
 #region HELPER FUNCS
@@ -456,6 +487,10 @@ func check_custom() -> void:
 ## Saves the custom pronouns input.
 func save_custom_dict():
 	for i in get_line_edits():
+		# Don't save empty pronoun lines
+		if i.text.is_empty():
+			continue
+		
 		if i.name.begins_with('subjective'):
 			P.player_pronouns[curr_custom_dict]['pronouns']['subjective'] = i.text
 		elif i.name.begins_with('objective'):
