@@ -12,4 +12,5 @@ script = ExtResource("1_m5nnp")
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Change type"
+theme_override_colors/font_disabled_color = Color(0.9867516, 0.9867516, 0.9867516, 1)
 text = ""

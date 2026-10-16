@@ -27,6 +27,9 @@ corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
+shadow_color = Color(0, 0, 0, 0.078431375)
+shadow_size = 8
+shadow_offset = Vector2(3, 3)
 
 [node name="MainMenu" type="Control" unique_id=2008582098]
 layout_mode = 3

@@ -50,6 +50,7 @@ func add_pronouns() -> void:
 		if P.player_pronouns[i]['pronouns'].has('subjective'):
 			print("All the pronouns: ", i)
 			var button:= Button.new()
+			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			button.text = (
 				P.player_pronouns[i]['pronouns']['subjective'].capitalize() +
 				 "/" + 
@@ -151,7 +152,7 @@ func pronoun_label():
 		subjective_pronoun = P.player_pronouns[curr_pronoun]['pronouns']['subjective']
 		objective_pronoun = P.player_pronouns[curr_pronoun]['pronouns']['objective']
 	current_pronoun_label.text = (
-		"Current pronoun: [b]" + 
+		"[b]" +
 		subjective_pronoun.capitalize() + 
 		"/" + 
 		objective_pronoun.capitalize()
@@ -222,6 +223,7 @@ func update_sentence(pronoun: String, verb: String, value: int = 0) -> void:
 func _on_back_button_pressed() -> void:
 	# Only call when the pronouns need to be reset.
 	#P.clear()
+	custom_pronouns.show()
 	self.hide()
 
 

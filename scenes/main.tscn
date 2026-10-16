@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b5lufh74gl71q" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://8v6rjdnw80di" path="res://scenes/custom_pronouns.tscn" id="2_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://jhdvw3bmsvw6" path="res://icon.svg" id="3_choun"]
 [ext_resource type="PackedScene" uid="uid://c33dl8n5kstxm" path="res://scenes/example_sentences.tscn" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://mpl860we857m" path="res://scripts/dialogue.gd" id="4_tbgi4"]
 [ext_resource type="Resource" uid="uid://sxyrib2w8nmd" path="res://timeline_pronouns.dtl" id="5_tefeu"]
@@ -20,10 +21,49 @@ colors = PackedColorArray(0, 0, 0, 1, 0.14509805, 0.1882353, 0.29803923, 1, 0.94
 gradient = SubResource("Gradient_85g3d")
 fill_to = Vector2(1, 0.7345086)
 
-[node name="Main" type="Node" unique_id=437644318 node_paths=PackedStringArray("custom_pronouns", "main_menu")]
+[sub_resource type="Animation" id="Animation_ya4ey"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/TextureRect3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(576, 270)]
+}
+
+[sub_resource type="Animation" id="Animation_eb6dy"]
+resource_name = "bg_shapes"
+length = 10.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/TextureRect3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9.9),
+"transitions": PackedFloat32Array(1.1486988, 1.9318742),
+"update": 0,
+"values": [Vector2(900, 270), Vector2(900, 129)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_trceg"]
+_data = {
+&"RESET": SubResource("Animation_ya4ey"),
+&"bg_shapes": SubResource("Animation_eb6dy")
+}
+
+[node name="Main" type="Node" unique_id=437644318 node_paths=PackedStringArray("custom_pronouns", "main_menu", "animation_player")]
 script = ExtResource("1_sugp2")
 custom_pronouns = NodePath("CustomPronouns")
 main_menu = NodePath("MainMenu")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Background" type="Control" parent="." unique_id=1526023556]
 layout_mode = 3
@@ -54,8 +94,16 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_choun")
 expand_mode = 1
 
+[node name="TextureRect3" type="TextureRect" parent="Background" unique_id=841516863]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 270.0
+offset_right = 789.0
+offset_bottom = 498.9996
+rotation = 0.45819244
+texture = ExtResource("3_choun")
+
 [node name="CustomPronouns" parent="." unique_id=78342683 node_paths=PackedStringArray("main", "examples_sentence") instance=ExtResource("2_jyhfs")]
-visible = false
 main = NodePath("..")
 examples_sentence = NodePath("../ExampleSentences")
 
@@ -89,3 +137,7 @@ dialogue = NodePath("../Dialogue")
 
 [node name="Debug" parent="." unique_id=559146899 instance=ExtResource("6_tefeu")]
 visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=413948421]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_trceg")

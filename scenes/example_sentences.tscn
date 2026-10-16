@@ -3,37 +3,121 @@
 [ext_resource type="Theme" uid="uid://qpir2awu1mnv" path="res://themes/simplistic.tres" id="1_iyick"]
 [ext_resource type="Script" uid="uid://cwh34fi1bulsx" path="res://scripts/example_sentences.gd" id="1_o2fwr"]
 [ext_resource type="Shader" uid="uid://g122rjbh0i7b" path="res://shaders/blur.gdshader" id="2_iyick"]
-[ext_resource type="Theme" uid="uid://hn1qglo51or4" path="res://pronoun_theme.tres" id="2_o2fwr"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="4_mtxbf"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="5_kpbhc"]
+
+[sub_resource type="Resource" id="Resource_bax13"]
+script = ExtResource("4_mtxbf")
+color = Color(1, 1, 1, 0.41568628)
+blend = true
+width_bottom = 20
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Resource" id="Resource_vmws6"]
+script = ExtResource("4_mtxbf")
+ignore_stack = true
+width_right = 1
+width_bottom = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="StyleBox" id="StyleBox_dmgw1"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("5_kpbhc")
+color = Color(0.95686275, 0.95686275, 0.95686275, 0.21960784)
+borders = Array[ExtResource("4_mtxbf")]([SubResource("Resource_bax13"), SubResource("Resource_vmws6")])
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aek14"]
 shader = ExtResource("2_iyick")
 shader_parameter/amount = 1.8000001
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
-bg_color = Color(0.09411765, 0.09411765, 0.09411765, 0.7490196)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmgw1"]
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi1ct"]
-bg_color = Color(0.08468992, 0.08468994, 0.08468988, 0.8)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 35
-corner_radius_top_right = 35
-corner_radius_bottom_right = 35
-corner_radius_bottom_left = 35
+[sub_resource type="Resource" id="Resource_fqtv2"]
+script = ExtResource("4_mtxbf")
+color = Color(1, 1, 1, 0.3882353)
+blend = true
+width_top = 12
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p7k8k"]
+[sub_resource type="Resource" id="Resource_ugv3e"]
+script = ExtResource("4_mtxbf")
+color = Color(1, 1, 1, 0.3882353)
+blend = true
+width_bottom = 30
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2fwr"]
+[sub_resource type="Resource" id="Resource_a7lbn"]
+script = ExtResource("4_mtxbf")
+ignore_stack = true
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="StyleBox" id="StyleBox_7avwq"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("5_kpbhc")
+color = Color(1, 1, 1, 0.14901961)
+borders = Array[ExtResource("4_mtxbf")]([SubResource("Resource_fqtv2"), SubResource("Resource_ugv3e"), SubResource("Resource_a7lbn")])
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpbhc"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+expand_margin_left = 10.0
+expand_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f24y1"]
+bg_color = Color(0.047557704, 0.04755763, 0.047557645, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_mtxbf"]
+CheckButton/colors/font_color = Color(0.6789431, 0.678944, 0.6789434, 1)
+CheckButton/font_sizes/font_size = 18
+MarginContainer/constants/margin_bottom = 5
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 5
+MarginContainer/constants/margin_top = 5
+Panel/styles/panel = SubResource("StyleBoxFlat_f24y1")
+RichTextLabel/colors/default_color = Color(0.8431839, 0.8431839, 0.84318376, 1)
+RichTextLabel/font_sizes/normal_font_size = 22
+VBoxContainer/constants/separation = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mtxbf"]
 
 [sub_resource type="Animation" id="Animation_o2fwr"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("blur_color_rect:material:shader_parameter/amount")
+tracks/0/path = NodePath("MarginContainer/blur_panel:material:shader_parameter/amount")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -48,7 +132,7 @@ length = 0.5
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("blur_color_rect:material:shader_parameter/amount")
+tracks/0/path = NodePath("MarginContainer/blur_panel:material:shader_parameter/amount")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -72,49 +156,79 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_iyick")
 script = ExtResource("1_o2fwr")
-current_pronoun_label = NodePath("Panel/MarginContainer/current_pronoun_label")
-are_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer/are_label")
-arent_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer/arent_label")
-were_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer/were_label")
-have_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer/have_label")
-do_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer/do_label")
-dont_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer/dont_label")
-s_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer/s_label")
-es_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer/es_label")
-vbox_container = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer")
-custom_pronouns_vbox = NodePath("Panel/MarginContainer/VBoxContainer/custom_pronouns_vbox")
+current_pronoun_label = NodePath("MarginContainer/current_pronoun_vbox/pronoun_label")
+are_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer/are_label")
+arent_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer/arent_label")
+were_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer/were_label")
+have_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer/have_label")
+do_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer/do_label")
+dont_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer/dont_label")
+s_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer/s_label")
+es_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer/es_label")
+vbox_container = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer")
+custom_pronouns_vbox = NodePath("pronouns_panel/MarginContainer/VBoxContainer/custom_pronouns_vbox")
 
-[node name="blur_color_rect" type="ColorRect" parent="." unique_id=152564983]
-material = SubResource("ShaderMaterial_aek14")
+[node name="pronouns_panel" type="Panel" parent="." unique_id=1633314076]
+custom_minimum_size = Vector2(240, 360)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 240.0
+offset_bottom = -146.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_dmgw1")
+
+[node name="MarginContainer" type="MarginContainer" parent="pronouns_panel" unique_id=640327407]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="Panel" type="Panel" parent="." unique_id=7624072]
+[node name="VBoxContainer" type="VBoxContainer" parent="pronouns_panel/MarginContainer" unique_id=1389435485]
+custom_maximum_size = Vector2(-1, 600)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="all_pronouns_label" type="RichTextLabel" parent="pronouns_panel/MarginContainer/VBoxContainer" unique_id=1830316307]
+custom_minimum_size = Vector2(193, 50)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]Pronoun(s):"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="custom_pronouns_vbox" type="VBoxContainer" parent="pronouns_panel/MarginContainer/VBoxContainer" unique_id=854538277]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2042163947]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=2042163947]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 30
+mouse_filter = 2
+theme_override_constants/margin_left = 170
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="current_pronoun_label" type="RichTextLabel" parent="Panel/MarginContainer" unique_id=1313239238]
+[node name="current_pronoun_vbox" type="VBoxContainer" parent="MarginContainer" unique_id=1359705925]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="current_pronoun_label" type="RichTextLabel" parent="MarginContainer/current_pronoun_vbox" unique_id=1313239238]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -122,42 +236,63 @@ size_flags_vertical = 0
 theme_override_font_sizes/normal_font_size = 34
 theme_override_font_sizes/bold_font_size = 32
 bbcode_enabled = true
-text = "Current pronoun: [b]They/Them"
+text = "Current pronoun:"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="Panel/MarginContainer" unique_id=1534172627]
+[node name="pronoun_label" type="RichTextLabel" parent="MarginContainer/current_pronoun_vbox" unique_id=875015754]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/normal_font_size = 34
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]They/Them"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="blur_panel" type="Panel" parent="MarginContainer" unique_id=1080233746]
+material = SubResource("ShaderMaterial_aek14")
 custom_minimum_size = Vector2(700, 410)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_bi1ct")
+theme_override_styles/panel = SubResource("StyleBoxFlat_dmgw1")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel" unique_id=921037064]
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1534172627]
+custom_minimum_size = Vector2(700, 410)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_7avwq")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel" unique_id=921037064]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 35
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer" unique_id=1576903788]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer" unique_id=1576903788]
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 15
 
-[node name="are_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=752861319]
+[node name="are_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=752861319]
 custom_minimum_size = Vector2(0, 35)
 custom_maximum_size = Vector2(-1, 35)
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_o2fwr")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kpbhc")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel" unique_id=835521096]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel" unique_id=835521096]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,12 +300,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer" unique_id=1356366565]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer" unique_id=1356366565]
 layout_mode = 2
 size_flags_vertical = 4
-theme = ExtResource("2_o2fwr")
+theme = SubResource("Theme_mtxbf")
 
-[node name="are_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer" unique_id=120486461]
+[node name="are_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer" unique_id=120486461]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -179,21 +314,20 @@ bbcode_enabled = true
 text = "___ running in the woods."
 fit_content = true
 
-[node name="are_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer" unique_id=1345413435]
+[node name="are_button" type="CheckButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer" unique_id=1345413435]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Singular"
 
-[node name="arent_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=392040169]
+[node name="arent_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=392040169]
 custom_minimum_size = Vector2(0, 35)
 custom_maximum_size = Vector2(-1, 35)
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_o2fwr")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_p7k8k")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kpbhc")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel" unique_id=1918421839]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel" unique_id=1918421839]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -201,12 +335,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer" unique_id=1324578717]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer" unique_id=1324578717]
 layout_mode = 2
 size_flags_vertical = 4
-theme = ExtResource("2_o2fwr")
+theme = SubResource("Theme_mtxbf")
 
-[node name="arent_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=1930773529]
+[node name="arent_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=1930773529]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/bold_font_size = 22
@@ -214,20 +348,20 @@ bbcode_enabled = true
 text = "___ walking to class."
 fit_content = true
 
-[node name="arent_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=629490013]
+[node name="arent_button" type="CheckButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer" unique_id=629490013]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Singular"
 
-[node name="were_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1429795574]
+[node name="were_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1429795574]
 custom_minimum_size = Vector2(0, 35)
 custom_maximum_size = Vector2(-1, 35)
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_o2fwr")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kpbhc")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel" unique_id=1268965587]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel" unique_id=1268965587]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -235,12 +369,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer" unique_id=142141983]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer" unique_id=142141983]
 layout_mode = 2
 size_flags_vertical = 4
-theme = ExtResource("2_o2fwr")
+theme = SubResource("Theme_mtxbf")
 
-[node name="were_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer" unique_id=113410060]
+[node name="were_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer" unique_id=113410060]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/bold_font_size = 22
@@ -248,21 +382,20 @@ bbcode_enabled = true
 text = "___ aware of the extent of the damage."
 fit_content = true
 
-[node name="were_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer" unique_id=317367285]
+[node name="were_button" type="CheckButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer" unique_id=317367285]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Singular"
 
-[node name="have_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=996886174]
+[node name="have_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=996886174]
 custom_minimum_size = Vector2(0, 35)
 custom_maximum_size = Vector2(-1, 35)
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_o2fwr")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_o2fwr")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kpbhc")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel" unique_id=1951477763]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel" unique_id=1951477763]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -270,12 +403,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer" unique_id=389630915]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer" unique_id=389630915]
 layout_mode = 2
 size_flags_vertical = 4
-theme = ExtResource("2_o2fwr")
+theme = SubResource("Theme_mtxbf")
 
-[node name="have_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=1267480670]
+[node name="have_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=1267480670]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/bold_font_size = 22
@@ -283,20 +416,20 @@ bbcode_enabled = true
 text = "___ run out of time."
 fit_content = true
 
-[node name="have_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=10616149]
+[node name="have_button" type="CheckButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/have_panel/MarginContainer/HBoxContainer" unique_id=10616149]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Singular"
 
-[node name="do_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1917274669]
+[node name="do_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1917274669]
 custom_minimum_size = Vector2(0, 35)
 custom_maximum_size = Vector2(-1, 35)
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_o2fwr")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kpbhc")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel" unique_id=941610490]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel" unique_id=941610490]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -304,12 +437,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer" unique_id=359900955]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer" unique_id=359900955]
 layout_mode = 2
 size_flags_vertical = 4
-theme = ExtResource("2_o2fwr")
+theme = SubResource("Theme_mtxbf")
 
-[node name="do_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=684988593]
+[node name="do_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=684988593]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/bold_font_size = 22
@@ -317,21 +450,20 @@ bbcode_enabled = true
 text = "___ like coffee?"
 fit_content = true
 
-[node name="do_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=615695145]
+[node name="do_button" type="CheckButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/do_panel/MarginContainer/HBoxContainer" unique_id=615695145]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Singular"
 
-[node name="dont_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1922918899]
+[node name="dont_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1922918899]
 custom_minimum_size = Vector2(0, 35)
 custom_maximum_size = Vector2(-1, 35)
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_o2fwr")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_p7k8k")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kpbhc")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel" unique_id=1963239310]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel" unique_id=1963239310]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -339,12 +471,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer" unique_id=389023409]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer" unique_id=389023409]
 layout_mode = 2
 size_flags_vertical = 4
-theme = ExtResource("2_o2fwr")
+theme = SubResource("Theme_mtxbf")
 
-[node name="dont_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=787641833]
+[node name="dont_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=787641833]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/bold_font_size = 22
@@ -352,20 +484,20 @@ bbcode_enabled = true
 text = "___ like candy?"
 fit_content = true
 
-[node name="dont_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=1785237839]
+[node name="dont_button" type="CheckButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/dont_panel/MarginContainer/HBoxContainer" unique_id=1785237839]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Singular"
 
-[node name="s_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1698498893]
+[node name="s_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1698498893]
 custom_minimum_size = Vector2(0, 35)
 custom_maximum_size = Vector2(-1, 35)
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_o2fwr")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kpbhc")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel" unique_id=1519066035]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel" unique_id=1519066035]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -373,12 +505,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer" unique_id=1102479837]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer" unique_id=1102479837]
 layout_mode = 2
 size_flags_vertical = 4
-theme = ExtResource("2_o2fwr")
+theme = SubResource("Theme_mtxbf")
 
-[node name="s_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer" unique_id=1507978596]
+[node name="s_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer" unique_id=1507978596]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/bold_font_size = 22
@@ -386,21 +518,20 @@ bbcode_enabled = true
 text = "___ like a machine."
 fit_content = true
 
-[node name="s_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer" unique_id=533750109]
+[node name="s_button" type="CheckButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer" unique_id=533750109]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Singular"
 
-[node name="es_panel" type="Panel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1215786053]
+[node name="es_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1215786053]
 custom_minimum_size = Vector2(0, 35)
 custom_maximum_size = Vector2(-1, 35)
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_o2fwr")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_p7k8k")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mtxbf")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel" unique_id=617036124]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel" unique_id=617036124]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -408,12 +539,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer" unique_id=169491524]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer" unique_id=169491524]
 layout_mode = 2
 size_flags_vertical = 4
-theme = ExtResource("2_o2fwr")
+theme = SubResource("Theme_mtxbf")
 
-[node name="es_label" type="RichTextLabel" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer" unique_id=2130984321]
+[node name="es_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer" unique_id=2130984321]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/bold_font_size = 22
@@ -421,46 +552,58 @@ bbcode_enabled = true
 text = "___ homework every day."
 fit_content = true
 
-[node name="es_button" type="CheckButton" parent="Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer" unique_id=951941832]
+[node name="es_button" type="CheckButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer" unique_id=951941832]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Singular"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1389435485]
-custom_maximum_size = Vector2(-1, 600)
-layout_mode = 2
-size_flags_horizontal = 0
+[node name="Panel" type="Panel" parent="." unique_id=7624072]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="all_pronouns_label" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer" unique_id=1830316307]
-custom_minimum_size = Vector2(193, 50)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 32
-theme_override_font_sizes/bold_font_size = 32
-bbcode_enabled = true
-text = "[b]Pronoun(s):"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1791988761]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_bax13")
 
-[node name="custom_pronouns_vbox" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=854538277]
-layout_mode = 2
-size_flags_vertical = 3
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=2005562638]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
 
-[node name="back_button" type="Button" parent="Panel/MarginContainer" unique_id=1109656006]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2" unique_id=1070254962]
+layout_mode = 2
+
+[node name="back_button" type="Button" parent="MarginContainer2/HBoxContainer" unique_id=1109656006]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
 text = "Back"
 
-[node name="confirm_button" type="Button" parent="Panel/MarginContainer" unique_id=896515120]
+[node name="Control" type="Control" parent="MarginContainer2/HBoxContainer" unique_id=1266275366]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="confirm_button" type="Button" parent="MarginContainer2/HBoxContainer" unique_id=896515120]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "Confirm"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1791988761]
-unique_name_in_owner = true
-libraries/ = SubResource("AnimationLibrary_bax13")
-
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="pressed" from="Panel/MarginContainer/back_button" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/confirm_button" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/HBoxContainer/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/HBoxContainer/confirm_button" to="." method="_on_confirm_button_pressed"]

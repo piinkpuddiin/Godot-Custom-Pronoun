@@ -24,6 +24,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Change type"
+theme_override_colors/font_disabled_color = Color(0.9867516, 0.9867516, 0.9867516, 1)
 text = ""
 
 [node name="Value1Text" parent="SimpleEditor" unique_id=1592171585 instance=ExtResource("3_3kfwc")]
@@ -46,11 +47,13 @@ placeholder_text = "Variable"
 [node name="Operator" parent="SimpleEditor" unique_id=82489422 instance=ExtResource("2_f6v80")]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.9867516, 0.9867516, 0.9867516, 1)
 
 [node name="Value2Type" parent="SimpleEditor" unique_id=235002404 instance=ExtResource("2_f6v80")]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Change type"
+theme_override_colors/font_disabled_color = Color(0.9867516, 0.9867516, 0.9867516, 1)
 text = ""
 
 [node name="Value2Text" parent="SimpleEditor" unique_id=99134020 instance=ExtResource("3_3kfwc")]

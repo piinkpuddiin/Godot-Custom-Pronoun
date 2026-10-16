@@ -2,8 +2,11 @@ extends Node
 
 @export var custom_pronouns: Control
 @export var main_menu: Control
+@export var animation_player: AnimationPlayer
 
 func _ready() -> void:
+	if animation_player:
+		animation_player.play("bg_shapes")
 	P.loaded_pronouns.connect(load_data)
 	Dialogic.timeline_ended.connect(timeline_ended)
 

@@ -1,7 +1,7 @@
 n: This the test timeline.
-n: [u][color=pink]{P.they}[/color][/u] slept through [u][color=pink]{P.their}[/color][/u] alarm. Which is why [u][color=pink]{P.their}[/color][/u] friend didn't see [u][color=pink]{P.them}[/color][/u] at the meeting spot.
-n: [i][color=dark_sea_green]{P.were}[/color][/i] [u][color=pink]{P.they}[/color][/u] ready? [u][color=pink]{P.they}[/color][/u] nodded to [u][color=pink]{P.themselves}[/color][/u]. [u][color=pink]{P.they}[/color][/u] [i][color=dark_sea_green]{P.were}[/color][/i].
-n: [u][color=pink]{P.they}[/color][/u] [i][color=dark_sea_green]{P.dont}[/color][/i] know the address. Which is why [u][color=pink]{P.they}[/color][/u] asked [u][color=pink]{P.their}[/color][/u] friend.
-n: [u][color=pink]{P.they}[/color][/u] clean[i][color=dark_sea_green]{P.s}[/color][/i] [u][color=pink]{P.their}[/color][/u] room quite often. [u][color=pink]{P.they}[/color][/u] [i][color=dark_sea_green]{P.are}[/color][/i] a very clean individual.
+n: [u][color=dark_blue]{P.they}[/color][/u] slept through [u][color=dark_blue]{P.their}[/color][/u] alarm. Which is why [u][color=dark_blue]{P.their}[/color][/u] friend didn't see [u][color=dark_blue]{P.them}[/color][/u] at the meeting spot.
+n: [i][color=olive_drab]{P.were}[/color][/i] [u][color=dark_blue]{P.they}[/color][/u] ready? [u][color=dark_blue]{P.they}[/color][/u] nodded to [u][color=dark_blue]{P.themselves}[/color][/u]. [u][color=dark_blue]{P.they}[/color][/u] [i][color=olive_drab]{P.were}[/color][/i].
+n: [u][color=dark_blue]{P.they}[/color][/u] [i][color=olive_drab]{P.dont}[/color][/i] know the address. Which is why [u][color=dark_blue]{P.they}[/color][/u] asked [u][color=dark_blue]{P.their}[/color][/u] friend.
+n: [u][color=dark_blue]{P.they}[/color][/u] clean[i][color=olive_drab]{P.s}[/color][/i] [u][color=dark_blue]{P.their}[/color][/u] room quite often. [u][color=dark_blue]{P.they}[/color][/u] [i][color=olive_drab]{P.are}[/color][/i] a very clean individual.
 [end_timeline]
 return

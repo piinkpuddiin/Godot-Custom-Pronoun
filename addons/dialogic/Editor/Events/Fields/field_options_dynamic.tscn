@@ -10,28 +10,27 @@
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#ff5d5d\" d=\"M2 1v8.586l1.293-1.293a1 1 0 0 1 1.414 0L7 10.587l2.293-2.293a1 1 0 0 1 1.414 0L13 10.586l1-1V6H9V1H2zm8 0v4h4zm-6 9.414-2 2V15h12v-2.586l-.293.293a1 1 0 0 1-1.414 0L10 10.414l-2.293 2.293a1 1 0 0 1-1.414 0L4 10.414z\"/></svg>
 "
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw5e6"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.75)
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yo20m"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 7.0
+content_margin_bottom = 7.0
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 17
+corner_radius_top_right = 17
+corner_radius_bottom_right = 17
+corner_radius_bottom_left = 17
+expand_margin_left = 7.0
+expand_margin_top = 7.0
+expand_margin_right = 7.0
+expand_margin_bottom = 7.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qatmg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw5e6"]
 content_margin_left = 6.0
 content_margin_top = 6.0
 content_margin_right = 6.0
@@ -140,7 +139,7 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qw5e6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yo20m")
 metadata/_edit_use_anchors_ = true
 
 [node name="ErrorTooltip" type="Label" parent="PanelContainer/Focus" unique_id=937004670]
@@ -152,7 +151,7 @@ offset_left = -2.0
 offset_top = -44.5
 offset_right = 11.0
 offset_bottom = -9.5
-theme_override_styles/normal = SubResource("StyleBoxFlat_qatmg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qw5e6")
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_entered" from="PanelContainer/MarginContainer/HBoxContainer/Search" to="." method="_on_search_focus_entered"]
