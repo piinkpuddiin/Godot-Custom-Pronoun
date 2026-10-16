@@ -102,8 +102,10 @@ func check_verb(_new_text: String = "") -> void:
 	#next_button.disabled = line_edit_verbs()
 	
 	var filled_arr: Array
+	var player_pronouns_arr: Array
 	# Check if all the types aren't empty.
 	for i in P.player_pronouns.keys():
+		player_pronouns_arr.append(i)
 		# Skip the empty key.
 		if i == "":
 			continue
@@ -118,10 +120,9 @@ func check_verb(_new_text: String = "") -> void:
 	elif filled_arr.count(true) >= 1:
 		next_button.disabled = true
 	# We multiply the player_pronuns keys times 5, for the 5 types in the pronouns (subjective, objective, etc...)
-	# We remove 5 to account for the empty key.
-	elif filled_arr.count(false) == (len(P.player_pronouns.keys()) * 5) - 5:
+	elif filled_arr.count(false) == player_pronouns_arr.size() * 5:
 		next_button.disabled = false
-	
+
 #endregion
 
 
@@ -208,6 +209,8 @@ func set_defaults() -> void:
 		# Show the pronouns if the mouse is hovering or the button is focused.
 		button.mouse_entered.connect(display_line_edits.bind(pronoun))
 		button.focus_entered.connect(display_line_edits.bind(pronoun))
+		#button.mouse_exited.connect(display_line_edits.bind(pronoun))
+		#button.focus_exited.connect(display_line_edits.bind(pronoun))
 		# Disable editing default pronouns.
 		button.focus_entered.connect(line_edits_editable.bind(false))
 		button.mouse_entered.connect(line_edits_editable.bind(false))
@@ -227,10 +230,10 @@ func _on_add_button_pressed() -> void:
 	button.text = custom_key
 	button.name = custom_key
 	# Initialize the custom key with no value
+	P.custom_pronouns[custom_key] = {}
 	P.player_pronouns[custom_key] = {}
 	P.player_pronouns[custom_key]['pronouns'] = {}
 	P.player_pronouns[custom_key]['verbs'] = {}
-	P.custom_pronouns[custom_key] = {}
 	
 	button.gui_input.connect(delete_custom_event)
 	
@@ -245,7 +248,8 @@ func _on_add_button_pressed() -> void:
 	button.mouse_entered.connect(line_edits_editable.bind(true))
 	# Set the custom pronouns dict.
 	button.focus_entered.connect(set_curr_pronoun.bind(custom_key))
-	button.mouse_entered.connect(set_curr_pronoun.bind(custom_key))
+	# TODO: uncomment
+	#button.mouse_entered.connect(set_curr_pronoun.bind(custom_key))
 	
 	pronoun_choice_hbox.add_child(button)
 	await get_tree().process_frame
@@ -267,19 +271,25 @@ func set_curr_pronoun(custom_pronoun: String) -> void:
 
 ## The function for the toggle signal in the custom button.
 func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
+	#print("_toggle_custom_pronoun()")
 	if toggled_on:
 		check_custom()
 		line_edits_editable(true)
 		
+		#print("the customs: ", P.custom_pronouns)
 		if P.custom_pronouns.has(custom_pronoun):
+			#print("this dict exists in the customs")
 			if !P.player_pronouns.has(custom_pronoun):
+				#print("this dict DOES NOT exists in the player pronous")
 				P.player_pronouns[custom_pronoun] = {}
 				P.player_pronouns[custom_pronoun]['verbs'] = {}
 				P.player_pronouns[custom_pronoun]['pronouns'] = P.custom_pronouns[custom_pronoun]
+			#print("The custom dict has this pronoun: ", custom_pronoun)
 		
 		# We disable deleting, the pronouns have all already been set.
 		delete_button.disabled = false
 		set_curr_pronoun(custom_pronoun)
+		display_line_edits(custom_pronoun)
 	else:
 		# Remove the pronoun key from the player dict. Does not delete the pronoun.
 		if P.player_pronouns.get(custom_pronoun):
@@ -293,6 +303,7 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 
 ## Create the toggle function for the default buttons.
 func _toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
+	print("_toggle_default_pronous()")
 	if toggled_on:
 		check_custom()
 		P.player_pronouns[pronoun] = {}
@@ -306,7 +317,7 @@ func _toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
 		current_pronoun_label.text = " "
 		curr_custom_dict = ""
 		line_edits_clear()
-	
+	display_line_edits(pronoun)
 	check_verb()
 	delete_button.disabled = true
 
@@ -373,7 +384,7 @@ func check_pronouns_exist(dict_key: String) -> String:
 func display_line_edits(pronoun: String):
 	# We remove the previous pronouns.
 	line_edits_clear()
-	
+	# We the labels back to their first example lines.
 	reset_example_labels()
 	
 	# We only show the pronouns the player has choosen.
@@ -432,6 +443,7 @@ func _on_delete_button_pressed() -> void:
 	delete_custom()
 
 func _on_next_button_pressed() -> void:
+	print("next_button_pressed()")
 	# Delete the empty key.
 	P.player_pronouns.erase("")
 	
@@ -450,12 +462,14 @@ func delete_custom_event(event: InputEvent) -> void:
 
 ## Delete the current custom button.
 func delete_custom() -> void:
+	print("delete_custom()")
 	for i in pronoun_choice_hbox.get_children():
 		if i.name == curr_custom_dict:
 			i.call_deferred("queue_free")
 	
 	line_edits_editable(false)
 	line_edits_clear()
+	check_verb()
 	delete_button.disabled = true
 	
 	print("Deleted pronoun: ", curr_custom_dict)
@@ -466,12 +480,14 @@ func delete_custom() -> void:
 
 ## Add the pronoun type if it doesn't exist to the dict.
 func update_pronouns(new_text: String, type: String) -> void:
+	print("update_pronouns()")
 	check_custom()
 	P.player_pronouns[curr_custom_dict]['pronouns'][type] = new_text.to_lower()
 	P.custom_pronouns[curr_custom_dict][type] = new_text.to_lower()
 
 ## Creates a custom key if it already doesn't exists.
 func check_custom() -> void:
+	print("check_custom()")
 	if !P.player_pronouns.has(curr_custom_dict):
 		P.player_pronouns[curr_custom_dict] = {}
 		P.player_pronouns[curr_custom_dict]['pronouns'] = {}
@@ -481,6 +497,7 @@ func check_custom() -> void:
 
 ## Saves the custom pronouns input.
 func save_custom_dict():
+	print("save_custom_dict()")
 	for i in get_line_edits():
 		# Don't save empty pronoun lines
 		if i.text.is_empty():
@@ -508,6 +525,7 @@ func set_new_keys() -> void:
 				P.player_pronouns[new_key] = P.player_pronouns[i]
 				P.player_pronouns.erase(i)
 				#print("New keys set: ", JSON.stringify((P.player_pronouns), "  "))
+				print("New keys set: ", P.player_pronouns.keys())
 
 
 ## Clears the screen from the previous choices and resets the custom_num counter.

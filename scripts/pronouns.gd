@@ -309,6 +309,7 @@ func _load(save_name: String):
 	print("Succesfully loaded! Loaded: " + save_name + ".")
 	return load_data
 
+
 ## Checks if the save exists.
 func save_exists(save_name: String) -> bool:
 	var dir = DirAccess.open("user://")
