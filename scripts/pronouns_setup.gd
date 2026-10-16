@@ -42,13 +42,16 @@ var subjective_pronoun: String
 ## Stores all the original example lines with "___".
 var example_labels_array: Array[String]
 
+
 func _ready() -> void:
+	set_defaults()
+	line_edits_editable(false)
 	P.curr_pronoun.connect(set_curr_pronoun)
 	line_edits_text_submitted()
-	set_defaults()
 	check_verb()
 	# Get all the example labels and store them in the array.
 	get_example_labels_text()
+
 
 #region LINEEDITS
 ## Return all the line edits.
@@ -112,6 +115,12 @@ func get_example_labels_text():
 	for i in get_example_labels():
 		text_array.append(i.text)
 	example_labels_array = text_array
+
+## Resets the example lines to the original sentence.
+func reset_example_labels():
+	for i in get_example_labels():
+		i.text = example_labels_array.get(get_example_labels().find(i))
+	
 #endregion
 
 #region Line Edits EXAMPLES
@@ -158,19 +167,35 @@ func set_button_name() -> void:
 #region DEFAULTS
 ## Creates the default pronoun buttons.
 func set_defaults() -> void:
+	# Remove all the pronoun buttons.
 	for i in pronoun_choice_hbox.get_children():
-		if i is Button and !i.name.begins_with("custom") and !i.name.begins_with("add"):
-			var pronoun = i.name.trim_suffix("_button")
-			i.toggled.connect(_toggle_default_pronouns.bind(pronoun))
-			i.toggled.connect(line_edits_pronouns.bind(P.default_pronouns, pronoun))
-			# Show the pronouns if the mouse is hovering or the button is focused.
-			i.mouse_entered.connect(display_line_edits.bind(pronoun))
-			i.focus_entered.connect(display_line_edits.bind(pronoun))
-			# Checks if all the line_edits have words in them (always true)
-			i.mouse_entered.connect(check_verb)
-			i.focus_entered.connect(check_verb)
-			i.mouse_exited.connect(check_verb)
-			i.focus_exited.connect(check_verb)
+		if i.name.begins_with("add"):
+			continue
+		i.queue_free()
+	
+	# Create all the pronoun buttons.
+	for i in P.default_pronouns.keys():
+		var button:= Button.new()
+		var pronoun = i
+		button.toggle_mode = true
+		button.name = i + "_button"
+		button.text = P.default_pronouns[i]['subjective'].capitalize() + "/" + P.default_pronouns[i]['objective'].capitalize()
+		button.toggled.connect(_toggle_default_pronouns.bind(pronoun))
+		button.toggled.connect(line_edits_pronouns.bind(P.default_pronouns, pronoun))
+		# Show the pronouns if the mouse is hovering or the button is focused.
+		button.mouse_entered.connect(display_line_edits.bind(pronoun))
+		button.focus_entered.connect(display_line_edits.bind(pronoun))
+		# Disable editing default pronouns.
+		button.focus_entered.connect(line_edits_editable.bind(false))
+		button.mouse_entered.connect(line_edits_editable.bind(false))
+		# Checks if all the line_edits have words in them (always true)
+		button.mouse_entered.connect(check_verb)
+		button.focus_entered.connect(check_verb)
+		button.mouse_exited.connect(check_verb)
+		button.focus_exited.connect(check_verb)
+		pronoun_choice_hbox.add_child(button)
+		await get_tree().process_frame
+		pronoun_choice_hbox.move_child(button, 0)
 
 ## Creates a new custom button.
 func _on_add_button_pressed() -> void:
@@ -195,13 +220,16 @@ func _on_add_button_pressed() -> void:
 	# Show the pronouns on hover/focus
 	button.mouse_entered.connect(display_line_edits.bind(custom_key))
 	button.focus_entered.connect(display_line_edits.bind(custom_key))
+	# Enable editing custom pronouns.
+	button.focus_entered.connect(line_edits_editable.bind(true))
+	button.mouse_entered.connect(line_edits_editable.bind(true))
 	
 	pronoun_choice_hbox.add_child(button)
 	await get_tree().process_frame
 	pronoun_choice_scroll_container.ensure_control_visible(button)
 	pronoun_choice_hbox.move_child(%add_button, -1)
 	
-	#line_edits_editable(false)
+	line_edits_editable(false)
 	line_edits_clear()
 
 
@@ -219,6 +247,7 @@ func set_curr_pronoun(custom_pronoun: String) -> void:
 func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 	if toggled_on:
 		check_custom()
+		line_edits_editable(true)
 		
 		if P.custom_pronouns.has(custom_pronoun):
 			if !P.player_pronouns.has(custom_pronoun):
@@ -235,6 +264,7 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 			P.player_pronouns.erase(custom_pronoun)
 		# Clear the previous pronouns
 		line_edits_clear()
+		line_edits_editable(false)
 		current_pronoun_label.text = " "
 		curr_custom_dict = ""
 
@@ -316,9 +346,7 @@ func display_line_edits(pronoun: String):
 	# We remove the previous pronouns.
 	line_edits_clear()
 	
-	# Resets the example lines to the original one.
-	for i in get_example_labels():
-		i.text = example_labels_array.get(get_example_labels().find(i))
+	reset_example_labels()
 	
 	# We only show the pronouns the player has choosen.
 	if !P.player_pronouns.has(pronoun):
@@ -378,7 +406,7 @@ func _on_delete_button_pressed() -> void:
 		if i.name == curr_custom_dict:
 			i.call_deferred("queue_free")
 	
-	#line_edits_editable(false)
+	line_edits_editable(false)
 	line_edits_clear()
 	
 	P.player_pronouns.erase(curr_custom_dict)
@@ -449,5 +477,7 @@ func clear():
 	
 	for i in pronoun_choice_hbox.get_children():
 		i.button_pressed = false
-
+	
+	set_defaults()
+	reset_example_labels()
 #endregion

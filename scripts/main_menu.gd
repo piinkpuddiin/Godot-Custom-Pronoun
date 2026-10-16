@@ -4,10 +4,14 @@ extends Control
 @export var dialogue: Control
 
 func _ready() -> void:
+	self.show()
 	%dialogue_button.disabled = true
 	P.loaded_pronouns.connect(load_data)
 
 func _on_pronouns_button_pressed() -> void:
+	P.clear()
+	custom_pronouns.clear()
+	custom_pronouns.show()
 	self.hide()
 
 func _on_dialogue_button_pressed() -> void:
@@ -16,7 +20,7 @@ func _on_dialogue_button_pressed() -> void:
 	dialogue.start_dialogue()
 
 func _on_load_button_pressed() -> void:
-	P.player_pronouns = {}
+	P.clear()
 	P.loaded_pronouns.emit(custom_pronouns.save_name)
 
 func load_data(save_name):

@@ -13,14 +13,44 @@ signal loaded_pronouns
 # Stores all the pronouns and the pronouns correct verbs.
 var player_pronouns:= {}
 
-# The default pronouns, need to match the ones in the custom_pronouns hbox.
+# The default pronouns, add in all the default pronouns here.
+# They will automatically be added as a button.
 var default_pronouns:= {
-	"she": {
-		"subjective": "she",
-		"objective": "her",
-		"possessive_dep": "her",
-		"possessive_indep": "hers",
-		"reflexive": "herself",
+	#"ex": {
+		#"subjective": "example",
+		#"objective": "example",
+		#"possessive_dep": "example",
+		#"possessive_indep": "example",
+		#"reflexive": "example",
+	#},
+	# NOTE: The pronouns show in reverse order from the one tha is being declared here.
+	"ey": {
+		"subjective": "ey",
+		"objective": "em",
+		"possessive_dep": "eir",
+		"possessive_indep": "eirs",
+		"reflexive": "emself",
+	},
+	"ae": {
+		"subjective": "ae",
+		"objective": "aer",
+		"possessive_dep": "aer",
+		"possessive_indep": "aers",
+		"reflexive": "aerself",
+	},
+	"its": {
+		"subjective": "it",
+		"objective": "it",
+		"possessive_dep": "its",
+		"possessive_indep": "its",
+		"reflexive": "itself",
+	},
+	"they": {
+		"subjective": "they",
+		"objective": "them",
+		"possessive_dep": "their",
+		"possessive_indep": "theirs",
+		"reflexive": "themselves",
 	},
 	"he": {
 		"subjective": "he",
@@ -29,13 +59,13 @@ var default_pronouns:= {
 		"possessive_indep": "his",
 		"reflexive": "himself",
 	},
-	"they": {
-		"subjective": "they",
-		"objective": "them",
-		"possessive_dep": "their",
-		"possessive_indep": "theirs",
-		"reflexive": "themselves",
-	}
+	"she": {
+		"subjective": "she",
+		"objective": "her",
+		"possessive_dep": "her",
+		"possessive_indep": "hers",
+		"reflexive": "herself",
+	},
 }
 
 # Temporarily holds the custom inputed pronouns.

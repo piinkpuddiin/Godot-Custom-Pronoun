@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StyleBorder" format=3 uid="uid://brgijohll6mlm"]
+
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="1_yyrpn"]
+
+[resource]
+script = ExtResource("1_yyrpn")
+ignore_stack = true
+width_left = 3
+width_top = 3
+width_right = 3
+width_bottom = 3
+inset_left = -2
+inset_top = -2
+inset_right = -2
+inset_bottom = -2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"

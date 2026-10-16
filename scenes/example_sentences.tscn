@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c33dl8n5kstxm"]
 
+[ext_resource type="Theme" uid="uid://qpir2awu1mnv" path="res://themes/simplistic.tres" id="1_iyick"]
 [ext_resource type="Script" uid="uid://cwh34fi1bulsx" path="res://scripts/example_sentences.gd" id="1_o2fwr"]
 [ext_resource type="Shader" uid="uid://g122rjbh0i7b" path="res://shaders/blur.gdshader" id="2_iyick"]
 [ext_resource type="Theme" uid="uid://hn1qglo51or4" path="res://pronoun_theme.tres" id="2_o2fwr"]
@@ -69,6 +70,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_iyick")
 script = ExtResource("1_o2fwr")
 current_pronoun_label = NodePath("Panel/MarginContainer/current_pronoun_label")
 are_label = NodePath("Panel/MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer/are_label")

@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://cp5j03ncyll87"]
+
+[resource]
+Label/font_sizes/font_size = 30
+RichTextLabel/font_sizes/bold_font_size = 24
+RichTextLabel/font_sizes/normal_font_size = 24

@@ -13,4 +13,3 @@ func load_data(save_name):
 
 func timeline_ended():
 	main_menu.show()
-	custom_pronouns.show()

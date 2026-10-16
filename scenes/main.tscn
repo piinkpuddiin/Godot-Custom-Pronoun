@@ -10,6 +10,16 @@
 [ext_resource type="Texture2D" uid="uid://bsg7e0mhcch2v" path="res://images/bg_quick.png" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://1bwc32uk448w" path="res://scenes/main_menu.tscn" id="9_choun"]
 
+[sub_resource type="Gradient" id="Gradient_85g3d"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0.38060537, 0.5913677, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.14509805, 0.1882353, 0.29803923, 1, 0.9490196, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_choun"]
+gradient = SubResource("Gradient_85g3d")
+fill_to = Vector2(1, 0.7345086)
+
 [node name="Main" type="Node" unique_id=437644318 node_paths=PackedStringArray("custom_pronouns", "main_menu")]
 script = ExtResource("1_sugp2")
 custom_pronouns = NodePath("CustomPronouns")
@@ -24,6 +34,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="Background" unique_id=1528989936]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +44,18 @@ grow_vertical = 2
 texture = ExtResource("9_85g3d")
 expand_mode = 1
 
+[node name="TextureRect2" type="TextureRect" parent="Background" unique_id=1025452533]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_choun")
+expand_mode = 1
+
 [node name="CustomPronouns" parent="." unique_id=78342683 node_paths=PackedStringArray("main", "examples_sentence") instance=ExtResource("2_jyhfs")]
+visible = false
 main = NodePath("..")
 examples_sentence = NodePath("../ExampleSentences")
 
@@ -54,13 +76,16 @@ offset_bottom = 50.248703
 script = ExtResource("4_tbgi4")
 timeline = ExtResource("5_tefeu")
 
-[node name="Debug" parent="." unique_id=559146899 instance=ExtResource("6_tefeu")]
-
 [node name="Notification" parent="." unique_id=1326836657 node_paths=PackedStringArray("dialogue", "custom_pronouns", "example_sentences") instance=ExtResource("8_85g3d")]
+visible = false
 dialogue = NodePath("../Dialogue")
 custom_pronouns = NodePath("../CustomPronouns")
 example_sentences = NodePath("../ExampleSentences")
 
 [node name="MainMenu" parent="." unique_id=2008582098 node_paths=PackedStringArray("custom_pronouns", "dialogue") instance=ExtResource("9_choun")]
+visible = false
 custom_pronouns = NodePath("../CustomPronouns")
 dialogue = NodePath("../Dialogue")
+
+[node name="Debug" parent="." unique_id=559146899 instance=ExtResource("6_tefeu")]
+visible = false

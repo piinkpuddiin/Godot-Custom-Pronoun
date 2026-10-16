@@ -221,8 +221,7 @@ func update_sentence(pronoun: String, verb: String, value: int = 0) -> void:
 
 func _on_back_button_pressed() -> void:
 	# Only call when the pronouns need to be reset.
-	#P.player_pronouns.clear()
-	#pronouns.clear()
+	#P.clear()
 	self.hide()
 
 
