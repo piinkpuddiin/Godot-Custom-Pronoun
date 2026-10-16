@@ -135,9 +135,11 @@ visible = false
 custom_pronouns = NodePath("../CustomPronouns")
 dialogue = NodePath("../Dialogue")
 
-[node name="Debug" parent="." unique_id=559146899 instance=ExtResource("6_tefeu")]
-visible = false
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=413948421]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_trceg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1598013482]
+layer = 2
+
+[node name="Debug" parent="CanvasLayer" unique_id=559146899 instance=ExtResource("6_tefeu")]

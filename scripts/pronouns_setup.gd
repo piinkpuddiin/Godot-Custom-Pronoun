@@ -1,6 +1,5 @@
 extends Control
 
-# TODO: Add delete key input for the custom buttons.
 # TODO: Add function to switch between type variations.
 
 @export var main: Node
@@ -52,24 +51,7 @@ func _ready() -> void:
 	line_edits_text_submitted()
 	# Get all the example labels and store them in the array.
 	get_example_labels_text()
-	#set_theme_type()
 
-#func set_theme_type():
-	#var theme_color: String
-	#
-	#if theme_type == "DARK":
-		#theme_color = "dark"
-	#elif theme_type == "LIGHT":
-		#theme_color = "light"
-	#
-	#for i in self.get_children(true):
-		#print(i)
-		##i.propagate_call(set_type.bind(i))
-		##pass
-
-#func set_type(i):
-	#i.theme.set_theme_item()
-	#pass
 
 #region LINEEDITS
 ## Return all the line edits.
@@ -207,12 +189,6 @@ func set_defaults() -> void:
 		# Disable editing default pronouns.
 		button.focus_entered.connect(line_edits_editable.bind(false))
 		button.mouse_entered.connect(line_edits_editable.bind(false))
-		# Checks if all the line_edits have words in them (always true)
-		#button.button_up.connect(check_verb)
-		#button.mouse_entered.connect(check_verb)
-		#button.focus_entered.connect(check_verb)
-		#button.mouse_exited.connect(check_verb)
-		#button.focus_exited.connect(check_verb)
 		
 		pronoun_choice_hbox.add_child(button)
 		pronoun_choice_hbox.move_child(button, 0)
@@ -234,9 +210,11 @@ func _on_add_button_pressed() -> void:
 	P.player_pronouns[custom_key]['verbs'] = {}
 	P.custom_pronouns[custom_key] = {}
 	
+	button.gui_input.connect(delete_custom_event)
+	
 	button.toggled.connect(_toggle_custom_pronoun.bind(custom_key))
 	button.toggled.connect(line_edits_pronouns.bind(P.custom_pronouns, custom_key))
-	button.pressed.connect(check_verb)
+	
 	# Show the pronouns on hover/focus
 	button.mouse_entered.connect(display_line_edits.bind(custom_key))
 	button.focus_entered.connect(display_line_edits.bind(custom_key))
@@ -251,6 +229,8 @@ func _on_add_button_pressed() -> void:
 	
 	line_edits_editable(false)
 	line_edits_clear()
+
+
 
 
 ## Set the current pronoun dict key, and display it on the label.
@@ -423,18 +403,7 @@ func _on_print_all_button_pressed() -> void:
 
 # Deletes the custom pronoun.
 func _on_delete_button_pressed() -> void:
-	for i in pronoun_choice_hbox.get_children():
-		if i.name == curr_custom_dict:
-			i.call_deferred("queue_free")
-	
-	line_edits_editable(false)
-	line_edits_clear()
-	
-	print("Deleted pronoun: ", curr_custom_dict)
-	P.player_pronouns.erase(curr_custom_dict)
-	P.custom_pronouns.erase(curr_custom_dict)
-	current_pronoun_label.text = " "
-	curr_custom_dict = ""
+	delete_custom()
 
 func _on_next_button_pressed() -> void:
 	# NOTE: creates so many bugs, set only after all the pronouns have been set.
@@ -447,6 +416,28 @@ func _on_next_button_pressed() -> void:
 	self.hide()
 
 #region HELPER FUNCS
+## Deletes the hovered/focused custom button.
+func delete_custom_event(event: InputEvent) -> void:
+	if event.is_action("delete"):
+		print("Deleted button!")
+		delete_custom()
+
+## Delete the current custom button.
+func delete_custom() -> void:
+	for i in pronoun_choice_hbox.get_children():
+		if i.name == curr_custom_dict:
+			i.call_deferred("queue_free")
+	
+	line_edits_editable(false)
+	line_edits_clear()
+	delete_button.disabled = true
+	
+	print("Deleted pronoun: ", curr_custom_dict)
+	P.player_pronouns.erase(curr_custom_dict)
+	P.custom_pronouns.erase(curr_custom_dict)
+	current_pronoun_label.text = " "
+	curr_custom_dict = ""
+
 ## Add the pronoun type if it doesn't exist to the dict.
 func update_pronouns(new_text: String, type: String) -> void:
 	check_custom()

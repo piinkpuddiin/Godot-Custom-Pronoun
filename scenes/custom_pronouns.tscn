@@ -5,17 +5,6 @@
 [ext_resource type="Material" uid="uid://dm0yb5m3no21j" path="res://shaders/glass_effect.tres" id="3_ebniy"]
 [ext_resource type="FontFile" uid="uid://8xoyof5kxkpj" path="res://fonts/funnel_sans/FunnelSans-ExtraBold.ttf" id="4_aek14"]
 
-[sub_resource type="Gradient" id="Gradient_ebniy"]
-offsets = PackedFloat32Array(0.14742152, 0.30885652, 1)
-colors = PackedColorArray(0, 0, 0.12156863, 1, 0.28627452, 0.28627452, 0.7294118, 1, 0.9843137, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dmgw1"]
-gradient = SubResource("Gradient_ebniy")
-width = 128
-height = 128
-fill_from = Vector2(0.36271366, 0)
-fill_to = Vector2(0.79433763, 0)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dm0k"]
 bg_color = Color(0.8, 0.8, 0.8, 0.1882353)
 border_width_right = 2
@@ -79,26 +68,6 @@ pronoun_choice_scroll_container = NodePath("HBoxContainer/pronoun_panel/MarginCo
 current_pronoun_label = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/current_pronoun_label")
 delete_button = NodePath("HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/delete_button")
 next_button = NodePath("MarginContainer/next_button")
-
-[node name="Panel" type="Panel" parent="." unique_id=1604500296]
-visible = false
-layout_mode = 0
-offset_left = 401.0
-offset_right = 798.0
-offset_bottom = 700.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-
-[node name="ColorRect" type="TextureRect" parent="." unique_id=767843632]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_dmgw1")
 
 [node name="background_hbox" type="HBoxContainer" parent="." unique_id=1195024795]
 layout_mode = 1
