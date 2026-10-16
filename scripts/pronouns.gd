@@ -306,6 +306,16 @@ func _load(save_name: String):
 	load_data['pronouns'] = _pronouns
 	
 	#loaded_pronouns.emit(save_name)
+	print("Succesfully loaded! Loaded: " + save_name + ".")
 	return load_data
 
+## Checks if the save exists.
+func save_exists(save_name: String) -> bool:
+	var dir = DirAccess.open("user://")
+	var value
+	if dir.file_exists(SAVE_PATH + save_name + FILE_PATH):
+		value = false
+	else:
+		value = true
+	return value
 #endregion

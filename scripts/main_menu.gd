@@ -6,8 +6,13 @@ extends Control
 func _ready() -> void:
 	self.show()
 	%dialogue_button.disabled = true
+	check_load()
+	P.saved_pronouns.connect(check_load)
 	P.loaded_pronouns.connect(load_data)
 	%version_label.text = "V." + str(ProjectSettings.get_setting("application/config/version"))
+
+func check_load():
+	%load_button.disabled =  P.save_exists(custom_pronouns.save_name)
 
 func _on_pronouns_button_pressed() -> void:
 	P.clear()

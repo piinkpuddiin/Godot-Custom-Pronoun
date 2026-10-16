@@ -94,7 +94,9 @@ layout_mode = 2
 text = "Pronouns"
 
 [node name="load_button" type="Button" parent="Panel/VBoxContainer" unique_id=1190039379]
+unique_name_in_owner = true
 layout_mode = 2
+disabled = true
 text = "Load"
 
 [node name="dialogue_button" type="Button" parent="Panel/VBoxContainer" unique_id=150812753]

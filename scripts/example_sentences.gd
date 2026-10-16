@@ -224,8 +224,7 @@ func update_sentence(pronoun: String, verb: String, value: int = 0) -> void:
 			P.player_pronouns[pronoun]['verbs']['es'] = ""
 			P.player_pronouns[pronoun]['verbs']['es'] = value
 		_:
-			print("This verb does not exist.")
-			pass
+			printerr("This verb: ", verb ," does not exist.")
 
 
 func _on_back_button_pressed() -> void:

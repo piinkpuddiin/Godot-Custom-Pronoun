@@ -25,6 +25,7 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/stretch_mode=0
 boot_splash/image="uid://b8872ktl2arq4"
 config/icon="uid://blnmehfr86rxo"
+boot_splash/minimum_display_time=3
 
 [autoload]
 
