@@ -18,12 +18,12 @@ var player_pronouns:= {}
 # The default pronouns, add in all the default pronouns here.
 # They will automatically be added as a button.
 var default_pronouns:= {
-	#"ex": {
-		#"subjective": "example",
-		#"objective": "example",
-		#"possessive_dep": "example",
-		#"possessive_indep": "example",
-		#"reflexive": "example",
+	#"abc": {
+		#"subjective": "...",
+		#"objective": "...",
+		#"possessive_dep": "...",
+		#"possessive_indep": "...",
+		#"reflexive": "...",
 	#},
 	# NOTE: The pronouns show in reverse order from the one tha is being declared here.
 	"ey": {

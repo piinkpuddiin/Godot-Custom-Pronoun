@@ -131,6 +131,7 @@ func example_sentence() -> void:
 	
 	var reversed_keys: Array
 	for i in P.player_pronouns.keys():
+		P.player_pronouns[i]['verbs'] = {}
 		reversed_keys.append(i)
 	reversed_keys.reverse()
 	

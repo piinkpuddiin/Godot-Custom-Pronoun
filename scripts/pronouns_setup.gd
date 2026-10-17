@@ -99,16 +99,14 @@ func line_edit_verbs() -> bool:
 ## Check wheter editing the verbs is possible.
 func check_verb(_new_text: String = "") -> void:
 	await get_tree().process_frame
-	#next_button.disabled = line_edit_verbs()
 	
 	var filled_arr: Array
 	var player_pronouns_arr: Array
+	
+	P.player_pronouns.erase("")
 	# Check if all the types aren't empty.
 	for i in P.player_pronouns.keys():
 		player_pronouns_arr.append(i)
-		# Skip the empty key.
-		if i == "":
-			continue
 		for x in P.player_pronouns[i]['pronouns'].keys():
 			if !P.player_pronouns[i]['pronouns'][x].is_empty():
 				filled_arr.append(false)
@@ -176,13 +174,15 @@ func _on_reflexive_line_edit_text_changed(new_text: String) -> void:
 func set_button_name() -> void:
 	for i in pronoun_choice_hbox.get_children():
 			if i.name == curr_custom_dict:
-				if P.player_pronouns[curr_custom_dict]['pronouns'].has('objective') and P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
+				if !P.player_pronouns.has(curr_custom_dict):
+					return
+				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('objective') and P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
 					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize() + "/" + P.player_pronouns[curr_custom_dict]['pronouns']['objective'].capitalize()
 				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('objective'):
 					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['objective'].capitalize()
 				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
 					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize()
-				if i.text.begins_with("custom_"):
+				elif i.text.begins_with("custom_"):
 					return
 				# Set the current pronoun label to the button name as well.
 				current_pronoun_label.text = i.text
@@ -209,14 +209,15 @@ func set_defaults() -> void:
 		# Show the pronouns if the mouse is hovering or the button is focused.
 		button.mouse_entered.connect(display_line_edits.bind(pronoun))
 		button.focus_entered.connect(display_line_edits.bind(pronoun))
-		#button.mouse_exited.connect(display_line_edits.bind(pronoun))
-		#button.focus_exited.connect(display_line_edits.bind(pronoun))
+		button.mouse_exited.connect(display_line_edits.bind(pronoun))
+		button.focus_exited.connect(display_line_edits.bind(pronoun))
 		# Disable editing default pronouns.
 		button.focus_entered.connect(line_edits_editable.bind(false))
 		button.mouse_entered.connect(line_edits_editable.bind(false))
 		
 		pronoun_choice_hbox.add_child(button)
 		pronoun_choice_hbox.move_child(button, 0)
+
 
 ## Creates a new custom button.
 func _on_add_button_pressed() -> void:
@@ -229,18 +230,18 @@ func _on_add_button_pressed() -> void:
 	var custom_key =  "custom_" + str(custom_num)
 	button.text = custom_key
 	button.name = custom_key
+	
 	# Initialize the custom key with no value
 	P.custom_pronouns[custom_key] = {}
 	P.player_pronouns[custom_key] = {}
 	P.player_pronouns[custom_key]['pronouns'] = {}
-	P.player_pronouns[custom_key]['verbs'] = {}
 	
 	button.gui_input.connect(delete_custom_event)
 	
 	button.toggled.connect(_toggle_custom_pronoun.bind(custom_key))
 	button.toggled.connect(line_edits_pronouns.bind(P.custom_pronouns, custom_key))
 	
-	# Show the pronouns on hover/focus
+	# Show the pronouns on hover/focus.
 	button.mouse_entered.connect(display_line_edits.bind(custom_key))
 	button.focus_entered.connect(display_line_edits.bind(custom_key))
 	# Enable editing custom pronouns.
@@ -248,8 +249,7 @@ func _on_add_button_pressed() -> void:
 	button.mouse_entered.connect(line_edits_editable.bind(true))
 	# Set the custom pronouns dict.
 	button.focus_entered.connect(set_curr_pronoun.bind(custom_key))
-	# TODO: uncomment
-	#button.mouse_entered.connect(set_curr_pronoun.bind(custom_key))
+	button.mouse_entered.connect(set_curr_pronoun.bind(custom_key))
 	
 	pronoun_choice_hbox.add_child(button)
 	await get_tree().process_frame
@@ -264,27 +264,28 @@ func _on_add_button_pressed() -> void:
 func set_curr_pronoun(custom_pronoun: String) -> void:
 	print_rich("The current custom pronoun: [b]", custom_pronoun)
 	curr_custom_dict = custom_pronoun
+	
 	if P.player_pronouns.has(custom_pronoun):
-		if P.player_pronouns[custom_pronoun]['pronouns'].has('subjective') and P.player_pronouns[custom_pronoun]['pronouns'].has('objective'):
-			current_pronoun_label.text = P.player_pronouns[custom_pronoun]['pronouns']['subjective'].capitalize() + "/" + P.player_pronouns[custom_pronoun]['pronouns']['objective'].capitalize()
+		# NOTE: Could and should be writen with an `and` but it was hard to read. 
+		# So two if statments.
+		if P.player_pronouns[custom_pronoun]['pronouns'].has('subjective'):
+			if  P.player_pronouns[custom_pronoun]['pronouns'].has('objective'):
+				current_pronoun_label.text = (
+					P.player_pronouns[custom_pronoun]['pronouns']['subjective'].capitalize() +
+					 "/" +
+					 P.player_pronouns[custom_pronoun]['pronouns']['objective'].capitalize())
 
 
 ## The function for the toggle signal in the custom button.
 func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
-	#print("_toggle_custom_pronoun()")
 	if toggled_on:
-		check_custom()
+		#check_custom()
 		line_edits_editable(true)
 		
-		#print("the customs: ", P.custom_pronouns)
 		if P.custom_pronouns.has(custom_pronoun):
-			#print("this dict exists in the customs")
 			if !P.player_pronouns.has(custom_pronoun):
-				#print("this dict DOES NOT exists in the player pronous")
 				P.player_pronouns[custom_pronoun] = {}
-				P.player_pronouns[custom_pronoun]['verbs'] = {}
 				P.player_pronouns[custom_pronoun]['pronouns'] = P.custom_pronouns[custom_pronoun]
-			#print("The custom dict has this pronoun: ", custom_pronoun)
 		
 		# We disable deleting, the pronouns have all already been set.
 		delete_button.disabled = false
@@ -292,7 +293,8 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 		display_line_edits(custom_pronoun)
 	else:
 		# Remove the pronoun key from the player dict. Does not delete the pronoun.
-		if P.player_pronouns.get(custom_pronoun):
+		if P.player_pronouns.has(custom_pronoun):
+			P.player_pronouns[custom_pronoun] = {}
 			P.player_pronouns.erase(custom_pronoun)
 		# Clear the previous pronouns
 		line_edits_clear()
@@ -303,12 +305,10 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 
 ## Create the toggle function for the default buttons.
 func _toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
-	print("_toggle_default_pronous()")
 	if toggled_on:
 		check_custom()
 		P.player_pronouns[pronoun] = {}
 		P.player_pronouns[pronoun]['pronouns'] = P.default_pronouns[pronoun]
-		P.player_pronouns[pronoun]['verbs'] = {}
 	else:
 		# Remove the pronoun key from the player dict. Does not delete the pronoun.
 		if P.player_pronouns.get(pronoun):
@@ -419,11 +419,12 @@ func display_line_edits(pronoun: String):
 			if P.player_pronouns[pronoun]['pronouns'].has('reflexive'):
 				i.text = P.player_pronouns[pronoun]['pronouns']['reflexive'].to_pascal_case()
 				_on_reflexive_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['reflexive'])
-
+	
 	if P.player_pronouns == {}:
 		for i in get_line_edits():
 			i.text = ""
 #endregion
+
 
 # Save all the pronouns to the save.
 func _on_save_button_pressed() -> void:
@@ -443,7 +444,6 @@ func _on_delete_button_pressed() -> void:
 	delete_custom()
 
 func _on_next_button_pressed() -> void:
-	print("next_button_pressed()")
 	# Delete the empty key.
 	P.player_pronouns.erase("")
 	
@@ -460,9 +460,9 @@ func delete_custom_event(event: InputEvent) -> void:
 		print("Deleted button!")
 		delete_custom()
 
+
 ## Delete the current custom button.
 func delete_custom() -> void:
-	print("delete_custom()")
 	for i in pronoun_choice_hbox.get_children():
 		if i.name == curr_custom_dict:
 			i.call_deferred("queue_free")
@@ -478,26 +478,29 @@ func delete_custom() -> void:
 	current_pronoun_label.text = " "
 	curr_custom_dict = ""
 
+
 ## Add the pronoun type if it doesn't exist to the dict.
 func update_pronouns(new_text: String, type: String) -> void:
-	print("update_pronouns()")
 	check_custom()
 	P.player_pronouns[curr_custom_dict]['pronouns'][type] = new_text.to_lower()
 	P.custom_pronouns[curr_custom_dict][type] = new_text.to_lower()
 
+
 ## Creates a custom key if it already doesn't exists.
 func check_custom() -> void:
-	print("check_custom()")
+	P.custom_pronouns.erase("")
+	P.player_pronouns.erase("")
+	
 	if !P.player_pronouns.has(curr_custom_dict):
 		P.player_pronouns[curr_custom_dict] = {}
 		P.player_pronouns[curr_custom_dict]['pronouns'] = {}
-		P.player_pronouns[curr_custom_dict]['verbs'] = {}
-		
-		P.custom_pronouns[curr_custom_dict] = {}
+	if !P.default_pronouns.has(curr_custom_dict):
+		if !P.custom_pronouns.has(curr_custom_dict):
+			P.custom_pronouns[curr_custom_dict] = {}
+
 
 ## Saves the custom pronouns input.
 func save_custom_dict():
-	print("save_custom_dict()")
 	for i in get_line_edits():
 		# Don't save empty pronoun lines
 		if i.text.is_empty():
@@ -524,7 +527,6 @@ func set_new_keys() -> void:
 				var new_key: String = P.player_pronouns[i]['pronouns']['subjective'] 
 				P.player_pronouns[new_key] = P.player_pronouns[i]
 				P.player_pronouns.erase(i)
-				#print("New keys set: ", JSON.stringify((P.player_pronouns), "  "))
 				print("New keys set: ", P.player_pronouns.keys())
 
 

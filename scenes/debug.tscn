@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://btuy73xn15aq2" path="res://scripts/debug.gd" id="1_lgrwq"]
 
 [node name="Debug" type="Control" unique_id=559146899]
-modulate = Color(1, 1, 1, 0.6313726)
+modulate = Color(1, 1, 1, 0.8117647)
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -17,7 +17,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -194.60898
-offset_bottom = 144.0
+offset_bottom = 232.0
 grow_horizontal = 0
 mouse_filter = 2
 
@@ -40,6 +40,30 @@ layout_mode = 2
 mouse_filter = 2
 bbcode_enabled = true
 text = "curr_pronoun: "
+fit_content = true
+
+[node name="custom_pronouns" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=1724557930]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "custom:"
+fit_content = true
+
+[node name="custom_pronouns_keys" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=1195522548]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "custom reflexive:"
+fit_content = true
+
+[node name="player_pronouns" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=1386194498]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "custom:"
 fit_content = true
 
 [node name="are_label" type="Label" parent="Panel/VBoxContainer" unique_id=1072971195]
