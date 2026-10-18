@@ -55,7 +55,7 @@ func _ready() -> void:
 	generate_default_buttons()
 	line_edits_editable(false)
 	P.curr_pronoun.connect(set_curr_pronoun)
-	line_edits_text_submitted()
+	line_edits_text_signal()
 	# Get all the example labels and store them in the array.
 	get_example_labels_text()
 
@@ -82,13 +82,14 @@ func line_edits_clear() -> void:
 		i.text = ""
 
 ## Submits the text for all the line edits.
-func line_edits_text_submitted() -> void:
+func line_edits_text_signal() -> void:
 	for i in get_line_edits():
 		var pronoun_type = i.name.trim_suffix("_line_edit")
 		# Save all the changes to the correct dict
 		i.text_submitted.connect(update_pronouns.bind(pronoun_type))
 		i.text_changed.connect(update_pronouns.bind(pronoun_type))
 		i.text_changed.connect(check_verb)
+		i.text_changed.connect(set_button_name)
 
 ## Check every line_edits text to see wheter or not it is empty.
 func line_edit_verbs() -> bool:
@@ -160,16 +161,8 @@ func _on_subjective_line_edit_text_changed(new_text: String) -> void:
 	subjective_example.text = "[u][i]" + new_text.capitalize() + "[/i][/u]" + subjective_sentence
 	subjective_pronoun = new_text
 
-# Rename the button with it's subjective and/or subjective pronoun from the current pronoun dict key.
-func _on_subjective_line_edit_editing_toggled(_toggled_on: bool) -> void:
-	set_button_name()
-
 func _on_objective_line_edit_text_changed(new_text: String) -> void:
 	object_example.text = objective_sentence + "[u][i]" + new_text.to_lower() + "[/i][/u]?"
-
-# Rename the button with it's subjective and/or subjective pronoun from the current pronoun dict key.
-func _on_objective_line_edit_editing_toggled(_toggled_on: bool) -> void:
-	set_button_name()
 
 func _on_possessive_dep_line_edit_text_changed(new_text: String) -> void:
 	possessive_dep_example.text = possessive_dep_sentence[0] + "[u][i]" + new_text.to_lower() + "[/i][/u]" + possessive_dep_sentence[1]
@@ -180,21 +173,6 @@ func _on_possessive_indep_line_edit_text_changed(new_text: String) -> void:
 func _on_reflexive_line_edit_text_changed(new_text: String) -> void:
 	reflexive_example.text = subjective_pronoun.capitalize() + reflexive_sentence + "[u][i]" + new_text.to_lower() + "[/i][/u]."
 
-func set_button_name() -> void:
-	for i in pronoun_choice_hbox.get_children():
-			if i.name == curr_custom_dict:
-				if !P.player_pronouns.has(curr_custom_dict):
-					return
-				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('objective') and P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
-					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize() + "/" + P.player_pronouns[curr_custom_dict]['pronouns']['objective'].capitalize()
-				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('objective'):
-					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['objective'].capitalize()
-				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
-					i.text = P.player_pronouns[curr_custom_dict]['pronouns']['subjective'].capitalize()
-				elif i.text.begins_with("custom_"):
-					return
-				# Set the current pronoun label to the button name as well.
-				current_pronoun_label.text = i.text
 #endregion
 
 #region DEFAULTS
@@ -272,6 +250,39 @@ func _on_add_button_pressed() -> void:
 	
 	line_edits_editable(false)
 	line_edits_clear()
+
+
+## Rename the custom button with it's subjective and/or subjective pronoun from the
+## current pronoun dict key.
+func set_button_name(_new_text: String) -> void:
+	var subjective: String
+	var objective: String 
+	
+	if P.player_pronouns[curr_custom_dict]['pronouns'].has('objective'):
+		objective = P.player_pronouns[curr_custom_dict]['pronouns']['objective']
+	if P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
+		subjective = P.player_pronouns[curr_custom_dict]['pronouns']['subjective']
+	
+	for i in pronoun_choice_hbox.get_children():
+			if i.name == curr_custom_dict:
+				if !P.player_pronouns.has(curr_custom_dict):
+					return
+				
+				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('objective') and P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
+					i.text = subjective.capitalize() + "/" + objective.capitalize()
+					if objective == "": # If objective is missing, only show subjective.
+						i.text = subjective.capitalize()
+					elif subjective == "": # Same but reversed.
+						i.text = objective.capitalize()
+				
+				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('objective'):
+					i.text = objective.capitalize()
+				elif P.player_pronouns[curr_custom_dict]['pronouns'].has('subjective'):
+					i.text = subjective.capitalize()
+				elif i.text.begins_with("custom_"):
+					return
+				# Set the current pronoun label to the button name as well.
+				current_pronoun_label.text = i.text
 
 
 ## Set the current pronoun dict key, and display it on the label.

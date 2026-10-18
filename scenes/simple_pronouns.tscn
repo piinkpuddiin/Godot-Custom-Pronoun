@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://dfsmx8m5r2bis"]
+
+[ext_resource type="Theme" uid="uid://qpir2awu1mnv" path="res://themes/simplistic.tres" id="1_2llbx"]
+[ext_resource type="Script" uid="uid://dongkyjg76meh" path="res://scripts/simple_pronouns.gd" id="1_y5txx"]
+[ext_resource type="Shader" uid="uid://g122rjbh0i7b" path="res://shaders/blur.gdshader" id="2_2llbx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ld40"]
+shader = ExtResource("2_2llbx")
+shader_parameter/amount = 4.00000019
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqmmt"]
+bg_color = Color(0.8156863, 0.8156863, 0.8156863, 0.1254902)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc10j"]
+bg_color = Color(0.8156863, 0.8156863, 0.8156863, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0, 0, 0, 0.078431375)
+shadow_size = 8
+shadow_offset = Vector2(3, 3)
+
+[node name="SimplePronouns" type="Control" unique_id=1592544595 node_paths=PackedStringArray("default_pronouns_vbox")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2llbx")
+script = ExtResource("1_y5txx")
+default_pronouns_vbox = NodePath("Panel/MarginContainer/ScrollContainer/default_pronouns_vbox")
+
+[node name="blur_color_rect" type="Panel" parent="." unique_id=384513639]
+material = SubResource("ShaderMaterial_0ld40")
+custom_minimum_size = Vector2(220, 220)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = -110.0
+offset_right = 122.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gqmmt")
+
+[node name="Panel" type="Panel" parent="." unique_id=1708351239]
+custom_minimum_size = Vector2(220, 220)
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -110.0
+offset_right = 123.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yc10j")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1356005446]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer" unique_id=1635745327]
+clip_contents = false
+layout_mode = 2
+
+[node name="default_pronouns_vbox" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer" unique_id=1504648765]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=340698751]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2" unique_id=474215174]
+layout_mode = 2
+
+[node name="back_button" type="Button" parent="MarginContainer2/HBoxContainer" unique_id=144387538]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[node name="Control" type="Control" parent="MarginContainer2/HBoxContainer" unique_id=697181090]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="confirm_button" type="Button" parent="MarginContainer2/HBoxContainer" unique_id=1192108865]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Confirm"
+
+[connection signal="pressed" from="MarginContainer2/HBoxContainer/confirm_button" to="." method="_on_confirm_button_pressed"]

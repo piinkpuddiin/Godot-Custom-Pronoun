@@ -186,43 +186,34 @@ func update_sentence(pronoun: String, verb: String, value: int = 0) -> void:
 			# And set the button_pressed parameter to the right value.
 			get_check_buttons().get(0).button_pressed = pressed
 			# Create the verb key, and add the value.
-			#P.player_pronouns[pronoun]['verbs'] = "are"
-			P.player_pronouns[pronoun]['verbs']['are'] = ""
 			P.player_pronouns[pronoun]['verbs']['are'] = value
 		"arent":
 			arent_label.text = subjective_pronoun.capitalize() + " [u][i]" + P.arent_arr[value] + "[/i][/u]" + arent_sentence
 			get_check_buttons().get(1).button_pressed = pressed
-			P.player_pronouns[pronoun]['verbs']['arent'] = ""
 			P.player_pronouns[pronoun]['verbs']['arent'] = value
 		"were":
 			were_label.text = subjective_pronoun.capitalize() + " [u][i]" + P.were_arr[value] + "[/i][/u]" + were_sentence
 			get_check_buttons().get(2).button_pressed = pressed
-			P.player_pronouns[pronoun]['verbs']['were'] = ""
 			P.player_pronouns[pronoun]['verbs']['were'] = value
 		"have":
 			have_label.text = subjective_pronoun.capitalize() + " [u][i]" + P.have_arr[value] + "[/i][/u]" + have_sentence
 			get_check_buttons().get(3).button_pressed = pressed
-			P.player_pronouns[pronoun]['verbs']['have'] = ""
 			P.player_pronouns[pronoun]['verbs']['have'] = value
 		"do":
 			do_label.text = "[u][i]" + P.do_arr[value].capitalize() + "[/i][/u] " + subjective_pronoun + do_sentence
 			get_check_buttons().get(4).button_pressed = pressed
-			P.player_pronouns[pronoun]['verbs']['do'] = ""
 			P.player_pronouns[pronoun]['verbs']['do'] = value
 		"dont":
 			dont_label.text = "[u][i]" + P.dont_arr[value].capitalize() + "[/i][/u] " + subjective_pronoun + dont_sentence
 			get_check_buttons().get(5).button_pressed = pressed
-			P.player_pronouns[pronoun]['verbs']['dont'] = ""
 			P.player_pronouns[pronoun]['verbs']['dont'] = value
 		"s":
 			s_label.text = subjective_pronoun.capitalize() + " " + "work" + "[u][i]" + P.s_arr[value] + "[/i][/u]" + s_sentence
 			get_check_buttons().get(6).button_pressed = pressed
-			P.player_pronouns[pronoun]['verbs']['s'] = ""
 			P.player_pronouns[pronoun]['verbs']['s'] = value
 		"es":
 			es_label.text = subjective_pronoun.capitalize() + " " + "do[u][i]" + P.es_arr[value] + "[/i][/u] " + possessive_dep_pronoun + es_sentence
 			get_check_buttons().get(7).button_pressed = pressed
-			P.player_pronouns[pronoun]['verbs']['es'] = ""
 			P.player_pronouns[pronoun]['verbs']['es'] = value
 		_:
 			printerr("This verb: ", verb ," does not exist.")
