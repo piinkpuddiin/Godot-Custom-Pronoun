@@ -21,6 +21,13 @@ extends Control
 @export var possessive_dep_example: RichTextLabel
 @export var reflexive_example: RichTextLabel
 
+@export_category("Sentence Examples.")
+@export var subjective_sentence:= " did the job."
+@export var objective_sentence:= "Are you talking to "
+@export var possessive_indep_sentence:= "This book is "
+@export var possessive_dep_sentence:= ["Working is " ," only driving force."]
+@export var reflexive_sentence:= " will take care of "
+
 @export_category("Containers")
 @export var line_edit_vbox: VBoxContainer
 @export var example_vbox: VBoxContainer
@@ -45,8 +52,7 @@ var example_labels_array: Array[String]
 
 func _ready() -> void:
 	self.hide()
-	#check_verb()
-	set_defaults()
+	generate_default_buttons()
 	line_edits_editable(false)
 	P.curr_pronoun.connect(set_curr_pronoun)
 	line_edits_text_submitted()
@@ -117,7 +123,8 @@ func check_verb(_new_text: String = "") -> void:
 		next_button.disabled = true
 	elif filled_arr.count(true) >= 1:
 		next_button.disabled = true
-	# We multiply the player_pronuns keys times 5, for the 5 types in the pronouns (subjective, objective, etc...)
+	# We multiply the player_pronuns keys times 5, for the 5 types in the 
+	# player_pronouns keys (subjective, objective, etc...)
 	elif filled_arr.count(false) == player_pronouns_arr.size() * 5:
 		next_button.disabled = false
 
@@ -125,6 +132,7 @@ func check_verb(_new_text: String = "") -> void:
 
 
 #region RICHTEXTLABEL
+## Returns all the examples setences labels.
 func get_example_labels() -> Array[RichTextLabel]:
 	var example_array: Array[RichTextLabel]
 	for i in example_vbox.get_children(true):
@@ -134,6 +142,7 @@ func get_example_labels() -> Array[RichTextLabel]:
 					example_array.append(x)
 	return example_array
 
+## Returns all the examples setences texts.
 func get_example_labels_text():
 	var text_array: Array[String]
 	for i in get_example_labels():
@@ -148,7 +157,7 @@ func reset_example_labels():
 
 #region Line Edits EXAMPLES
 func _on_subjective_line_edit_text_changed(new_text: String) -> void:
-	subjective_example.text = "[u][i]" + new_text.capitalize() + "[/i][/u] did the job."
+	subjective_example.text = "[u][i]" + new_text.capitalize() + "[/i][/u]" + subjective_sentence
 	subjective_pronoun = new_text
 
 # Rename the button with it's subjective and/or subjective pronoun from the current pronoun dict key.
@@ -156,20 +165,20 @@ func _on_subjective_line_edit_editing_toggled(_toggled_on: bool) -> void:
 	set_button_name()
 
 func _on_objective_line_edit_text_changed(new_text: String) -> void:
-	object_example.text = "Are you talking to [u][i]" + new_text.to_lower() + "[/i][/u]?"
+	object_example.text = objective_sentence + "[u][i]" + new_text.to_lower() + "[/i][/u]?"
 
 # Rename the button with it's subjective and/or subjective pronoun from the current pronoun dict key.
 func _on_objective_line_edit_editing_toggled(_toggled_on: bool) -> void:
 	set_button_name()
 
 func _on_possessive_dep_line_edit_text_changed(new_text: String) -> void:
-	possessive_dep_example.text = "Working is [u][i]" + new_text.to_lower() + "[/i][/u] only driving force."
+	possessive_dep_example.text = possessive_dep_sentence[0] + "[u][i]" + new_text.to_lower() + "[/i][/u]" + possessive_dep_sentence[1]
 
 func _on_possessive_indep_line_edit_text_changed(new_text: String) -> void:
-	possessive_indep_example.text = "This book is [u][i]" + new_text.to_lower() + "[/i][/u]."
+	possessive_indep_example.text = possessive_indep_sentence + "[u][i]" + new_text.to_lower() + "[/i][/u]."
 
 func _on_reflexive_line_edit_text_changed(new_text: String) -> void:
-	reflexive_example.text = subjective_pronoun.capitalize() + " will take care of [u][i]" + new_text.to_lower() + "[/i][/u]."
+	reflexive_example.text = subjective_pronoun.capitalize() + reflexive_sentence + "[u][i]" + new_text.to_lower() + "[/i][/u]."
 
 func set_button_name() -> void:
 	for i in pronoun_choice_hbox.get_children():
@@ -190,7 +199,7 @@ func set_button_name() -> void:
 
 #region DEFAULTS
 ## Creates the default pronoun buttons.
-func set_defaults() -> void:
+func generate_default_buttons() -> void:
 	# Remove all the pronoun buttons.
 	for i in pronoun_choice_hbox.get_children():
 		if i.name.begins_with("add"):
@@ -224,7 +233,7 @@ func set_defaults() -> void:
 			pronoun_choice_hbox.move_child(i, -1)
 
 
-## Creates a new custom button.
+## Create a new custom pronoun button.
 func _on_add_button_pressed() -> void:
 	var button = Button.new()
 	button.toggle_mode = true
@@ -342,27 +351,27 @@ func line_edits_pronouns(toggled_on: bool, dict: Dictionary, pronoun: String):
 			
 			if i.name.begins_with("subjective"):
 				if dict[pronoun].has('subjective'):
-					i.text = dict[pronoun]['subjective'].to_pascal_case()
+					i.text = dict[pronoun]['subjective'].to_lower()
 					_on_subjective_line_edit_text_changed(dict[pronoun]['subjective'])
 			
 			elif i.name.begins_with("objective"):
 				if dict[pronoun].has('objective'):
-					i.text = dict[pronoun]['objective'].to_pascal_case()
+					i.text = dict[pronoun]['objective'].to_lower()
 					_on_objective_line_edit_text_changed(dict[pronoun]['objective'])
 			
 			elif i.name.begins_with("possessive_dep"):
 				if dict[pronoun].has('possessive_dep'):
-					i.text = dict[pronoun]['possessive_dep'].to_pascal_case()
+					i.text = dict[pronoun]['possessive_dep'].to_lower()
 					_on_possessive_dep_line_edit_text_changed(dict[pronoun]['possessive_dep'])
 			
 			elif i.name.begins_with("possessive_indep"):
 				if dict[pronoun].has('possessive_indep'):
-					i.text = dict[pronoun]['possessive_indep'].to_pascal_case()
+					i.text = dict[pronoun]['possessive_indep'].to_lower()
 					_on_possessive_indep_line_edit_text_changed(dict[pronoun]['possessive_indep'])
 			
 			elif i.name.begins_with("reflexive"):
 				if dict[pronoun].has('reflexive'):
-					i.text = dict[pronoun]['reflexive'].to_pascal_case()
+					i.text = dict[pronoun]['reflexive'].to_lower()
 					_on_reflexive_line_edit_text_changed(dict[pronoun]['reflexive'])
 	
 	if P.player_pronouns == {}:
@@ -409,27 +418,27 @@ func display_line_edits(pronoun: String):
 	for i in get_line_edits():
 		if i.name.begins_with("subjective"):
 			if P.player_pronouns[pronoun]['pronouns'].has('subjective'):
-				i.text = P.player_pronouns[pronoun]['pronouns']['subjective'].to_pascal_case()
+				i.text = P.player_pronouns[pronoun]['pronouns']['subjective'].to_lower()
 				_on_subjective_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['subjective'])
 			
 		elif i.name.begins_with("objective"):
 			if P.player_pronouns[pronoun]['pronouns'].has('objective'):
-				i.text = P.player_pronouns[pronoun]['pronouns']['objective'].to_pascal_case()
+				i.text = P.player_pronouns[pronoun]['pronouns']['objective'].to_lower()
 				_on_objective_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['objective'])
 			
 		elif i.name.begins_with("possessive_dep"):
 			if P.player_pronouns[pronoun]['pronouns'].has('possessive_dep'):
-				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_dep'].to_pascal_case()
+				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_dep'].to_lower()
 				_on_possessive_dep_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['possessive_dep'])
 			
 		elif i.name.begins_with("possessive_indep"):
 			if P.player_pronouns[pronoun]['pronouns'].has('possessive_indep'):
-				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_indep'].to_pascal_case()
+				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_indep'].to_lower()
 				_on_possessive_indep_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['possessive_indep'])
 			
 		elif i.name.begins_with("reflexive"):
 			if P.player_pronouns[pronoun]['pronouns'].has('reflexive'):
-				i.text = P.player_pronouns[pronoun]['pronouns']['reflexive'].to_pascal_case()
+				i.text = P.player_pronouns[pronoun]['pronouns']['reflexive'].to_lower()
 				_on_reflexive_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['reflexive'])
 	
 	if P.player_pronouns == {}:
@@ -438,6 +447,7 @@ func display_line_edits(pronoun: String):
 #endregion
 
 
+#region BUTTONS
 # Save all the pronouns to the save.
 func _on_save_button_pressed() -> void:
 	save_custom_dict()
@@ -464,6 +474,8 @@ func _on_next_button_pressed() -> void:
 	examples_sentence.show()
 	
 	self.hide()
+#endregion
+
 
 #region HELPER FUNCS
 ## Deletes the hovered/focused custom button.
@@ -553,6 +565,6 @@ func clear():
 	for i in pronoun_choice_hbox.get_children():
 		i.button_pressed = false
 	
-	set_defaults()
+	generate_default_buttons()
 	reset_example_labels()
 #endregion
