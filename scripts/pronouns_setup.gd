@@ -216,7 +216,12 @@ func set_defaults() -> void:
 		button.mouse_entered.connect(line_edits_editable.bind(false))
 		
 		pronoun_choice_hbox.add_child(button)
-		pronoun_choice_hbox.move_child(button, 0)
+		pronoun_choice_hbox.move_child(button, -1)
+	
+	# Place the add button back at the end of the button list.
+	for i in pronoun_choice_hbox.get_children():
+		if i.name.begins_with("add"):
+			pronoun_choice_hbox.move_child(i, -1)
 
 
 ## Creates a new custom button.
@@ -304,20 +309,20 @@ func _toggle_custom_pronoun(toggled_on: bool, custom_pronoun: String) -> void:
 
 
 ## Create the toggle function for the default buttons.
-func _toggle_default_pronouns(toggled_on: bool, pronoun: String) -> void:
+func _toggle_default_pronouns(toggled_on: bool, default_pronoun: String) -> void:
 	if toggled_on:
 		check_custom()
-		P.player_pronouns[pronoun] = {}
-		P.player_pronouns[pronoun]['pronouns'] = P.default_pronouns[pronoun]
+		P.player_pronouns[default_pronoun] = {}
+		P.player_pronouns[default_pronoun]['pronouns'] = P.default_pronouns[default_pronoun]
 	else:
 		# Remove the pronoun key from the player dict. Does not delete the pronoun.
-		if P.player_pronouns.get(pronoun):
-			print("Erased pronoun: ", pronoun)
-			P.player_pronouns.erase(pronoun)
+		if P.player_pronouns.get(default_pronoun):
+			print("Erased pronoun: ", default_pronoun)
+			P.player_pronouns.erase(default_pronoun)
 		current_pronoun_label.text = " "
 		curr_custom_dict = ""
 		line_edits_clear()
-	display_line_edits(pronoun)
+	display_line_edits(default_pronoun)
 	check_verb()
 	delete_button.disabled = true
 
@@ -368,27 +373,34 @@ func line_edits_pronouns(toggled_on: bool, dict: Dictionary, pronoun: String):
 ## Checks if either of the subjective and objective pronouns exist.[br]
 ## Returns one of the pronouns or both of them.
 func check_pronouns_exist(dict_key: String) -> String:
-	var pronouns: String
+	var pronouns: String = " "
 	if P.player_pronouns[dict_key]['pronouns'].has('subjective') and P.player_pronouns[dict_key]['pronouns'].has('objective'):
 		pronouns = P.player_pronouns[dict_key]['pronouns']['subjective'].capitalize() + "/" + P.player_pronouns[dict_key]['pronouns']['objective'].capitalize()
 	elif P.player_pronouns[dict_key]['pronouns'].has('subjective'):
 		pronouns = P.player_pronouns[dict_key]['pronouns']['subjective'].capitalize()
 	elif P.player_pronouns[dict_key]['pronouns'].has('objective'):
 		pronouns = P.player_pronouns[dict_key]['pronouns']['objective'].capitalize()
-	if pronouns == "":
+	else:
 		pronouns = " "
+	
 	return pronouns
 
 
 ## Only shows the currently hovered/focused pronouns.
 func display_line_edits(pronoun: String):
-	# We remove the previous pronouns.
+	# NOTE: Uncomment the line below to keep showing the previously pressed pronoun 
+	# if the mouse is hovering/focused over a pronoun that isn't in the player_pronoun dict.
+	# We remove the previous pronouns in the line edits.
 	line_edits_clear()
-	# We the labels back to their first example lines.
+	# NOTE: Uncomment the line below to keep showing the previously pressed pronouns examples
+	# if the mouse is hovering/focused over a pronoun that isn't in the player_pronoun dict.
+	# We the examples sentence labels back to their original example.
 	reset_example_labels()
 	
 	# We only show the pronouns the player has choosen.
 	if !P.player_pronouns.has(pronoun):
+		# NOTE: Uncomment the line below to keep showing the previously pressed pronoun label
+		# even if the mouse is hovering/focused over a pronoun that isn't in the player_pronoun dict.
 		current_pronoun_label.text = " "
 		return
 	

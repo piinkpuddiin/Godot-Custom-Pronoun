@@ -18,48 +18,12 @@ var player_pronouns:= {}
 # The default pronouns, add in all the default pronouns here.
 # They will automatically be added as a button.
 var default_pronouns:= {
-	#"abc": {
-		#"subjective": "...",
-		#"objective": "...",
-		#"possessive_dep": "...",
-		#"possessive_indep": "...",
-		#"reflexive": "...",
-	#},
-	# NOTE: The pronouns show in reverse order from the one tha is being declared here.
-	"ey": {
-		"subjective": "ey",
-		"objective": "em",
-		"possessive_dep": "eir",
-		"possessive_indep": "eirs",
-		"reflexive": "emself",
-	},
-	"ae": {
-		"subjective": "ae",
-		"objective": "aer",
-		"possessive_dep": "aer",
-		"possessive_indep": "aers",
-		"reflexive": "aerself",
-	},
-	"it": {
-		"subjective": "it",
-		"objective": "it",
-		"possessive_dep": "its",
-		"possessive_indep": "its",
-		"reflexive": "itself",
-	},
 	"they": {
 		"subjective": "they",
 		"objective": "them",
 		"possessive_dep": "their",
 		"possessive_indep": "theirs",
 		"reflexive": "themselves",
-	},
-	"he": {
-		"subjective": "he",
-		"objective": "him",
-		"possessive_dep": "his",
-		"possessive_indep": "his",
-		"reflexive": "himself",
 	},
 	"she": {
 		"subjective": "she",
@@ -68,6 +32,41 @@ var default_pronouns:= {
 		"possessive_indep": "hers",
 		"reflexive": "herself",
 	},
+	"he": {
+		"subjective": "he",
+		"objective": "him",
+		"possessive_dep": "his",
+		"possessive_indep": "his",
+		"reflexive": "himself",
+	},
+	"it": {
+		"subjective": "it",
+		"objective": "it",
+		"possessive_dep": "its",
+		"possessive_indep": "its",
+		"reflexive": "itself",
+	},
+	"ae": {
+		"subjective": "ae",
+		"objective": "aer",
+		"possessive_dep": "aer",
+		"possessive_indep": "aers",
+		"reflexive": "aerself",
+	},
+	"ey": {
+		"subjective": "ey",
+		"objective": "em",
+		"possessive_dep": "eir",
+		"possessive_indep": "eirs",
+		"reflexive": "emself",
+	},
+	#"abc": {
+		#"subjective": "...",
+		#"objective": "...",
+		#"possessive_dep": "...",
+		#"possessive_indep": "...",
+		#"reflexive": "...",
+	#},
 }
 
 # Temporarily holds the custom inputed pronouns.

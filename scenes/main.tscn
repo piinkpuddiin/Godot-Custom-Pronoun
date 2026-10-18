@@ -318,6 +318,7 @@ dialogue = NodePath("../Dialogue")
 layer = 2
 
 [node name="Debug" parent="CanvasLayer" unique_id=559146899 instance=ExtResource("6_tefeu")]
+visible = false
 
 [node name="SavedPronouns" parent="CanvasLayer" unique_id=1996028071 instance=ExtResource("15_jkv2x")]
 visible = false
