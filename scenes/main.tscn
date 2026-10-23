@@ -288,6 +288,7 @@ main = NodePath("..")
 examples_sentence = NodePath("../ExampleSentences")
 
 [node name="SimplePronouns" parent="." unique_id=1592544595 node_paths=PackedStringArray("custom_pronouns", "_notification") instance=ExtResource("9_jbj1t")]
+visible = false
 custom_pronouns = NodePath("../CustomPronouns")
 _notification = NodePath("../Notification")
 
@@ -316,7 +317,6 @@ custom_pronouns = NodePath("../CustomPronouns")
 example_sentences = NodePath("../ExampleSentences")
 
 [node name="MainMenu" parent="." unique_id=2008582098 node_paths=PackedStringArray("custom_pronouns", "simple_pronouns", "dialogue") instance=ExtResource("9_choun")]
-visible = false
 custom_pronouns = NodePath("../CustomPronouns")
 simple_pronouns = NodePath("../SimplePronouns")
 dialogue = NodePath("../Dialogue")
