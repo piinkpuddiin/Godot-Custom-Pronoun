@@ -1,0 +1,227 @@
+[gd_resource type="Theme" format=3 uid="uid://dfoe13qfskyx3"]
+
+[ext_resource type="FontFile" uid="uid://j47r8cevwd3l" path="res://fonts/helvetica/HelveticaNeueLight.ttf" id="1_ap3g7"]
+[ext_resource type="FontFile" uid="uid://54xufe6ypt15" path="res://fonts/helvetica/HelveticaNeueCondensedBold.ttf" id="1_nb6y8"]
+[ext_resource type="FontFile" uid="uid://cxsgdi6e2xk36" path="res://fonts/helvetica/HelveticaNeueBold.ttf" id="1_pj5i0"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="3_042cj"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="4_cuy4x"]
+[ext_resource type="Texture2D" uid="uid://bg2wpbg53huat" path="res://images/marjan-blan-794QUz5-cso-unsplash.jpg" id="5_buf0l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ri8ov"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.08627451, 0.13333334, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_042cj"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pj5i0"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buf0l"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 1)
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="DPITexture" id="DPITexture_042cj"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".75\" rx=\"7\"/><circle cx=\"24\" cy=\"8\" r=\"5\" fill=\"#1a1a1a\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_cuy4x"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".37\" rx=\"7\"/><circle cx=\"24\" cy=\"8\" r=\"5\" fill=\"#1a1a1a\" fill-opacity=\".5\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_buf0l"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".37\" rx=\"7\"/><circle cx=\"8\" cy=\"8\" r=\"5\" fill=\"#1a1a1a\" fill-opacity=\".5\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_4vjnj"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".75\" rx=\"7\"/><circle cx=\"8\" cy=\"8\" r=\"5\" fill=\"#1a1a1a\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_ec81o"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><g fill-opacity=\".5\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#1a1a1a\" rx=\"7\"/><circle cx=\"8\" cy=\"8\" r=\"5\" fill=\"#fff\"/></g></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_8d1fx"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><g fill-opacity=\".25\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#1a1a1a\" rx=\"7\"/><circle cx=\"8\" cy=\"8\" r=\"5\" fill=\"#fff\"/></g></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_h2xpl"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><g fill-opacity=\".25\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#1a1a1a\" rx=\"7\"/><circle cx=\"24\" cy=\"8\" r=\"5\" fill=\"#fff\"/></g></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_o2i3o"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><g fill-opacity=\".5\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#1a1a1a\" rx=\"7\"/><circle cx=\"24\" cy=\"8\" r=\"5\" fill=\"#fff\"/></g></svg>
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g71k2"]
+content_margin_left = 6.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw5e6"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_4vjnj"]
+color = Color(0.7607843, 0, 0, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ec81o"]
+color = Color(1, 0.6039824, 0.81145185, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8d1fx"]
+color = Color(0.3313973, 0.012447671, 0.5120964, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_o2i3o"]
+color = Color(1, 1, 1, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pj5i0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+skew = Vector2(0.245, 0.005)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.96440977, 0.5879717, 0.95056885, 1)
+expand_margin_left = 12.0
+expand_margin_top = 5.0
+expand_margin_right = 12.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBox" id="StyleBox_pc32k"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("4_cuy4x")
+skew = Vector2(0.375, -0.01)
+texture = ExtResource("5_buf0l")
+texture_stretch_mode = 5
+texture_repeat = 1
+texture_scale = 1.54
+expand_margin_left = 7.0
+expand_margin_right = 7.0
+shadow_enabled = true
+shadow_blur = 2
+shadow_offset = Vector2(4.65, 4.68)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svo5o"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.49019608, 0.49019608, 0.49019608, 0.7607843)
+skew = Vector2(-0.31, 0.015)
+expand_margin_left = 7.0
+shadow_color = Color(0, 0, 0, 0.21960784)
+shadow_size = 2
+shadow_offset = Vector2(4.65, 4.68)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ojbl1"]
+bg_color = Color(0.043137256, 0.043137256, 0.043137256, 0.74509805)
+
+[resource]
+default_font = ExtResource("1_ap3g7")
+Button/colors/font_color = Color(0.79773074, 0.07293605, 0.014492746, 1)
+Button/colors/font_hover_pressed_color = Color(1, 0, 0.49019608, 1)
+Button/colors/font_pressed_color = Color(0.54901963, 0.08235294, 1, 1)
+Button/font_sizes/font_size = 28
+Button/fonts/font = ExtResource("1_pj5i0")
+Button/styles/hover = SubResource("StyleBoxFlat_ri8ov")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_042cj")
+Button/styles/normal = SubResource("StyleBoxEmpty_pj5i0")
+Button/styles/pressed = SubResource("StyleBoxFlat_buf0l")
+CheckButton/colors/button_checked_color = Color(1, 1, 1, 1)
+CheckButton/colors/button_unchecked_color = Color(1, 1, 1, 1)
+CheckButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+CheckButton/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+CheckButton/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+CheckButton/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+CheckButton/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+CheckButton/colors/font_outline_color = Color(0, 0, 0, 1)
+CheckButton/colors/font_pressed_color = Color(1, 1, 1, 1)
+CheckButton/constants/check_v_offset = 0
+CheckButton/constants/h_separation = 4
+CheckButton/constants/outline_size = 0
+CheckButton/font_sizes/font_size = 16
+CheckButton/icons/checked = SubResource("DPITexture_042cj")
+CheckButton/icons/checked_disabled = SubResource("DPITexture_cuy4x")
+CheckButton/icons/checked_disabled_mirrored = SubResource("DPITexture_buf0l")
+CheckButton/icons/checked_mirrored = SubResource("DPITexture_4vjnj")
+CheckButton/icons/unchecked = SubResource("DPITexture_ec81o")
+CheckButton/icons/unchecked_disabled = SubResource("DPITexture_8d1fx")
+CheckButton/icons/unchecked_disabled_mirrored = SubResource("DPITexture_h2xpl")
+CheckButton/icons/unchecked_mirrored = SubResource("DPITexture_o2i3o")
+CheckButton/styles/disabled = SubResource("StyleBoxEmpty_g71k2")
+CheckButton/styles/focus = SubResource("StyleBoxFlat_qw5e6")
+CheckButton/styles/hover = SubResource("StyleBoxEmpty_g71k2")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_g71k2")
+CheckButton/styles/normal = SubResource("StyleBoxEmpty_g71k2")
+CheckButton/styles/pressed = SubResource("StyleBoxEmpty_g71k2")
+HScrollBar/styles/grabber = SubResource("StyleBoxLine_4vjnj")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxLine_ec81o")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxLine_8d1fx")
+HScrollBar/styles/scroll = SubResource("StyleBoxLine_o2i3o")
+Label/font_sizes/font_size = 24
+LineEdit/colors/caret_color = Color(0.9490196, 0.827451, 0, 1)
+LineEdit/colors/font_color = Color(0.79773074, 0.07293605, 0.014492746, 1)
+LineEdit/colors/font_selected_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_uneditable_color = Color(0.8745098, 0.8745098, 0.8745098, 0.7490196)
+LineEdit/colors/selection_color = Color(0.9098039, 0.2784314, 0.79607844, 0.7176471)
+LineEdit/constants/caret_width = 3
+LineEdit/font_sizes/font_size = 24
+LineEdit/fonts/font = ExtResource("1_nb6y8")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_pj5i0")
+LineEdit/styles/normal = SubResource("StyleBox_pc32k")
+LineEdit/styles/read_only = SubResource("StyleBoxFlat_svo5o")
+Panel/styles/panel = SubResource("StyleBoxFlat_ojbl1")
+RichTextLabel/font_sizes/bold_font_size = 24
+RichTextLabel/font_sizes/bold_italics_font_size = 24
+RichTextLabel/font_sizes/italics_font_size = 24
+RichTextLabel/font_sizes/mono_font_size = 24
+RichTextLabel/font_sizes/normal_font_size = 24

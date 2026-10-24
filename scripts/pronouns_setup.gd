@@ -133,7 +133,7 @@ func check_verb(_new_text: String = "") -> void:
 
 
 #region RICHTEXTLABEL
-## Returns all the examples setences labels.
+## Returns all the examples sentences labels.
 func get_example_labels() -> Array[RichTextLabel]:
 	var example_array: Array[RichTextLabel]
 	for i in example_vbox.get_children(true):
@@ -143,7 +143,7 @@ func get_example_labels() -> Array[RichTextLabel]:
 					example_array.append(x)
 	return example_array
 
-## Returns all the examples setences texts.
+## Returns all the examples sentences texts.
 func get_example_labels_text():
 	var text_array: Array[String]
 	for i in get_example_labels():
@@ -362,27 +362,27 @@ func line_edits_pronouns(toggled_on: bool, dict: Dictionary, pronoun: String):
 			
 			if i.name.begins_with("subjective"):
 				if dict[pronoun].has('subjective'):
-					i.text = dict[pronoun]['subjective'].to_lower()
+					i.text = dict[pronoun]['subjective'].capitalize()
 					_on_subjective_line_edit_text_changed(dict[pronoun]['subjective'])
 			
 			elif i.name.begins_with("objective"):
 				if dict[pronoun].has('objective'):
-					i.text = dict[pronoun]['objective'].to_lower()
+					i.text = dict[pronoun]['objective'].capitalize()
 					_on_objective_line_edit_text_changed(dict[pronoun]['objective'])
 			
 			elif i.name.begins_with("possessive_dep"):
 				if dict[pronoun].has('possessive_dep'):
-					i.text = dict[pronoun]['possessive_dep'].to_lower()
+					i.text = dict[pronoun]['possessive_dep'].capitalize()
 					_on_possessive_dep_line_edit_text_changed(dict[pronoun]['possessive_dep'])
 			
 			elif i.name.begins_with("possessive_indep"):
 				if dict[pronoun].has('possessive_indep'):
-					i.text = dict[pronoun]['possessive_indep'].to_lower()
+					i.text = dict[pronoun]['possessive_indep'].capitalize()
 					_on_possessive_indep_line_edit_text_changed(dict[pronoun]['possessive_indep'])
 			
 			elif i.name.begins_with("reflexive"):
 				if dict[pronoun].has('reflexive'):
-					i.text = dict[pronoun]['reflexive'].to_lower()
+					i.text = dict[pronoun]['reflexive'].capitalize()
 					_on_reflexive_line_edit_text_changed(dict[pronoun]['reflexive'])
 	
 	if P.player_pronouns == {}:
@@ -429,27 +429,27 @@ func display_line_edits(pronoun: String):
 	for i in get_line_edits():
 		if i.name.begins_with("subjective"):
 			if P.player_pronouns[pronoun]['pronouns'].has('subjective'):
-				i.text = P.player_pronouns[pronoun]['pronouns']['subjective'].to_lower()
+				i.text = P.player_pronouns[pronoun]['pronouns']['subjective'].capitalize()
 				_on_subjective_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['subjective'])
 			
 		elif i.name.begins_with("objective"):
 			if P.player_pronouns[pronoun]['pronouns'].has('objective'):
-				i.text = P.player_pronouns[pronoun]['pronouns']['objective'].to_lower()
+				i.text = P.player_pronouns[pronoun]['pronouns']['objective'].capitalize()
 				_on_objective_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['objective'])
 			
 		elif i.name.begins_with("possessive_dep"):
 			if P.player_pronouns[pronoun]['pronouns'].has('possessive_dep'):
-				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_dep'].to_lower()
+				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_dep'].capitalize()
 				_on_possessive_dep_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['possessive_dep'])
 			
 		elif i.name.begins_with("possessive_indep"):
 			if P.player_pronouns[pronoun]['pronouns'].has('possessive_indep'):
-				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_indep'].to_lower()
+				i.text = P.player_pronouns[pronoun]['pronouns']['possessive_indep'].capitalize()
 				_on_possessive_indep_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['possessive_indep'])
 			
 		elif i.name.begins_with("reflexive"):
 			if P.player_pronouns[pronoun]['pronouns'].has('reflexive'):
-				i.text = P.player_pronouns[pronoun]['pronouns']['reflexive'].to_lower()
+				i.text = P.player_pronouns[pronoun]['pronouns']['reflexive'].capitalize()
 				_on_reflexive_line_edit_text_changed(P.player_pronouns[pronoun]['pronouns']['reflexive'])
 	
 	if P.player_pronouns == {}:

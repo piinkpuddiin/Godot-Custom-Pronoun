@@ -1,5 +1,6 @@
 extends Control
 
+@export var main_menu: Control
 @export var custom_pronouns: Control
 @export var _notification: Control
 @export var default_pronouns_vbox: VBoxContainer
@@ -62,3 +63,8 @@ func _on_confirm_button_pressed() -> void:
 	_notification.show()
 	self.hide()
 	P._save(custom_pronouns.save_name)
+
+
+func _on_back_button_pressed() -> void:
+	self.hide()
+	main_menu.show()

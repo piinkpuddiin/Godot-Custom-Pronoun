@@ -1,5 +1,6 @@
 extends Control
 
+@export var choose_theme: Control
 @export var custom_pronouns: Control
 @export var simple_pronouns: Control
 @export var dialogue: Control
@@ -16,12 +17,13 @@ func check_load():
 	%load_button.disabled = P.save_exists(custom_pronouns.save_name)
 
 func _on_custom_pronouns_button_pressed() -> void:
-	P.clear()
-	custom_pronouns.clear()
-	custom_pronouns.show()
+	choose_theme.show()
 	self.hide()
 
 func _on_simple_pronouns_button_pressed() -> void:
+	P.clear() 
+	# NOTE: Always clear the previously set pronouns, 
+	# when a pronouns screen comes up.
 	simple_pronouns.show()
 	self.hide()
 
