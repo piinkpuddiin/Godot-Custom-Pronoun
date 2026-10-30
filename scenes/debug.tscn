@@ -16,12 +16,12 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -194.60898
-offset_bottom = 232.0
+offset_left = -256.99997
+offset_bottom = 700.0
 grow_horizontal = 0
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=600255184]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel" unique_id=1019652718]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,11 +30,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="print_all_button" type="Button" parent="Panel/VBoxContainer" unique_id=514449032]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer" unique_id=600255184]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="print_all_button" type="Button" parent="Panel/ScrollContainer/VBoxContainer" unique_id=514449032]
 layout_mode = 2
 text = "Print all"
 
-[node name="curr_pronoun" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=71049639]
+[node name="curr_pronoun" type="RichTextLabel" parent="Panel/ScrollContainer/VBoxContainer" unique_id=71049639]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
@@ -42,7 +48,7 @@ bbcode_enabled = true
 text = "curr_pronoun: "
 fit_content = true
 
-[node name="custom_pronouns" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=1724557930]
+[node name="custom_pronouns" type="RichTextLabel" parent="Panel/ScrollContainer/VBoxContainer" unique_id=1724557930]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
@@ -50,7 +56,7 @@ bbcode_enabled = true
 text = "custom:"
 fit_content = true
 
-[node name="custom_pronouns_keys" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=1195522548]
+[node name="custom_pronouns_keys" type="RichTextLabel" parent="Panel/ScrollContainer/VBoxContainer" unique_id=1195522548]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
@@ -58,7 +64,7 @@ bbcode_enabled = true
 text = "custom reflexive:"
 fit_content = true
 
-[node name="player_pronouns" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=1386194498]
+[node name="player_pronouns" type="RichTextLabel" parent="Panel/ScrollContainer/VBoxContainer" unique_id=1386194498]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
@@ -66,16 +72,21 @@ bbcode_enabled = true
 text = "custom:"
 fit_content = true
 
-[node name="are_label" type="Label" parent="Panel/VBoxContainer" unique_id=1072971195]
+[node name="are_label" type="Label" parent="Panel/ScrollContainer/VBoxContainer" unique_id=1072971195]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="were_label" type="Label" parent="Panel/VBoxContainer" unique_id=1326898133]
+[node name="were_label" type="Label" parent="Panel/ScrollContainer/VBoxContainer" unique_id=1326898133]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="s_label" type="Label" parent="Panel/VBoxContainer" unique_id=1612458851]
+[node name="s_label" type="Label" parent="Panel/ScrollContainer/VBoxContainer" unique_id=1612458851]
 unique_name_in_owner = true
 layout_mode = 2
 
-[connection signal="pressed" from="Panel/VBoxContainer/print_all_button" to="." method="_on_print_all_button_pressed"]
+[node name="dict" type="Label" parent="Panel/ScrollContainer/VBoxContainer" unique_id=1339746437]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[connection signal="pressed" from="Panel/ScrollContainer/VBoxContainer/print_all_button" to="." method="_on_print_all_button_pressed"]

@@ -15,10 +15,15 @@ func _process(_delta: float) -> void:
 	%s_label.text = P.s
 	%custom_pronouns.text = "custom: " + str(P.custom_pronouns.keys())
 	
-	for i in P.custom_pronouns.keys():
-		if P.custom_pronouns[i].has('reflexive'):
-			%custom_pronouns_keys.text = P.custom_pronouns[i]['reflexive']
+	for i in P.player_pronouns.keys():
+		#print("custom i: ", i)
+		if P.player_pronouns[i].has('pronouns'):
+			%custom_pronouns_keys.text = "custom reflexive: " + P.player_pronouns[i]['pronouns']['reflexive']
+		if P.player_pronouns[i].has('verbs'):
+			%custom_pronouns_keys.text = "custom are:" + str(P.player_pronouns[i]['verbs']['are'])
+			
 	%player_pronouns.text = "player: " + str(P.player_pronouns.keys())
+	%dict.text = JSON.stringify((P.player_pronouns), "  ")
 
 
 func _on_print_all_button_pressed() -> void:

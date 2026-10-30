@@ -34,10 +34,10 @@ var curr_pronoun: String
 
 
 func _ready() -> void:
+	#set_toggle()
 	P.set_sentence.connect(example_sentence)
 	P.curr_pronoun.connect(set_pronoun)
 	P.curr_verb.connect(update_sentence)
-	set_toggle()
 
 ## Adds all the players pronouns buttons.
 func add_pronouns() -> void:
@@ -46,36 +46,59 @@ func add_pronouns() -> void:
 		for i in custom_pronouns_vbox.get_children():
 			i.queue_free()
 	
+	print_rich("[b]All the pronouns:[/b] ", P.player_pronouns.keys())
 	for i in P.player_pronouns.keys():
-		if P.player_pronouns[i]['pronouns'].has('subjective'):
-			print("All the pronouns: ", i)
-			var button:= Button.new()
-			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			button.text = (
-				P.player_pronouns[i]['pronouns']['subjective'].capitalize() +
-				 "/" + 
-				P.player_pronouns[i]['pronouns']['objective'].capitalize()
-				)
-			button.name = P.player_pronouns[i]['pronouns']['subjective'] + "_button"
-			
-			button.tree_entered.connect(P.set_sentence.emit)
-			# Set the current pronoun to the button.
-			button.pressed.connect(set_pronoun.bind(i))
-			button.pressed.connect(pronoun_label)
-			# Check the pronoun verbs of the current pronoun.
-			button.pressed.connect(check_pronoun_verbs)
-			
-			custom_pronouns_vbox.add_child(button)
-			custom_pronouns_vbox.move_child(button, -1)
+		# NOTE: All the input fields shpuld have a pronoun so unnecessary
+		#if P.player_pronouns[i]['pronouns'].has('subjective'):
+		var button:= Button.new()
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.text = (
+			P.player_pronouns[i]['pronouns']['subjective'].capitalize() +
+			 "/" + 
+			P.player_pronouns[i]['pronouns']['objective'].capitalize()
+			)
+		button.name = P.player_pronouns[i]['pronouns']['subjective'] + "_button"
+		
+		#button.tree_entered.connect(P.set_sentence.emit)
+		# Set the current pronoun to the button.
+		#button.focus_entered.connect(set_pronoun.bind(i))
+		#button.mouse_entered.connect(set_pronoun.bind(i))
+		button.pressed.connect(set_pronoun.bind(i))
+		button.pressed.connect(pronoun_label)
+		# Check the pronoun verbs of the current pronoun.
+		button.pressed.connect(check_pronoun_verbs.bind(i))
+		#button.pressed.connect(set_pronoun.bind(i))
+		
+		custom_pronouns_vbox.add_child(button)
+		custom_pronouns_vbox.move_child(button, -1)
+	
+	P.set_sentence.emit()
+	set_toggle()
 
 
 ## Sets the curr_pronoun to the most recently pressed pronoun.
 func set_pronoun(pronoun):
 	curr_pronoun = pronoun
-	print("curr pronoun: ", pronoun)
+	print_rich("[b]curr pronoun: ", pronoun)
 
 
-## Returns all the label examples in an array.
+## Sets the current label with the subjective and objective pronoun.
+func pronoun_label():
+	var subjective_pronoun: String 
+	var objective_pronoun: String
+	
+	if P.player_pronouns.has(curr_pronoun):
+		subjective_pronoun = P.player_pronouns[curr_pronoun]['pronouns']['subjective']
+		objective_pronoun = P.player_pronouns[curr_pronoun]['pronouns']['objective']
+	current_pronoun_label.text = (
+		"[b]" +
+		subjective_pronoun.capitalize() + 
+		"/" + 
+		objective_pronoun.capitalize()
+	)
+
+
+## Returns all the label check buttons in an array.
 func get_check_buttons() -> Array[CheckButton]:
 	var check_array: Array
 	for i in vbox_container.get_children(true):
@@ -94,6 +117,7 @@ func get_label_examples() -> Array[Label]:
 				label_array.append(x)
 	return label_array
 
+
 ## Sets the toggle signal in all the checkbuttons
 func set_toggle() -> void:
 	for i in get_check_buttons():
@@ -103,6 +127,7 @@ func set_toggle() -> void:
 
 ## Set the verb to either the plural or singular form.
 func set_verb(toggled_on: bool, button: CheckButton, verb: String):
+	print("set_verb: ",toggled_on)
 	if toggled_on:
 		button.text = "Plural"
 		P.curr_verb.emit(curr_pronoun, verb, 1)
@@ -111,21 +136,18 @@ func set_verb(toggled_on: bool, button: CheckButton, verb: String):
 		P.curr_verb.emit(curr_pronoun, verb, 0)
 
 
-## If the pronoun already has verbs set, show them if it's selected.
-func check_pronoun_verbs():
-	print("check_pronoun_verbs curr_pronoun: ", curr_pronoun)
-	print("curr_pronoun [verb][are]: ", P.player_pronouns[curr_pronoun]['verbs']['are'])
-	pronoun_label()
-	if P.player_pronouns.has(curr_pronoun):
-		if P.player_pronouns[curr_pronoun].has('verbs'):
-			update_sentence(curr_pronoun, "are", P.player_pronouns[curr_pronoun]['verbs']['are'])
-			update_sentence(curr_pronoun, "arent", P.player_pronouns[curr_pronoun]['verbs']['arent'])
-			update_sentence(curr_pronoun, "were", P.player_pronouns[curr_pronoun]['verbs']['were'])
-			update_sentence(curr_pronoun, "have", P.player_pronouns[curr_pronoun]['verbs']['have'])
-			update_sentence(curr_pronoun, "do", P.player_pronouns[curr_pronoun]['verbs']['do'])
-			update_sentence(curr_pronoun, "dont", P.player_pronouns[curr_pronoun]['verbs']['dont'])
-			update_sentence(curr_pronoun, "s", P.player_pronouns[curr_pronoun]['verbs']['s'])
-			update_sentence(curr_pronoun, "es", P.player_pronouns[curr_pronoun]['verbs']['es'])
+## If the pronoun already has verbs set, show them if the pronoun is selected.
+func check_pronoun_verbs(pronoun):
+	print('check_pronoun_verbs: ', pronoun)
+	if P.player_pronouns[pronoun].has('verbs'):
+		update_sentence(pronoun, "are", P.player_pronouns[pronoun]['verbs']['are'])
+		update_sentence(pronoun, "arent", P.player_pronouns[pronoun]['verbs']['arent'])
+		update_sentence(pronoun, "were", P.player_pronouns[pronoun]['verbs']['were'])
+		update_sentence(pronoun, "have", P.player_pronouns[pronoun]['verbs']['have'])
+		update_sentence(pronoun, "do", P.player_pronouns[pronoun]['verbs']['do'])
+		update_sentence(pronoun, "dont", P.player_pronouns[pronoun]['verbs']['dont'])
+		update_sentence(pronoun, "s", P.player_pronouns[pronoun]['verbs']['s'])
+		update_sentence(pronoun, "es", P.player_pronouns[pronoun]['verbs']['es'])
 
 
 ## Set the example sentences the first time the screen is shown.
@@ -153,33 +175,18 @@ func example_sentence() -> void:
 		update_sentence(i, "es", value)
 
 
-## Sets the current label with the subjective and objective pronoun.
-func pronoun_label():
-	var subjective_pronoun: String 
-	var objective_pronoun: String
-	
-	if P.player_pronouns.has(curr_pronoun):
-		subjective_pronoun = P.player_pronouns[curr_pronoun]['pronouns']['subjective']
-		objective_pronoun = P.player_pronouns[curr_pronoun]['pronouns']['objective']
-	current_pronoun_label.text = (
-		"[b]" +
-		subjective_pronoun.capitalize() + 
-		"/" + 
-		objective_pronoun.capitalize()
-	)
-
-
 func update_sentence(pronoun: String, verb: String, value: int) -> void:
+	# O: Singular, 1: Plural
+	
+	#print("the pronoun + value: ", pronoun, " ", value)
 	var subjective_pronoun: String
 	var possessive_dep_pronoun: String
+	# NOTE: It runs too many times.
 	
 	if P.player_pronouns.has(pronoun):
-		if P.player_pronouns[pronoun]['pronouns'].has('subjective'):
-			subjective_pronoun = P.player_pronouns[pronoun]['pronouns']['subjective']
-			possessive_dep_pronoun = P.player_pronouns[pronoun]['pronouns']['possessive_dep']
-	
-	# O: Singular, 1: Plural
-	#var pressed: bool = value
+		subjective_pronoun = P.player_pronouns[pronoun]['pronouns']['subjective']
+		possessive_dep_pronoun = P.player_pronouns[pronoun]['pronouns']['possessive_dep']
+		print("Subjective pronoun: ", subjective_pronoun)
 	
 	match verb:
 		"are":
@@ -188,6 +195,7 @@ func update_sentence(pronoun: String, verb: String, value: int) -> void:
 			# Gets the checkbuttons in the order they are added to the list.
 			# And set the button_pressed parameter to the right value.
 			get_check_buttons().get(0).button_pressed = value
+			#print(get_check_buttons().get(0).name)
 			# Create the verb key, and set the value.
 			P.player_pronouns[pronoun]['verbs']['are'] = value
 		"arent":
@@ -219,7 +227,7 @@ func update_sentence(pronoun: String, verb: String, value: int) -> void:
 			get_check_buttons().get(7).button_pressed = value
 			P.player_pronouns[pronoun]['verbs']['es'] = value
 		_:
-			printerr("This verb: ", verb ," does not exist.")
+			printerr("This verb: ", verb, " does not exist.")
 
 
 func _on_back_button_pressed() -> void:
