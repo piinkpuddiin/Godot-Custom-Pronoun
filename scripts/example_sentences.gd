@@ -1,7 +1,5 @@
 extends Control
 
-@export var main: Node
-@export var dialogue: Node
 @export var custom_pronouns: Node
 @export var _notification: Node
 
@@ -34,7 +32,7 @@ var curr_pronoun: String
 
 
 func _ready() -> void:
-	#set_toggle()
+	set_toggle()
 	P.set_sentence.connect(example_sentence)
 	P.curr_pronoun.connect(set_pronoun)
 	P.curr_verb.connect(update_sentence)
@@ -73,7 +71,6 @@ func add_pronouns() -> void:
 		custom_pronouns_vbox.move_child(button, -1)
 	
 	P.set_sentence.emit()
-	set_toggle()
 
 
 ## Sets the curr_pronoun to the most recently pressed pronoun.
@@ -234,7 +231,7 @@ func _on_back_button_pressed() -> void:
 	# Only call when the pronouns need to be reset.
 	#P.clear()
 	custom_pronouns.show()
-	self.hide()
+	get_parent().hide()
 
 
 func _on_visibility_changed() -> void:
@@ -246,5 +243,5 @@ func _on_visibility_changed() -> void:
 
 func _on_confirm_button_pressed() -> void:
 	_notification.show()
-	custom_pronouns.set_new_keys()
-	P._save(custom_pronouns.save_name)
+	custom_pronouns.get_child(0).set_new_keys()
+	P._save(custom_pronouns.get_child(0).save_name)

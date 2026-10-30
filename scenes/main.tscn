@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://bkoi1o4txqnfo"]
 
 [ext_resource type="Script" uid="uid://b5lufh74gl71q" path="res://scripts/main.gd" id="1_sugp2"]
-[ext_resource type="PackedScene" uid="uid://8v6rjdnw80di" path="res://scenes/custom_pronouns.tscn" id="2_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://vvt6sex2ctoq" path="res://images/circle_2.png" id="3_jkv2x"]
-[ext_resource type="PackedScene" uid="uid://c33dl8n5kstxm" path="res://scenes/example_sentences.tscn" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://c33dl8n5kstxm" path="res://scenes/base_example_sentences.tscn" id="3_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://dxo7j707uuork" path="res://images/cloud_2.png" id="4_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://7xc6vehj0ph5" path="res://images/circle_1.png" id="4_muem4"]
 [ext_resource type="Script" uid="uid://mpl860we857m" path="res://scripts/dialogue.gd" id="4_tbgi4"]
@@ -13,11 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://drnqufsnlehxk" path="res://scenes/debug.tscn" id="6_tefeu"]
 [ext_resource type="Texture2D" uid="uid://dry62qqgpqlpm" path="res://images/rounded_square.png" id="7_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://gyqyp87jsk4k" path="res://scenes/notification.tscn" id="8_85g3d"]
+[ext_resource type="PackedScene" uid="uid://8v6rjdnw80di" path="res://scenes/base_custom_pronouns.tscn" id="8_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://1bwc32uk448w" path="res://scenes/main_menu.tscn" id="9_choun"]
-[ext_resource type="PackedScene" uid="uid://6w5y255puqc3" path="res://scenes/custom_pronouns_grunge.tscn" id="9_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://dfsmx8m5r2bis" path="res://scenes/simple_pronouns.tscn" id="9_jbj1t"]
-[ext_resource type="PackedScene" uid="uid://bap8tntbg14bc" path="res://scenes/choose_theme.tscn" id="11_muem4"]
-[ext_resource type="PackedScene" uid="uid://v4xvakcnihtx" path="res://scenes/example_sentences_grunge.tscn" id="12_0ld40"]
 [ext_resource type="PackedScene" uid="uid://t1oyhp6laii4" path="res://scenes/saved_pronouns.tscn" id="15_jkv2x"]
 
 [sub_resource type="Animation" id="Animation_ya4ey"]
@@ -178,9 +175,8 @@ _data = {
 &"bg_shapes": SubResource("Animation_eb6dy")
 }
 
-[node name="Main" type="Node" unique_id=437644318 node_paths=PackedStringArray("custom_pronouns", "main_menu", "animation_player")]
+[node name="Main" type="Node" unique_id=437644318 node_paths=PackedStringArray("main_menu", "animation_player")]
 script = ExtResource("1_sugp2")
-custom_pronouns = NodePath("Base/CustomPronouns")
 main_menu = NodePath("MainMenu")
 animation_player = NodePath("AnimationPlayer")
 
@@ -285,57 +281,36 @@ grow_vertical = 2
 texture = ExtResource("5_muem4")
 expand_mode = 1
 
-[node name="Base" type="Control" parent="." unique_id=22199139]
+[node name="CustomPronouns" type="Control" parent="." unique_id=1126488527]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
-[node name="CustomPronouns" parent="Base" unique_id=78342683 node_paths=PackedStringArray("main", "examples_sentence") instance=ExtResource("2_jyhfs")]
-visible = false
+[node name="BaseCustomPronouns" parent="CustomPronouns" unique_id=78342683 node_paths=PackedStringArray("examples_sentence") instance=ExtResource("8_jbj1t")]
 layout_mode = 1
-main = NodePath("../..")
-examples_sentence = NodePath("../ExampleSentences")
+examples_sentence = NodePath("../../ExampleSentences")
 
-[node name="ExampleSentences" parent="Base" unique_id=733475182 node_paths=PackedStringArray("main", "dialogue", "custom_pronouns", "_notification") instance=ExtResource("3_tbgi4")]
+[node name="ExampleSentences" type="Control" parent="." unique_id=656870350]
 visible = false
-layout_mode = 1
-main = NodePath("../..")
-dialogue = NodePath("../../Dialogue")
-custom_pronouns = NodePath("../CustomPronouns")
-_notification = NodePath("../../Notification")
-
-[node name="Grunge" type="Control" parent="." unique_id=1864286935]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
-[node name="CustomPronounsGrunge" parent="Grunge" unique_id=464961139 node_paths=PackedStringArray("main", "examples_sentence") instance=ExtResource("9_dp3eg")]
-visible = false
+[node name="BaseExampleSentences" parent="ExampleSentences" unique_id=733475182 node_paths=PackedStringArray("custom_pronouns", "_notification") instance=ExtResource("3_tbgi4")]
 layout_mode = 1
-main = NodePath("../..")
-examples_sentence = NodePath("../ExampleSentencesGrunge")
-save_name = "1_grunge"
-
-[node name="ExampleSentencesGrunge" parent="Grunge" unique_id=340689525 node_paths=PackedStringArray("main", "dialogue", "custom_pronouns", "_notification") instance=ExtResource("12_0ld40")]
-visible = false
-layout_mode = 1
-main = NodePath("../..")
-dialogue = NodePath("../../Dialogue")
-custom_pronouns = NodePath("../CustomPronounsGrunge")
+custom_pronouns = NodePath("../../CustomPronouns")
 _notification = NodePath("../../Notification")
 
-[node name="SimplePronouns" parent="." unique_id=1592544595 node_paths=PackedStringArray("main_menu", "custom_pronouns", "_notification") instance=ExtResource("9_jbj1t")]
+[node name="SimplePronouns" parent="." unique_id=1592544595 node_paths=PackedStringArray("main_menu", "_notification") instance=ExtResource("9_jbj1t")]
 visible = false
 main_menu = NodePath("../MainMenu")
-custom_pronouns = NodePath("../Base/CustomPronouns")
 _notification = NodePath("../Notification")
 
 [node name="Dialogue" type="Control" parent="." unique_id=704991212]
@@ -352,25 +327,19 @@ timeline = ExtResource("5_tefeu")
 [node name="Notification" parent="." unique_id=1326836657 node_paths=PackedStringArray("dialogue", "custom_pronouns", "example_sentences") instance=ExtResource("8_85g3d")]
 visible = false
 dialogue = NodePath("../Dialogue")
-custom_pronouns = [NodePath("../Base/CustomPronouns"), NodePath("../Grunge/CustomPronounsGrunge")]
-example_sentences = [NodePath("../Base/ExampleSentences"), NodePath("../Grunge/ExampleSentencesGrunge")]
+custom_pronouns = NodePath("../CustomPronouns")
+example_sentences = NodePath("../ExampleSentences")
 
-[node name="ChooseTheme" parent="." unique_id=2008582098 node_paths=PackedStringArray("main_menu", "base_theme", "grunge_theme") instance=ExtResource("11_muem4")]
-visible = false
-main_menu = NodePath("../MainMenu")
-base_theme = NodePath("../Base/CustomPronouns")
-grunge_theme = NodePath("../Grunge/CustomPronounsGrunge")
-
-[node name="MainMenu" parent="." unique_id=430276253 node_paths=PackedStringArray("choose_theme", "custom_pronouns", "simple_pronouns", "dialogue") instance=ExtResource("9_choun")]
-choose_theme = NodePath("../ChooseTheme")
-custom_pronouns = NodePath("../Base/CustomPronouns")
-simple_pronouns = NodePath("../SimplePronouns")
+[node name="MainMenu" parent="." unique_id=430276253 node_paths=PackedStringArray("dialogue", "custom_pronouns", "simple_pronouns") instance=ExtResource("9_choun")]
 dialogue = NodePath("../Dialogue")
+custom_pronouns = NodePath("../CustomPronouns")
+simple_pronouns = NodePath("../SimplePronouns")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1598013482]
 layer = 2
 
 [node name="Debug" parent="CanvasLayer" unique_id=559146899 instance=ExtResource("6_tefeu")]
+visible = false
 
 [node name="SavedPronouns" parent="CanvasLayer" unique_id=1996028071 instance=ExtResource("15_jkv2x")]
 visible = false

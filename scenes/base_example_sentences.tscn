@@ -1,25 +1,85 @@
-[gd_scene format=3 uid="uid://v4xvakcnihtx"]
+[gd_scene format=3 uid="uid://c33dl8n5kstxm"]
 
-[ext_resource type="Theme" uid="uid://dfoe13qfskyx3" path="res://themes/grunge.tres" id="1_q1oa5"]
-[ext_resource type="Script" uid="uid://cdea5ipvy2lrb" path="res://scripts/example_sentences_grunge.gd" id="2_4wwoy"]
-[ext_resource type="Texture2D" uid="uid://cxx77oehif00r" path="res://images/texturefabrik_dust-05.jpg" id="2_q7j32"]
-[ext_resource type="Texture2D" uid="uid://bgt4y0q2a2skb" path="res://images/pixel_sorted_clouds_2.png" id="3_4wwoy"]
-[ext_resource type="FontFile" uid="uid://54xufe6ypt15" path="res://fonts/helvetica/HelveticaNeueCondensedBold.ttf" id="4_q7j32"]
+[ext_resource type="Theme" uid="uid://qpir2awu1mnv" path="res://themes/simplistic.tres" id="1_iyick"]
+[ext_resource type="Script" uid="uid://cwh34fi1bulsx" path="res://scripts/example_sentences.gd" id="1_o2fwr"]
+[ext_resource type="Shader" uid="uid://g122rjbh0i7b" path="res://shaders/blur.gdshader" id="2_iyick"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="4_mtxbf"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="5_kpbhc"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_e8nvw"]
-blend_mode = 3
-light_mode = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aek14"]
+shader = ExtResource("2_iyick")
+shader_parameter/amount = 1.8000001
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_anv7d"]
-blend_mode = 1
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmgw1"]
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ac3s"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 30
-border_width_top = 30
-border_width_right = 30
-border_width_bottom = 30
-border_color = Color(0, 0, 0, 1)
+[sub_resource type="Resource" id="Resource_bax13"]
+script = ExtResource("4_mtxbf")
+color = Color(1, 1, 1, 0.41568628)
+blend = true
+width_bottom = 20
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Resource" id="Resource_vmws6"]
+script = ExtResource("4_mtxbf")
+ignore_stack = true
+width_right = 1
+width_bottom = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="StyleBox" id="StyleBox_dmgw1"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("5_kpbhc")
+color = Color(0.95686275, 0.95686275, 0.95686275, 0.21960784)
+borders = Array[ExtResource("4_mtxbf")]([SubResource("Resource_bax13"), SubResource("Resource_vmws6")])
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Resource" id="Resource_fqtv2"]
+script = ExtResource("4_mtxbf")
+color = Color(1, 1, 1, 0.3882353)
+blend = true
+width_top = 12
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Resource" id="Resource_ugv3e"]
+script = ExtResource("4_mtxbf")
+color = Color(1, 1, 1, 0.3882353)
+blend = true
+width_bottom = 30
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Resource" id="Resource_a7lbn"]
+script = ExtResource("4_mtxbf")
+ignore_stack = true
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="StyleBox" id="StyleBox_7avwq"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("5_kpbhc")
+color = Color(1, 1, 1, 0.25490198)
+borders = Array[ExtResource("4_mtxbf")]([SubResource("Resource_fqtv2"), SubResource("Resource_ugv3e"), SubResource("Resource_a7lbn")])
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpbhc"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -50,16 +110,51 @@ VBoxContainer/constants/separation = 10
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mtxbf"]
 
-[node name="ExampleSentencesGrunge" type="Control" unique_id=340689525 node_paths=PackedStringArray("current_pronoun_label", "are_label", "arent_label", "were_label", "have_label", "do_label", "dont_label", "s_label", "es_label", "vbox_container", "custom_pronouns_hbox")]
+[sub_resource type="Animation" id="Animation_o2fwr"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/blur_panel:material:shader_parameter/amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.8000001, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_iyick"]
+resource_name = "blur_bg"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/blur_panel:material:shader_parameter/amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(-9.5, -0.25, 0, 0.4, 13, 1.8000001, -0.40000004, -2.3000002, 0, 0),
+"times": PackedFloat32Array(-0.033333335, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bax13"]
+_data = {
+&"RESET": SubResource("Animation_o2fwr"),
+&"blur_bg": SubResource("Animation_iyick")
+}
+
+[node name="BaseExampleSentences" type="Control" unique_id=733475182 node_paths=PackedStringArray("current_pronoun_label", "are_label", "arent_label", "were_label", "have_label", "do_label", "dont_label", "s_label", "es_label", "vbox_container", "custom_pronouns_vbox")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_q1oa5")
-script = ExtResource("2_4wwoy")
-current_pronoun_label = NodePath("MarginContainer/current_pronoun_hbox/pronoun_label")
+theme = ExtResource("1_iyick")
+script = ExtResource("1_o2fwr")
+current_pronoun_label = NodePath("MarginContainer/current_pronoun_vbox/pronoun_label")
 are_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer/HBoxContainer/are_label")
 arent_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/arent_panel/MarginContainer/HBoxContainer/arent_label")
 were_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/were_panel/MarginContainer/HBoxContainer/were_label")
@@ -69,57 +164,27 @@ dont_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/dont_
 s_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/s_panel/MarginContainer/HBoxContainer/s_label")
 es_label = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer/HBoxContainer/es_label")
 vbox_container = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer")
-custom_pronouns_hbox = NodePath("pronouns_panel/MarginContainer/HBoxContainer/custom_pronouns_hbox")
+custom_pronouns_vbox = NodePath("pronouns_panel/MarginContainer/VBoxContainer/custom_pronouns_vbox")
 
-[node name="Background" type="Control" parent="." unique_id=1395519398]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="Background" unique_id=226090887]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-color = Color(0.60933006, 0.6093301, 0.60933006, 1)
-
-[node name="TextureRect" type="TextureRect" parent="Background" unique_id=2083683462]
-modulate = Color(1, 1, 1, 0.11764706)
-self_modulate = Color(1, 1, 1, 0.3254902)
-material = SubResource("CanvasItemMaterial_e8nvw")
+[node name="blur_panel" type="Panel" parent="." unique_id=1563202113]
+material = SubResource("ShaderMaterial_aek14")
+custom_minimum_size = Vector2(240, 360)
 layout_mode = 0
-offset_top = -250.0
-offset_right = 1200.0
-offset_bottom = 950.0
-size_flags_horizontal = 3
-texture = ExtResource("2_q7j32")
-expand_mode = 4
-flip_h = true
-
-[node name="PixelSortedClouds" type="TextureRect" parent="Background" unique_id=2023417731]
-modulate = Color(0.98039216, 1, 1, 0.3372549)
-material = SubResource("CanvasItemMaterial_anv7d")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_4wwoy")
+offset_right = 240.0
+offset_bottom = 554.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_dmgw1")
 
 [node name="pronouns_panel" type="Panel" parent="." unique_id=1633314076]
-custom_minimum_size = Vector2(0, 120)
+custom_minimum_size = Vector2(240, 360)
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 120.0
-grow_horizontal = 2
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 240.0
+offset_bottom = -146.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_dmgw1")
 
 [node name="MarginContainer" type="MarginContainer" parent="pronouns_panel" unique_id=640327407]
 layout_mode = 1
@@ -130,19 +195,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 35
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="pronouns_panel/MarginContainer" unique_id=1998154498]
+[node name="VBoxContainer" type="VBoxContainer" parent="pronouns_panel/MarginContainer" unique_id=1389435485]
 custom_maximum_size = Vector2(-1, 600)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="all_pronouns_label" type="RichTextLabel" parent="pronouns_panel/MarginContainer/HBoxContainer" unique_id=1830316307]
+[node name="all_pronouns_label" type="RichTextLabel" parent="pronouns_panel/MarginContainer/VBoxContainer" unique_id=1830316307]
 custom_minimum_size = Vector2(193, 50)
 layout_mode = 2
-theme_override_fonts/bold_font = ExtResource("4_q7j32")
 theme_override_font_sizes/normal_font_size = 32
 theme_override_font_sizes/bold_font_size = 32
 bbcode_enabled = true
@@ -150,19 +214,9 @@ text = "[b]Pronoun(s):"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="custom_pronouns_hbox" type="HBoxContainer" parent="pronouns_panel/MarginContainer/HBoxContainer" unique_id=200212731]
+[node name="custom_pronouns_vbox" type="VBoxContainer" parent="pronouns_panel/MarginContainer/VBoxContainer" unique_id=854538277]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="passe_partout_panel" type="Panel" parent="." unique_id=1187219829]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3ac3s")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2042163947]
 layout_mode = 1
@@ -172,22 +226,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 150
+theme_override_constants/margin_left = 170
+theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="current_pronoun_hbox" type="HBoxContainer" parent="MarginContainer" unique_id=1882535408]
+[node name="current_pronoun_vbox" type="VBoxContainer" parent="MarginContainer" unique_id=1359705925]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="current_pronoun_label" type="RichTextLabel" parent="MarginContainer/current_pronoun_hbox" unique_id=1313239238]
+[node name="current_pronoun_label" type="RichTextLabel" parent="MarginContainer/current_pronoun_vbox" unique_id=1313239238]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-theme_override_fonts/normal_font = ExtResource("4_q7j32")
 theme_override_font_sizes/normal_font_size = 34
 theme_override_font_sizes/bold_font_size = 32
 bbcode_enabled = true
@@ -196,7 +249,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="pronoun_label" type="RichTextLabel" parent="MarginContainer/current_pronoun_hbox" unique_id=875015754]
+[node name="pronoun_label" type="RichTextLabel" parent="MarginContainer/current_pronoun_vbox" unique_id=875015754]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -209,11 +262,20 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="blur_panel" type="Panel" parent="MarginContainer" unique_id=1080233746]
+material = SubResource("ShaderMaterial_aek14")
+custom_minimum_size = Vector2(700, 410)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_dmgw1")
+
 [node name="Panel" type="Panel" parent="MarginContainer" unique_id=1534172627]
 custom_minimum_size = Vector2(700, 410)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_7avwq")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel" unique_id=921037064]
 layout_mode = 1
@@ -240,13 +302,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_kpbhc")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel" unique_id=835521096]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -32.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/are_panel/MarginContainer" unique_id=1356366565]
 layout_mode = 2
@@ -495,13 +555,11 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_mtxbf")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel" unique_id=617036124]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -32.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/es_panel/MarginContainer" unique_id=169491524]
 layout_mode = 2
@@ -524,16 +582,27 @@ size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
 text = "Singular"
 
+[node name="Panel" type="Panel" parent="." unique_id=7624072]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1791988761]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_bax13")
+
 [node name="MarginContainer2" type="MarginContainer" parent="." unique_id=2005562638]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -118.0
 grow_horizontal = 2
 grow_vertical = 0
-mouse_filter = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
@@ -542,17 +611,23 @@ theme_override_constants/margin_bottom = 40
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2" unique_id=1070254962]
 layout_mode = 2
 
-[node name="back_button" type="Button" parent="MarginContainer2/HBoxContainer" unique_id=85224660]
+[node name="back_button" type="Button" parent="MarginContainer2/HBoxContainer" unique_id=1109656006]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
 text = "Back"
 
 [node name="Control" type="Control" parent="MarginContainer2/HBoxContainer" unique_id=1266275366]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="confirm_button" type="Button" parent="MarginContainer2/HBoxContainer" unique_id=551666218]
+[node name="confirm_button" type="Button" parent="MarginContainer2/HBoxContainer" unique_id=896515120]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 text = "Confirm"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MarginContainer2/HBoxContainer/back_button" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="MarginContainer2/HBoxContainer/confirm_button" to="." method="_on_confirm_button_pressed"]

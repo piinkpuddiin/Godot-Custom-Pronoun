@@ -2,10 +2,8 @@ extends Control
 
 # TODO: Add function to switch between type variations.
 
-@export var main: Node
 @export var examples_sentence: Control
-@export var save_name: String = "save_1"
-@export_enum("LIGHT", "DARK") var theme_type = "LIGHT"
+@export var save_name: String = "1"
 
 @export_category("Line Edits")
 @export var subjective_line_edit: LineEdit
@@ -51,7 +49,6 @@ var example_labels_array: Array[String]
 
 
 func _ready() -> void:
-	self.hide()
 	generate_default_buttons()
 	line_edits_editable(false)
 	P.curr_pronoun.connect(set_curr_pronoun)
@@ -481,10 +478,10 @@ func _on_next_button_pressed() -> void:
 	P.player_pronouns.erase("")
 	
 	P.curr_pronoun.emit(P.player_pronouns.keys()[0])
-	examples_sentence.add_pronouns()
+	examples_sentence.get_child(0).add_pronouns()
 	examples_sentence.show()
 	
-	self.hide()
+	get_parent().hide()
 #endregion
 
 
