@@ -322,6 +322,7 @@ visible = false
 layout_mode = 1
 main = NodePath("../..")
 examples_sentence = NodePath("../ExampleSentencesGrunge")
+save_name = "1_grunge"
 
 [node name="ExampleSentencesGrunge" parent="Grunge" unique_id=340689525 node_paths=PackedStringArray("main", "dialogue", "custom_pronouns", "_notification") instance=ExtResource("12_0ld40")]
 visible = false
@@ -370,7 +371,6 @@ dialogue = NodePath("../Dialogue")
 layer = 2
 
 [node name="Debug" parent="CanvasLayer" unique_id=559146899 instance=ExtResource("6_tefeu")]
-visible = false
 
 [node name="SavedPronouns" parent="CanvasLayer" unique_id=1996028071 instance=ExtResource("15_jkv2x")]
 visible = false

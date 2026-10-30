@@ -73,6 +73,7 @@ var default_pronouns:= {
 var custom_pronouns:= {}
 
 # TODO: To finish.
+#region Additional Variants
 var gender_expression:= {
 	"neutral": {
 		"compliment_1": "Good looking",
@@ -85,18 +86,22 @@ var gender_expression:= {
 	},
 	"custom": {}
 }
+var compliment_1: String
+var compliment_2: String
+var compliment_3: String
+#endregion
 
 # The current result of the randomized pronoun
 var current_pronoun: String
 
-## For ease of writing.
-var they = ""
-var them = ""
-var their = ""
-var theirs = ""
-var themselves = ""
+# For ease of writing.
+var they: String = ""
+var them: String = ""
+var their: String = ""
+var theirs: String = ""
+var themselves: String = ""
 
-## VERBS
+#region VERBS
 ## The verbs array go from singular to the plural pronoun
 var are = ""
 var are_arr = ["is", "are"]
@@ -124,6 +129,7 @@ var s_arr:= ["s", ""]
 
 var es = ""
 var es_arr:= ["es", ""]
+#endregion
 
 
 func _ready() -> void:
@@ -133,16 +139,7 @@ func _ready() -> void:
 	Dialogic.Text.about_to_show_text.connect(theirs_randomize)
 	Dialogic.Text.about_to_show_text.connect(themselves_randomize)
 	
-	Dialogic.Text.about_to_show_text.connect(randomized_are)
-	Dialogic.Text.about_to_show_text.connect(randomized_arent)
-	Dialogic.Text.about_to_show_text.connect(randomized_were)
-	Dialogic.Text.about_to_show_text.connect(randomized_have)
-	Dialogic.Text.about_to_show_text.connect(randomized_havent)
-	Dialogic.Text.about_to_show_text.connect(randomized_do)
-	Dialogic.Text.about_to_show_text.connect(randomized_dont)
-	Dialogic.Text.about_to_show_text.connect(randomized_s)
-	Dialogic.Text.about_to_show_text.connect(randomized_es)
-
+	Dialogic.Text.about_to_show_text.connect(randomized_verbs)
 
 func clear() -> void:
 	for i in player_pronouns.keys():
@@ -152,59 +149,39 @@ func clear() -> void:
 
 
 #region VERBS functions
-func randomized_are(_info: Dictionary = {}) -> String:
+func randomized_verbs(_info: Dictionary = {}):
+	if player_pronouns.keys().is_empty():
+		return
+	
 	if they in player_pronouns.keys():
 		if player_pronouns[they]['verbs'].has('are'):
 			are = are_arr[player_pronouns[they]['verbs']['are']]
-	return are
-
-func randomized_arent(_info: Dictionary = {}) -> String:
-	if they in player_pronouns.keys():
+			
 		if player_pronouns[they]['verbs'].has('arent'):
 			arent = arent_arr[player_pronouns[they]['verbs']['arent']]
-	return arent
-
-func randomized_dont(_info: Dictionary = {}) -> String:
-	if they in player_pronouns.keys():
+			
 		if player_pronouns[they]['verbs'].has('dont'):
 			dont = dont_arr[player_pronouns[they]['verbs']['dont']]
-	return dont
-
-func randomized_were(_info: Dictionary = {}) -> String:
-	if they in player_pronouns.keys():
+			
 		if player_pronouns[they]['verbs'].has('dont'):
 			were = were_arr[player_pronouns[they]['verbs']['were']]
-	return were
-
-func randomized_have(_info: Dictionary = {}) -> String:
-	if they in player_pronouns.keys():
+			
 		if player_pronouns[they]['verbs'].has('dont'):
 			have = dont_arr[player_pronouns[they]['verbs']['have']]
-	return have
-
-func randomized_havent(_info: Dictionary = {}) -> String:
-	if they in player_pronouns.keys():
+			
 		if player_pronouns[they]['verbs'].has('havent'):
 			havent = havent_arr[player_pronouns[they]['verbs']['havent']]
-	return havent
-
-func randomized_do(_info: Dictionary = {}) -> String:
-	if they in player_pronouns.keys():
+			
 		if player_pronouns[they]['verbs'].has('do'):
 			do = do_arr[player_pronouns[they]['verbs']['do']]
-	return do
-
-func randomized_s(_info: Dictionary = {}) -> String:
-	if they in player_pronouns.keys():
+			
 		if player_pronouns[they]['verbs'].has('s'):
 			s = s_arr[player_pronouns[they]['verbs']['s']]
-	return s
-
-func randomized_es(_info: Dictionary = {}) -> String:
-	if they in player_pronouns.keys():
+			
 		if player_pronouns[they]['verbs'].has('es'):
 			es = es_arr[player_pronouns[they]['verbs']['es']]
-	return es
+		pass
+
 #endregion
 
 # TODO add seed to make certain pronouns appear more often than others.

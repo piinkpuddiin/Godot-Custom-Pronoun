@@ -4,7 +4,7 @@ extends Control
 
 @export var main: Node
 @export var examples_sentence: Control
-@export var save_name: String = "save_1"
+@export var save_name: String = "1"
 #@export_enum("LIGHT", "DARK") var theme_type = "LIGHT"
 
 @export_category("Line Edits")
