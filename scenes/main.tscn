@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b5lufh74gl71q" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="Texture2D" uid="uid://vvt6sex2ctoq" path="res://images/circle_2.png" id="3_jkv2x"]
-[ext_resource type="PackedScene" uid="uid://c33dl8n5kstxm" path="res://scenes/base_example_sentences.tscn" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://c33dl8n5kstxm" path="res://scenes/base/base_example_sentences.tscn" id="3_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://dxo7j707uuork" path="res://images/cloud_2.png" id="4_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://7xc6vehj0ph5" path="res://images/circle_1.png" id="4_muem4"]
 [ext_resource type="Script" uid="uid://mpl860we857m" path="res://scripts/dialogue.gd" id="4_tbgi4"]
@@ -12,9 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://drnqufsnlehxk" path="res://scenes/debug.tscn" id="6_tefeu"]
 [ext_resource type="Texture2D" uid="uid://dry62qqgpqlpm" path="res://images/rounded_square.png" id="7_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://gyqyp87jsk4k" path="res://scenes/notification.tscn" id="8_85g3d"]
-[ext_resource type="PackedScene" uid="uid://8v6rjdnw80di" path="res://scenes/base_custom_pronouns.tscn" id="8_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://8v6rjdnw80di" path="res://scenes/base/base_custom_pronouns.tscn" id="8_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://1bwc32uk448w" path="res://scenes/main_menu.tscn" id="9_choun"]
 [ext_resource type="PackedScene" uid="uid://dfsmx8m5r2bis" path="res://scenes/simple_pronouns.tscn" id="9_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://x4v1nrc14uoy" path="res://scenes/base/base_gender_expression.tscn" id="10_muem4"]
 [ext_resource type="PackedScene" uid="uid://t1oyhp6laii4" path="res://scenes/saved_pronouns.tscn" id="15_jkv2x"]
 
 [sub_resource type="Animation" id="Animation_ya4ey"]
@@ -307,6 +308,17 @@ grow_vertical = 2
 layout_mode = 1
 custom_pronouns = NodePath("../../CustomPronouns")
 _notification = NodePath("../../Notification")
+
+[node name="GenderExpression" type="Control" parent="." unique_id=386585467]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BaseGenderExpression" parent="GenderExpression" unique_id=994650348 instance=ExtResource("10_muem4")]
+layout_mode = 1
 
 [node name="SimplePronouns" parent="." unique_id=1592544595 node_paths=PackedStringArray("main_menu", "_notification") instance=ExtResource("9_jbj1t")]
 visible = false

@@ -89,6 +89,7 @@ var gender_expression:= {
 var compliment_1: String
 var compliment_2: String
 var compliment_3: String
+var compliment_arr: Array[String] = ['Beautiful', 'Gorgeous', 'Handsome', 'Dashing']
 #endregion
 
 # The current result of the randomized pronoun

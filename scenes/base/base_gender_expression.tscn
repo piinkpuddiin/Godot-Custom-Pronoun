@@ -1,0 +1,296 @@
+[gd_scene format=3 uid="uid://x4v1nrc14uoy"]
+
+[ext_resource type="Theme" uid="uid://qpir2awu1mnv" path="res://themes/simplistic.tres" id="1_b44ly"]
+[ext_resource type="Shader" uid="uid://g122rjbh0i7b" path="res://shaders/blur.gdshader" id="1_dvkdh"]
+[ext_resource type="Script" uid="uid://dhnpgwo8wo8qo" path="res://scripts/base_gender_expression.gd" id="2_3cop4"]
+[ext_resource type="StyleBox" uid="uid://bl2wx4ylxcfu" path="res://themes/base_panel_fancy.tres" id="2_b44ly"]
+[ext_resource type="Script" uid="uid://bcyq3w58wisd" path="res://scripts/cycle_button.gd" id="4_6a7fa"]
+[ext_resource type="Script" uid="uid://mnfmmi0h38yl" path="res://scripts/reverse_cycle_button.gd" id="4_p3nya"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6a7fa"]
+shader = ExtResource("1_dvkdh")
+shader_parameter/amount = 1.8000001
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p3nya"]
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dvkdh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+expand_margin_left = 10.0
+expand_margin_right = 3.0
+expand_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dmgw1"]
+color = Color(1, 1, 1, 1)
+grow_begin = 15.0
+grow_end = 15.0
+thickness = 2
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f24y1"]
+bg_color = Color(0.047557704, 0.04755763, 0.047557645, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_b44ly"]
+CheckButton/colors/font_color = Color(0.6789431, 0.678944, 0.6789434, 1)
+CheckButton/font_sizes/font_size = 18
+MarginContainer/constants/margin_bottom = 5
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 5
+MarginContainer/constants/margin_top = 5
+Panel/styles/panel = SubResource("StyleBoxFlat_f24y1")
+RichTextLabel/colors/default_color = Color(0.8431839, 0.8431839, 0.84318376, 1)
+RichTextLabel/font_sizes/normal_font_size = 22
+VBoxContainer/constants/separation = 10
+
+[node name="BaseGenderExpression" type="Control" unique_id=994650348 node_paths=PackedStringArray("column_1_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_b44ly")
+script = ExtResource("2_3cop4")
+column_1_container = NodePath("MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=117365451]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 50
+
+[node name="blur_panel" type="Panel" parent="MarginContainer" unique_id=1664775758]
+material = SubResource("ShaderMaterial_6a7fa")
+custom_minimum_size = Vector2(700, 410)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p3nya")
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=18787267]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_b44ly")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel" unique_id=1027617438]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer" unique_id=1164871196]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer" unique_id=552946869]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="compliment_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=231771256]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_dvkdh")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel" unique_id=463455954]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer" unique_id=970616368]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="compliment_label" type="Label" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer" unique_id=1795562368]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Compliment:"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer" unique_id=1455413790]
+layout_mode = 2
+
+[node name="reverse_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1968680072]
+layout_mode = 2
+text = "<"
+script = ExtResource("4_p3nya")
+
+[node name="compliment_line_edit" type="LineEdit" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=2077749286]
+visible = false
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+placeholder_text = "Charming"
+max_length = 32
+
+[node name="custom_compliment_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1585538546]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "Beautiful"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="compliment_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=2063047627]
+layout_mode = 2
+text = ">"
+script = ExtResource("4_6a7fa")
+options = Array[String](["goom"])
+
+[node name="compliment_panel2" type="Panel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1295453598]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_dvkdh")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2" unique_id=1386623825]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer" unique_id=165770830]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="compliment_label" type="Label" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer" unique_id=635721050]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Compliment:"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer" unique_id=174181696]
+layout_mode = 2
+
+[node name="reverse_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer/HBoxContainer" unique_id=64679555]
+layout_mode = 2
+text = "<"
+script = ExtResource("4_p3nya")
+
+[node name="compliment_line_edit" type="LineEdit" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer/HBoxContainer" unique_id=2096301393]
+visible = false
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+placeholder_text = "Charming"
+max_length = 32
+
+[node name="custom_compliment_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer/HBoxContainer" unique_id=513337741]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "goom"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="compliment2_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer/HBoxContainer" unique_id=2107677641]
+layout_mode = 2
+text = ">"
+script = ExtResource("4_6a7fa")
+options = Array[String](["goom", "custom"])
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Panel/MarginContainer/HBoxContainer" unique_id=713379021]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_dmgw1")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer" unique_id=1308501336]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="presentation_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=809694863]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_dvkdh")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel" unique_id=851810457]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer" unique_id=245149779]
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_b44ly")
+
+[node name="presentation_label" type="Label" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer" unique_id=1568182509]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Presentation:"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer" unique_id=1839610407]
+layout_mode = 2
+
+[node name="reverse_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=596743654]
+layout_mode = 2
+text = "<"
+script = ExtResource("4_p3nya")
+
+[node name="presentation_line_edit" type="LineEdit" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=301099790]
+visible = false
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+placeholder_text = "Enby"
+max_length = 32
+
+[node name="presentation_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1533539558]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "Masc"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="presentation_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1493798407]
+layout_mode = 2
+text = ">"
+script = ExtResource("4_6a7fa")
+options = null
