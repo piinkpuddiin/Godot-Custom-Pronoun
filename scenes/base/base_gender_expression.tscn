@@ -50,7 +50,7 @@ RichTextLabel/colors/default_color = Color(0.8431839, 0.8431839, 0.84318376, 1)
 RichTextLabel/font_sizes/normal_font_size = 22
 VBoxContainer/constants/separation = 10
 
-[node name="BaseGenderExpression" type="Control" unique_id=994650348 node_paths=PackedStringArray("column_1_container")]
+[node name="BaseGenderExpression" type="Control" unique_id=994650348 node_paths=PackedStringArray("column_1_container", "column_2_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,7 +59,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_b44ly")
 script = ExtResource("2_3cop4")
-column_1_container = NodePath("MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer")
+column_1_container = NodePath("MarginContainer/Panel/MarginContainer/HBoxContainer/column_1_vbox")
+column_2_container = NodePath("MarginContainer/Panel/MarginContainer/HBoxContainer/column_2_vbox")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=117365451]
 layout_mode = 1
@@ -98,19 +99,19 @@ theme_override_constants/margin_bottom = 15
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer" unique_id=1164871196]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer" unique_id=552946869]
+[node name="column_1_vbox" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer" unique_id=552946869]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
-[node name="compliment_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=231771256]
+[node name="compliment_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_1_vbox" unique_id=231771256]
 custom_minimum_size = Vector2(0, 35)
 custom_maximum_size = Vector2(-1, 35)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_dvkdh")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel" unique_id=463455954]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_1_vbox/compliment_panel" unique_id=463455954]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -118,129 +119,69 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer" unique_id=970616368]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_1_vbox/compliment_panel/MarginContainer" unique_id=970616368]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="compliment_label" type="Label" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer" unique_id=1795562368]
+[node name="compliment_label" type="Label" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_1_vbox/compliment_panel/MarginContainer/HBoxContainer" unique_id=1795562368]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
+theme_override_font_sizes/font_size = 28
 text = "Compliment:"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer" unique_id=1455413790]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_1_vbox/compliment_panel/MarginContainer/HBoxContainer" unique_id=1455413790]
 layout_mode = 2
 
-[node name="reverse_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1968680072]
+[node name="reverse_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_1_vbox/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1968680072]
 layout_mode = 2
 text = "<"
 script = ExtResource("4_p3nya")
 
-[node name="compliment_line_edit" type="LineEdit" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=2077749286]
+[node name="compliment_line_edit" type="LineEdit" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_1_vbox/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=2077749286]
 visible = false
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 placeholder_text = "Charming"
 max_length = 32
 
-[node name="custom_compliment_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1585538546]
+[node name="compliment_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_1_vbox/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1585538546]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/normal_font_size = 22
 bbcode_enabled = true
-text = "Beautiful"
+text = "<null>"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="compliment_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=2063047627]
+[node name="compliment_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_1_vbox/compliment_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=2063047627]
 layout_mode = 2
 text = ">"
 script = ExtResource("4_6a7fa")
-options = Array[String](["goom"])
-
-[node name="compliment_panel2" type="Panel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1295453598]
-custom_minimum_size = Vector2(0, 35)
-custom_maximum_size = Vector2(-1, 35)
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_dvkdh")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2" unique_id=1386623825]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer" unique_id=165770830]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="compliment_label" type="Label" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer" unique_id=635721050]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-text = "Compliment:"
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer" unique_id=174181696]
-layout_mode = 2
-
-[node name="reverse_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer/HBoxContainer" unique_id=64679555]
-layout_mode = 2
-text = "<"
-script = ExtResource("4_p3nya")
-
-[node name="compliment_line_edit" type="LineEdit" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer/HBoxContainer" unique_id=2096301393]
-visible = false
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-placeholder_text = "Charming"
-max_length = 32
-
-[node name="custom_compliment_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer/HBoxContainer" unique_id=513337741]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 28
-bbcode_enabled = true
-text = "goom"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="compliment2_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/compliment_panel2/MarginContainer/HBoxContainer/HBoxContainer" unique_id=2107677641]
-layout_mode = 2
-text = ">"
-script = ExtResource("4_6a7fa")
-options = Array[String](["goom", "custom"])
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/Panel/MarginContainer/HBoxContainer" unique_id=713379021]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_dmgw1")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer" unique_id=1308501336]
+[node name="column_2_vbox" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer" unique_id=1308501336]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="presentation_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=809694863]
+[node name="presentation_panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_2_vbox" unique_id=809694863]
 custom_minimum_size = Vector2(0, 35)
 custom_maximum_size = Vector2(-1, 35)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_dvkdh")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel" unique_id=851810457]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_2_vbox/presentation_panel" unique_id=851810457]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -248,49 +189,69 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer" unique_id=245149779]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_2_vbox/presentation_panel/MarginContainer" unique_id=245149779]
 layout_mode = 2
 size_flags_vertical = 4
 theme = SubResource("Theme_b44ly")
 
-[node name="presentation_label" type="Label" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer" unique_id=1568182509]
+[node name="presentation_label" type="Label" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_2_vbox/presentation_panel/MarginContainer/HBoxContainer" unique_id=1568182509]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
+theme_override_font_sizes/font_size = 28
 text = "Presentation:"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer" unique_id=1839610407]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_2_vbox/presentation_panel/MarginContainer/HBoxContainer" unique_id=1839610407]
 layout_mode = 2
 
-[node name="reverse_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=596743654]
+[node name="reverse_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_2_vbox/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=596743654]
 layout_mode = 2
 text = "<"
 script = ExtResource("4_p3nya")
 
-[node name="presentation_line_edit" type="LineEdit" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=301099790]
+[node name="presentation_line_edit" type="LineEdit" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_2_vbox/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=301099790]
 visible = false
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 placeholder_text = "Enby"
 max_length = 32
 
-[node name="presentation_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1533539558]
+[node name="presentation_label" type="RichTextLabel" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_2_vbox/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1533539558]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/normal_font_size = 22
 bbcode_enabled = true
-text = "Masc"
+text = "<null>"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="presentation_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer2/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1493798407]
+[node name="presentation_cycle_button" type="Button" parent="MarginContainer/Panel/MarginContainer/HBoxContainer/column_2_vbox/presentation_panel/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1493798407]
 layout_mode = 2
 text = ">"
 script = ExtResource("4_6a7fa")
-options = null
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=494196264]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="save_button" type="Button" parent="MarginContainer2" unique_id=1664845404]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Save"
+
+[connection signal="pressed" from="MarginContainer2/save_button" to="." method="_on_save_button_pressed"]

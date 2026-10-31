@@ -310,6 +310,7 @@ custom_pronouns = NodePath("../../CustomPronouns")
 _notification = NodePath("../../Notification")
 
 [node name="GenderExpression" type="Control" parent="." unique_id=386585467]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -317,8 +318,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BaseGenderExpression" parent="GenderExpression" unique_id=994650348 instance=ExtResource("10_muem4")]
+[node name="BaseGenderExpression" parent="GenderExpression" unique_id=994650348 node_paths=PackedStringArray("main_menu") instance=ExtResource("10_muem4")]
 layout_mode = 1
+main_menu = NodePath("../../MainMenu")
 
 [node name="SimplePronouns" parent="." unique_id=1592544595 node_paths=PackedStringArray("main_menu", "_notification") instance=ExtResource("9_jbj1t")]
 visible = false
@@ -342,10 +344,11 @@ dialogue = NodePath("../Dialogue")
 custom_pronouns = NodePath("../CustomPronouns")
 example_sentences = NodePath("../ExampleSentences")
 
-[node name="MainMenu" parent="." unique_id=430276253 node_paths=PackedStringArray("dialogue", "custom_pronouns", "simple_pronouns") instance=ExtResource("9_choun")]
+[node name="MainMenu" parent="." unique_id=430276253 node_paths=PackedStringArray("dialogue", "custom_pronouns", "simple_pronouns", "gender_expression") instance=ExtResource("9_choun")]
 dialogue = NodePath("../Dialogue")
 custom_pronouns = NodePath("../CustomPronouns")
 simple_pronouns = NodePath("../SimplePronouns")
+gender_expression = NodePath("../GenderExpression")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1598013482]
 layer = 2

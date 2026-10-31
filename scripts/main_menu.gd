@@ -3,6 +3,7 @@ extends Control
 @export var dialogue: Control
 @export var custom_pronouns: Control
 @export var simple_pronouns: Control
+@export var gender_expression: Control
 
 func _ready() -> void:
 	self.show()
@@ -16,18 +17,22 @@ func check_load():
 	%load_button.disabled = P.save_exists(custom_pronouns.get_child(0).save_name)
 
 func _on_custom_pronouns_button_pressed() -> void:
+	hide()
 	custom_pronouns.show()
-	self.hide()
 
 func _on_simple_pronouns_button_pressed() -> void:
+	hide()
 	P.clear() 
 	# NOTE: Always clear the previously set pronouns, 
 	# when a pronouns screen comes up.
 	simple_pronouns.show()
-	self.hide()
+
+func _on_gender_expression_button_pressed() -> void:
+	hide()
+	gender_expression.show()
 
 func _on_dialogue_button_pressed() -> void:
-	self.hide()
+	hide()
 	custom_pronouns.hide()
 	dialogue.start_dialogue()
 
@@ -40,7 +45,3 @@ func load_data(save_name):
 	P.player_pronouns = P._load(save_name).get("pronouns")
 	%dialogue_button.disabled = false
 	print_rich("[b]Loaded pronouns:[/b] ",JSON.stringify((P.player_pronouns), "  "))
-
-
-func _on_gender_expression_button_pressed() -> void:
-	pass # Replace with function body.

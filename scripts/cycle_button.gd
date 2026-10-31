@@ -10,9 +10,10 @@ signal option_changed
 @export var selected_option:= 0
 
 func _ready() -> void:
-	var custom_option = 'custom'
-	options.append(custom_option)
-	
+	#var custom_option = 'custom'
+	#options.append(custom_option)
+	await get_tree().process_frame
+	@warning_ignore("unassigned_variable")
 	get_label().text = options.get(selected_option)
 	get_reverse_button().option_changed.connect(updated_selection)
 

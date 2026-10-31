@@ -74,22 +74,11 @@ var custom_pronouns:= {}
 
 # TODO: To finish.
 #region Additional Variants
-var gender_expression:= {
-	"neutral": {
-		"compliment_1": "Good looking",
-	},
-	"femme": {
-		"compliment_1": "Gorgeous",
-	},
-	"masc": {
-		"compliment_1": "Handsome",
-	},
-	"custom": {}
-}
-var compliment_1: String
-var compliment_2: String
-var compliment_3: String
+var compliment: String
 var compliment_arr: Array[String] = ['Beautiful', 'Gorgeous', 'Handsome', 'Dashing']
+
+var presentation: String
+var presentation_arr: Array[String] = ['Femme', 'Masc', 'GNC']
 #endregion
 
 # The current result of the randomized pronoun
