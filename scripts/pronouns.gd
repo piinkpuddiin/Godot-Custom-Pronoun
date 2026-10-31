@@ -72,7 +72,7 @@ var default_pronouns:= {
 # Temporarily holds the custom inputed pronouns.
 var custom_pronouns:= {}
 
-# TODO: To finish.
+# TODO: To add additional adjectives.
 #region Additional Variants
 var compliment: String
 var compliment_arr: Array[String] = ['Beautiful', 'Gorgeous', 'Handsome', 'Dashing']
@@ -131,6 +131,7 @@ func _ready() -> void:
 	
 	Dialogic.Text.about_to_show_text.connect(randomized_verbs)
 
+
 func clear() -> void:
 	for i in player_pronouns.keys():
 		player_pronouns.erase(i)
@@ -138,7 +139,6 @@ func clear() -> void:
 	print("The dictionary is cleared: ", player_pronouns)
 
 
-#region VERBS functions
 func randomized_verbs(_info: Dictionary = {}):
 	if player_pronouns.keys().is_empty():
 		return
@@ -170,9 +170,7 @@ func randomized_verbs(_info: Dictionary = {}):
 			
 		if player_pronouns[they]['verbs'].has('es'):
 			es = es_arr[player_pronouns[they]['verbs']['es']]
-		pass
 
-#endregion
 
 # TODO add seed to make certain pronouns appear more often than others.
 #region PRONOUNS functons

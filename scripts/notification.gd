@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/control/bell.svg")
 extends Control
 
 @export var dialogue: Control

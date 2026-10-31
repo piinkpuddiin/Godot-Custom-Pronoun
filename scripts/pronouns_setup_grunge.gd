@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/control/font.svg")
 extends Control
 
 @export var examples_sentence: Control

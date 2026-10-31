@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/control/speech_bubble.svg")
 extends Control
 
 @export var timeline: DialogicTimeline

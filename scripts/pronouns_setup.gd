@@ -1,6 +1,6 @@
+@icon("res://addons/at-icons/control/font.svg")
 extends Control
 
-# TODO: Add function to switch between type variations.
 
 @export var examples_sentence: Control
 @export var save_name: String = "1"

@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/control/notepad.svg")
 extends Control
 
 @export var custom_pronouns: Node

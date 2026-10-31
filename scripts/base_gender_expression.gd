@@ -1,5 +1,7 @@
+@icon("res://addons/at-icons/control/human.svg")
 extends Control
 
+# NOTE: The GE variables aren't saved in save/load example.
 @export var main_menu: Node
 @export var column_1_container:Container
 @export var column_2_container:Container
@@ -44,7 +46,6 @@ func set_options(column: Container) -> void:
 			print(variant_name,": ",P.get(variant_name))
 
 
-# TODO: Save all the choices, array index, and custom line edits.
 func save_gender_expression() -> void:
 	set_options(column_1_container)
 	set_options(column_2_container)
