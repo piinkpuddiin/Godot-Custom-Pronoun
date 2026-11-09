@@ -17,7 +17,7 @@ general/updates_per_second=100
 
 config/name="Custom Pronoun"
 config/description="Change the players pronouns and allow for custom pronouns."
-config/version="1.1.0"
+config/version="1.1.1"
 config/tags=PackedStringArray("dialogic", "in_progress", "visual_novel")
 run/main_scene="uid://bkoi1o4txqnfo"
 config/features=PackedStringArray("4.8", "Forward Plus")
@@ -43,7 +43,7 @@ directories/dch_directory={
 "n": "res://characters/n.dch"
 }
 directories/dtl_directory={
-"timeline/timeline_pronouns": "res://timeline/timeline_pronouns.dtl"
+"timeline_pronouns": "res://timeline/timeline_pronouns.dtl"
 }
 layout/style_directory={
 "": "res://dialogic_style.tres",

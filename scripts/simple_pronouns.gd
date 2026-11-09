@@ -62,7 +62,7 @@ func _on_confirm_button_pressed() -> void:
 	set_verbs()
 	_notification.show()
 	self.hide()
-	P._save(custom_pronouns.save_name)
+	P._save(custom_pronouns.get_child(0).save_name)
 
 
 func _on_back_button_pressed() -> void:
