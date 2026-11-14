@@ -24,6 +24,7 @@ func modifier_capitalize_pronoun(text: String) -> String:
 	var bbcode_array: Array
 	var new_text: String = ""
 	
+	# TODO: add exceptions (ex: title)
 	# Strip the bbcode from the string. 
 	# https://github.com/godotengine/godot-proposals/issues/5056
 	var regex = RegEx.new()

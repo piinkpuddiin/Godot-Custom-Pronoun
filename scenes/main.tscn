@@ -317,14 +317,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="BaseGenderExpression" parent="GenderExpression" unique_id=994650348 node_paths=PackedStringArray("main_menu") instance=ExtResource("10_muem4")]
 layout_mode = 1
 main_menu = NodePath("../../MainMenu")
 
-[node name="SimplePronouns" parent="." unique_id=1592544595 node_paths=PackedStringArray("main_menu", "_notification") instance=ExtResource("9_jbj1t")]
+[node name="SimplePronouns" parent="." unique_id=1592544595 node_paths=PackedStringArray("main_menu", "custom_pronouns", "_notification") instance=ExtResource("9_jbj1t")]
 visible = false
 main_menu = NodePath("../MainMenu")
+custom_pronouns = NodePath("../CustomPronouns/BaseCustomPronouns")
 _notification = NodePath("../Notification")
 
 [node name="Dialogue" type="Control" parent="." unique_id=704991212]

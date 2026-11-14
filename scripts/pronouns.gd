@@ -72,16 +72,18 @@ var default_pronouns:= {
 # Temporarily holds the custom inputed pronouns.
 var custom_pronouns:= {}
 
-# TODO: To add additional adjectives.
 #region Additional Variants
+# TODO: To add additional adjectives.
+# NOTE: All Array[String] variants will be used in the example list for the
+# gender expression carousel.
 var compliment: String = "Dashing"
 var compliment_arr: Array[String] = ['Beautiful', 'Gorgeous', 'Handsome', 'Dashing']
 
 var presentation: String = "GNC"
 var presentation_arr: Array[String] = ['Femme', 'Masc', 'GNC']
 
-var title: String = "Mx."
-var title_arr: Array[String] = ['Ms.', 'Mr.', 'Mx.']
+var title: String = "Mx"
+var title_arr: Array[String] = ['Ms', 'Mr', 'Mx']
 #endregion
 
 # The current result of the randomized pronoun
