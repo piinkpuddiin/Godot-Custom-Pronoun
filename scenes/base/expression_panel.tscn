@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://dfn06ilgdhuic"]
+
+[ext_resource type="Script" uid="uid://mnfmmi0h38yl" path="res://scripts/reverse_cycle_button.gd" id="1_wv278"]
+[ext_resource type="Script" uid="uid://bcyq3w58wisd" path="res://scripts/cycle_button.gd" id="2_aur75"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dvkdh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+expand_margin_left = 6.0
+expand_margin_right = 3.0
+expand_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f24y1"]
+bg_color = Color(0.047557704, 0.04755763, 0.047557645, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_b44ly"]
+CheckButton/colors/font_color = Color(0.6789431, 0.678944, 0.6789434, 1)
+CheckButton/font_sizes/font_size = 18
+MarginContainer/constants/margin_bottom = 5
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 5
+MarginContainer/constants/margin_top = 5
+Panel/styles/panel = SubResource("StyleBoxFlat_f24y1")
+RichTextLabel/colors/default_color = Color(0.8431839, 0.8431839, 0.84318376, 1)
+RichTextLabel/font_sizes/normal_font_size = 22
+VBoxContainer/constants/separation = 10
+
+[node name="expression_panel" type="Panel" unique_id=1371008404]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_dvkdh")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1605073016]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=604400918]
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_b44ly")
+
+[node name="label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=253345559]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 28
+text = "Presentation:"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1035492665]
+layout_mode = 2
+
+[node name="reverse_cycle_button" type="Button" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=724279846]
+layout_mode = 2
+text = "<"
+script = ExtResource("1_wv278")
+
+[node name="line_edit" type="LineEdit" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=246648530]
+visible = false
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+placeholder_text = "Enby"
+max_length = 32
+
+[node name="expression_label" type="RichTextLabel" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=1288508463]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "<null>"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="cycle_button" type="Button" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=927182859]
+layout_mode = 2
+text = ">"
+script = ExtResource("2_aur75")

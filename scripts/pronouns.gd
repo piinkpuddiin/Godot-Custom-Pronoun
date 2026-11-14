@@ -74,11 +74,14 @@ var custom_pronouns:= {}
 
 # TODO: To add additional adjectives.
 #region Additional Variants
-var compliment: String
+var compliment: String = "Dashing"
 var compliment_arr: Array[String] = ['Beautiful', 'Gorgeous', 'Handsome', 'Dashing']
 
-var presentation: String
+var presentation: String = "GNC"
 var presentation_arr: Array[String] = ['Femme', 'Masc', 'GNC']
+
+var title: String = "Mx."
+var title_arr: Array[String] = ['Ms.', 'Mr.', 'Mx.']
 #endregion
 
 # The current result of the randomized pronoun
