@@ -3,6 +3,7 @@ extends Control
 
 
 @export var examples_sentence: Control
+@export var main_menu: Control
 @export var save_name: String = "1"
 
 @export_category("Line Edits")
@@ -482,6 +483,12 @@ func _on_next_button_pressed() -> void:
 	examples_sentence.show()
 	
 	get_parent().hide()
+
+func _on_return_button_pressed() -> void:
+	if main_menu:
+		main_menu.show()
+	get_parent().hide()
+
 #endregion
 
 

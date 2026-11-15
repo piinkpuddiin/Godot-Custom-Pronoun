@@ -291,9 +291,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BaseCustomPronouns" parent="CustomPronouns" unique_id=78342683 node_paths=PackedStringArray("examples_sentence") instance=ExtResource("8_jbj1t")]
+[node name="BaseCustomPronouns" parent="CustomPronouns" unique_id=78342683 node_paths=PackedStringArray("examples_sentence", "main_menu") instance=ExtResource("8_jbj1t")]
 layout_mode = 1
 examples_sentence = NodePath("../../ExampleSentences")
+main_menu = NodePath("../../MainMenu")
 
 [node name="ExampleSentences" type="Control" parent="." unique_id=656870350]
 visible = false

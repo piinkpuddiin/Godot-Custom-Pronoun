@@ -120,7 +120,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
-text = "Back"
+text = "Return"
 
 [node name="Control" type="Control" parent="MarginContainer2/HBoxContainer" unique_id=697181090]
 layout_mode = 2

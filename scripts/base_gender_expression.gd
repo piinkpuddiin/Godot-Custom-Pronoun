@@ -86,3 +86,9 @@ func _on_save_button_pressed() -> void:
 	if main_menu:
 		main_menu.show()
 		hide()
+
+
+func _on_return_button_pressed() -> void:
+	if main_menu:
+		main_menu.show()
+	get_parent().hide()

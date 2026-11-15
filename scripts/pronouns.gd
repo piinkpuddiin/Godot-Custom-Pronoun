@@ -83,7 +83,7 @@ var presentation: String = "GNC"
 var presentation_arr: Array[String] = ['Femme', 'Masc', 'GNC']
 
 var title: String = "Mx"
-var title_arr: Array[String] = ['Ms', 'Mr', 'Mx']
+var title_arr: Array[String] = ['Ms.', 'Mrs.', 'Mr.', 'Mx.']
 #endregion
 
 # The current result of the randomized pronoun
@@ -144,6 +144,7 @@ var es_arr:= ["es", ""]
 
 
 func _ready() -> void:
+	Dialogic.timeline_started.connect(setup_pronouns)
 	Dialogic.Text.about_to_show_text.connect(they_randomize)
 	Dialogic.Text.about_to_show_text.connect(them_randomize)
 	Dialogic.Text.about_to_show_text.connect(their_randomize)
@@ -158,6 +159,10 @@ func clear() -> void:
 		player_pronouns.erase(i)
 	player_pronouns = {}
 	print("The dictionary is cleared: ", player_pronouns)
+
+
+func setup_pronouns() -> void:
+	title = title.capitalize()
 
 
 func randomized_verbs(_info: Dictionary = {}):

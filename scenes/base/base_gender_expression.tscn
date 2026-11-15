@@ -92,6 +92,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 20
 
@@ -101,4 +102,11 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "Save"
 
+[node name="return_button" type="Button" parent="MarginContainer2" unique_id=102177531]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Return"
+
 [connection signal="pressed" from="MarginContainer2/save_button" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/return_button" to="." method="_on_return_button_pressed"]

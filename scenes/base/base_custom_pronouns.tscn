@@ -441,6 +441,14 @@ theme_type_variation = &"LightButton"
 disabled = true
 text = "Next"
 
+[node name="return_button" type="Button" parent="MarginContainer" unique_id=643484112]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_type_variation = &"LightButton"
+text = "Return"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=984093856]
 visible = false
 layout_mode = 2
@@ -477,3 +485,4 @@ size_flags_vertical = 3
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/print_all_button" to="." method="_on_print_all_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/delete_button" to="." method="_on_delete_button_pressed"]
 [connection signal="pressed" from="MarginContainer/next_button" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="MarginContainer/return_button" to="." method="_on_return_button_pressed"]
