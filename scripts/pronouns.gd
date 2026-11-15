@@ -96,29 +96,45 @@ var their: String = ""
 var theirs: String = ""
 var themselves: String = ""
 
+# Capitalized pronoun.
+var They: String = ""
+var Them: String = ""
+var Their: String = ""
+var Theirs: String = ""
+var Themselves: String = ""
+
 #region VERBS
 ## The verbs array go from singular to the plural pronoun
+var Are = ""
 var are = ""
 var are_arr = ["is", "are"]
 
+var Arent = ""
 var arent = ""
 var arent_arr = ["isn't", "aren't"]
 
+var Were = ""
 var were = ""
 var were_arr:= ["was", "were"]
 
+var Have = ""
 var have = ""
 var have_arr:= ["has", "have"]
 
+var Havent = ""
 var havent = ""
 var havent_arr:= ["hasn't", "haven't"]
 
+var Do = ""
 var do = ""
 var do_arr:= ["does", "do"]
 
+var Dont = ""
 var dont = ""
 var dont_arr:= ["doesn't", "don't"]
 
+# The verbs below don't get a capitalized form, they would 
+# never grammatically stand on their own at the start of a sentence.
 var s = ""
 var s_arr:= ["s", ""]
 
@@ -151,24 +167,31 @@ func randomized_verbs(_info: Dictionary = {}):
 	if they in player_pronouns.keys():
 		if player_pronouns[they]['verbs'].has('are'):
 			are = are_arr[player_pronouns[they]['verbs']['are']]
+			Are = are.capitalize()
 			
 		if player_pronouns[they]['verbs'].has('arent'):
 			arent = arent_arr[player_pronouns[they]['verbs']['arent']]
+			Arent = arent.capitalize() 
 			
 		if player_pronouns[they]['verbs'].has('dont'):
 			dont = dont_arr[player_pronouns[they]['verbs']['dont']]
+			Dont = dont.capitalize()
 			
 		if player_pronouns[they]['verbs'].has('dont'):
 			were = were_arr[player_pronouns[they]['verbs']['were']]
+			Were = were.capitalize()
 			
 		if player_pronouns[they]['verbs'].has('dont'):
 			have = dont_arr[player_pronouns[they]['verbs']['have']]
+			Have = have.capitalize()
 			
 		if player_pronouns[they]['verbs'].has('havent'):
 			havent = havent_arr[player_pronouns[they]['verbs']['havent']]
+			Havent = havent.capitalize()
 			
 		if player_pronouns[they]['verbs'].has('do'):
 			do = do_arr[player_pronouns[they]['verbs']['do']]
+			Do = do.capitalize()
 			
 		if player_pronouns[they]['verbs'].has('s'):
 			s = s_arr[player_pronouns[they]['verbs']['s']]
@@ -179,7 +202,7 @@ func randomized_verbs(_info: Dictionary = {}):
 
 # TODO add seed to make certain pronouns appear more often than others.
 #region PRONOUNS functons
-func they_randomize(_info: Dictionary = {}) -> String:
+func they_randomize(_info: Dictionary = {}):
 	var pronoun_arr:= []
 	for i in player_pronouns.keys():
 		if i == "":
@@ -188,10 +211,10 @@ func they_randomize(_info: Dictionary = {}) -> String:
 			pronoun_arr.append(player_pronouns[i]['pronouns']['subjective'])
 	pronoun_arr.shuffle()
 	they = pronoun_arr.pick_random()
-	return they
+	They = they.capitalize()
 
 
-func them_randomize(_info: Dictionary = {}) -> String:
+func them_randomize(_info: Dictionary = {}):
 	var pronoun_arr:= []
 	for i in player_pronouns.keys():
 		if i == "":
@@ -200,10 +223,10 @@ func them_randomize(_info: Dictionary = {}) -> String:
 			pronoun_arr.append(player_pronouns[i]['pronouns']['objective'])
 	pronoun_arr.shuffle()
 	them = pronoun_arr.pick_random()
-	return them
+	Them = them.capitalize()
 
 
-func their_randomize(_info: Dictionary = {}) -> String:
+func their_randomize(_info: Dictionary = {}):
 	var pronoun_arr:= []
 	for i in player_pronouns.keys():
 		if i == "":
@@ -212,10 +235,10 @@ func their_randomize(_info: Dictionary = {}) -> String:
 			pronoun_arr.append(player_pronouns[i]['pronouns']['possessive_dep'])
 	pronoun_arr.shuffle()
 	their = pronoun_arr.pick_random()
-	return their
+	Their = their.capitalize()
 
 
-func theirs_randomize(_info: Dictionary = {}) -> String:
+func theirs_randomize(_info: Dictionary = {}):
 	var pronoun_arr:= []
 	for i in player_pronouns.keys():
 		if i == "":
@@ -224,10 +247,10 @@ func theirs_randomize(_info: Dictionary = {}) -> String:
 			pronoun_arr.append(player_pronouns[i]['pronouns']['possessive_indep'])
 	pronoun_arr.shuffle()
 	theirs = pronoun_arr.pick_random()
-	return theirs
+	Theirs = theirs.capitalize()
 
 
-func themselves_randomize(_info: Dictionary= {}) -> String:
+func themselves_randomize(_info: Dictionary= {}):
 	var pronoun_arr:= []
 	for i in player_pronouns.keys():
 		if i == "":
@@ -236,7 +259,7 @@ func themselves_randomize(_info: Dictionary= {}) -> String:
 			pronoun_arr.append(player_pronouns[i]['pronouns']['reflexive'])
 	pronoun_arr.shuffle()
 	themselves = pronoun_arr.pick_random()
-	return themselves
+	Themselves = themselves.capitalize()
 #endregion
 
 
