@@ -106,6 +106,15 @@ func get_check_buttons() -> Array[CheckButton]:
 	return check_array
 
 
+## Return the specified CheckButton.
+func get_check_button(value) -> CheckButton:
+	var check_button: CheckButton
+	for i in get_check_buttons():
+		if i.name.begins_with(value + '_button'):
+			check_button = i
+	return check_button
+
+
 ## Returns all the label examples in an array.
 func get_label_examples() -> Array[Label]:
 	var label_array: Array
@@ -189,40 +198,38 @@ func update_sentence(pronoun: String, verb: String, value: int) -> void:
 	match verb:
 		"are":
 			are_label.text = subjective_pronoun.capitalize() + " [u][i]" + P.are_arr[value] + "[/i][/u]" + are_sentence
-			# NOTE: To fix
 			# Gets the checkbuttons in the order they are added to the list.
 			# And set the button_pressed parameter to the right value.
-			get_check_buttons().get(0).button_pressed = value
-			#print(get_check_buttons().get(0).name)
+			get_check_button('are').button_pressed = value
 			# Create the verb key, and set the value.
 			P.player_pronouns[pronoun]['verbs']['are'] = value
 		"arent":
 			arent_label.text = subjective_pronoun.capitalize() + " [u][i]" + P.arent_arr[value] + "[/i][/u]" + arent_sentence
-			get_check_buttons().get(1).button_pressed = value
+			get_check_button('arent').button_pressed = value
 			P.player_pronouns[pronoun]['verbs']['arent'] = value
 		"were":
 			were_label.text = subjective_pronoun.capitalize() + " [u][i]" + P.were_arr[value] + "[/i][/u]" + were_sentence
-			get_check_buttons().get(2).button_pressed = value
+			get_check_button('were').button_pressed = value
 			P.player_pronouns[pronoun]['verbs']['were'] = value
 		"have":
 			have_label.text = subjective_pronoun.capitalize() + " [u][i]" + P.have_arr[value] + "[/i][/u]" + have_sentence
-			get_check_buttons().get(3).button_pressed = value
+			get_check_button('have').button_pressed = value
 			P.player_pronouns[pronoun]['verbs']['have'] = value
 		"do":
 			do_label.text = "[u][i]" + P.do_arr[value].capitalize() + "[/i][/u] " + subjective_pronoun + do_sentence
-			get_check_buttons().get(4).button_pressed = value
+			get_check_button('do').button_pressed = value
 			P.player_pronouns[pronoun]['verbs']['do'] = value
 		"dont":
 			dont_label.text = "[u][i]" + P.dont_arr[value].capitalize() + "[/i][/u] " + subjective_pronoun + dont_sentence
-			get_check_buttons().get(5).button_pressed = value
+			get_check_button('dont').button_pressed = value
 			P.player_pronouns[pronoun]['verbs']['dont'] = value
 		"s":
 			s_label.text = subjective_pronoun.capitalize() + " " + "work" + "[u][i]" + P.s_arr[value] + "[/i][/u]" + s_sentence
-			get_check_buttons().get(6).button_pressed = value
+			get_check_button('s').button_pressed = value
 			P.player_pronouns[pronoun]['verbs']['s'] = value
 		"es":
 			es_label.text = subjective_pronoun.capitalize() + " " + "do[u][i]" + P.es_arr[value] + "[/i][/u] " + possessive_dep_pronoun + es_sentence
-			get_check_buttons().get(7).button_pressed = value
+			get_check_button('es').button_pressed = value
 			P.player_pronouns[pronoun]['verbs']['es'] = value
 		_:
 			printerr("This verb: ", verb, " does not exist.")

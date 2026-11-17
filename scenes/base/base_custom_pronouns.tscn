@@ -61,14 +61,15 @@ possessive_dep_example = NodePath("HBoxContainer/VBoxContainer2/example_margin_c
 reflexive_example = NodePath("HBoxContainer/VBoxContainer2/example_margin_container/example_panel/MarginContainer/example_vbox/reflexive_vbox/reflexive_example_label")
 line_edit_vbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox")
 example_vbox = NodePath("HBoxContainer/VBoxContainer2/example_margin_container/example_panel/MarginContainer/example_vbox")
-pronoun_choice_hbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox")
+pronoun_choice_hbox = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/pronoun_choice_scroll_container/pronoun_choice_hbox")
 player_pronouns_hbox = NodePath("MarginContainer/HBoxContainer/ScrollContainer/player_pronouns_hbox")
-pronoun_choice_scroll_container = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer")
+pronoun_choice_scroll_container = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/pronoun_choice_scroll_container")
 current_pronoun_label = NodePath("HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/current_pronoun_label")
 delete_button = NodePath("HBoxContainer/pronoun_panel/MarginContainer/debug_vbox/delete_button")
 next_button = NodePath("MarginContainer/next_button")
 
 [node name="background_hbox" type="HBoxContainer" parent="." unique_id=1195024795]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -144,19 +145,19 @@ theme_override_constants/margin_top = 7
 theme_override_constants/margin_right = 7
 theme_override_constants/margin_bottom = 7
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer" unique_id=866741368]
+[node name="pronoun_choice_scroll_container" type="ScrollContainer" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer" unique_id=866741368]
 custom_minimum_size = Vector2(0, 55)
 clip_contents = false
 layout_mode = 2
 
-[node name="pronoun_choice_hbox" type="HBoxContainer" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer" unique_id=570172461]
+[node name="pronoun_choice_hbox" type="HBoxContainer" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/pronoun_choice_scroll_container" unique_id=570172461]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="add_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox" unique_id=1420610478]
+[node name="add_button" type="Button" parent="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/pronoun_choice_scroll_container/pronoun_choice_hbox" unique_id=1420610478]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add a new custom pronoun set."
@@ -412,6 +413,7 @@ text = "___ took charge all by [b]___[/b]."
 fit_content = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=219037680]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -474,7 +476,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/ScrollContainer/pronoun_choice_hbox/add_button" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/MarginContainer/pronoun_choice_scroll_container/pronoun_choice_hbox/add_button" to="." method="_on_add_button_pressed"]
 [connection signal="text_changed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/subjective_vbox/subjective_line_edit" to="." method="_on_subjective_line_edit_text_changed"]
 [connection signal="text_changed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/object_vbox/objective_line_edit" to="." method="_on_objective_line_edit_text_changed"]
 [connection signal="text_changed" from="HBoxContainer/pronoun_panel/MarginContainer/line_edit_vbox/possessive_dep_vbox/possessive_dep_line_edit" to="." method="_on_possessive_dep_line_edit_text_changed"]

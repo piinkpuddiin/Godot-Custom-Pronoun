@@ -1,0 +1,463 @@
+[gd_scene format=3 uid="uid://c3p4sm18oli8o"]
+
+[ext_resource type="Script" uid="uid://lc2nlar52m8o" path="res://plug_play/example_sentences.gd" id="1_e2t5r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f24y1"]
+bg_color = Color(0.047557704, 0.04755763, 0.047557645, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_8coj7"]
+CheckButton/colors/font_color = Color(0.6789431, 0.678944, 0.6789434, 1)
+CheckButton/font_sizes/font_size = 18
+MarginContainer/constants/margin_bottom = 5
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 5
+MarginContainer/constants/margin_top = 5
+Panel/styles/panel = SubResource("StyleBoxFlat_f24y1")
+RichTextLabel/colors/default_color = Color(0.8431839, 0.8431839, 0.84318376, 1)
+RichTextLabel/font_sizes/normal_font_size = 22
+VBoxContainer/constants/separation = 10
+
+[node name="ExampleSentences" type="Control" unique_id=61997178 node_paths=PackedStringArray("current_pronoun_label", "are_label", "arent_label", "were_label", "have_label", "do_label", "dont_label", "s_label", "es_label", "verbs_vbox", "custom_pronouns_vbox")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e2t5r")
+current_pronoun_label = NodePath("VerbControl/Panel/VBoxContainer/current_pronoun_vbox/current_pronoun_label")
+are_label = NodePath("VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/are_panel/MarginContainer/HBoxContainer/are_label")
+arent_label = NodePath("VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/arent_panel/MarginContainer/HBoxContainer/arent_label")
+were_label = NodePath("VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/were_panel/MarginContainer/HBoxContainer/were_label")
+have_label = NodePath("VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/have_panel/MarginContainer/HBoxContainer/have_label")
+do_label = NodePath("VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/do_panel/MarginContainer/HBoxContainer/do_label")
+dont_label = NodePath("VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/dont_panel/MarginContainer/HBoxContainer/dont_label")
+s_label = NodePath("VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/s_panel/MarginContainer/HBoxContainer/s_label")
+es_label = NodePath("VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/es_panel/MarginContainer/HBoxContainer/es_label")
+verbs_vbox = NodePath("VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox")
+custom_pronouns_vbox = NodePath("pronouns_panel/MarginContainer/VBoxContainer/custom_pronouns_vbox")
+
+[node name="pronouns_panel" type="Panel" parent="." unique_id=1536497428]
+custom_minimum_size = Vector2(240, 360)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="pronouns_panel" unique_id=2115267776]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pronouns_panel/MarginContainer" unique_id=360059083]
+custom_maximum_size = Vector2(-1, 600)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="all_pronouns_label" type="RichTextLabel" parent="pronouns_panel/MarginContainer/VBoxContainer" unique_id=1901386809]
+custom_minimum_size = Vector2(193, 50)
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]Pronoun(s):"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="custom_pronouns_vbox" type="VBoxContainer" parent="pronouns_panel/MarginContainer/VBoxContainer" unique_id=152258365]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VerbControl" type="Control" parent="." unique_id=1376234459]
+custom_minimum_size = Vector2(500, 435)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -231.0
+offset_top = -217.5
+offset_right = 469.0
+offset_bottom = 217.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="VerbControl" unique_id=1325797544]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VerbControl/Panel" unique_id=1908201050]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="current_pronoun_vbox" type="VBoxContainer" parent="VerbControl/Panel/VBoxContainer" unique_id=1647263367]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="current_pronoun_label" type="RichTextLabel" parent="VerbControl/Panel/VBoxContainer/current_pronoun_vbox" unique_id=25918016]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "Current pronoun:"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pronoun_label" type="RichTextLabel" parent="VerbControl/Panel/VBoxContainer/current_pronoun_vbox" unique_id=1290285363]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]They/Them"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VerbControl/Panel/VBoxContainer" unique_id=1299850512]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="verbs_vbox" type="VBoxContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer" unique_id=504645082]
+layout_mode = 2
+
+[node name="are_panel" type="Panel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox" unique_id=1331906087]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/are_panel" unique_id=482851984]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/are_panel/MarginContainer" unique_id=461244906]
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_8coj7")
+
+[node name="are_label" type="RichTextLabel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/are_panel/MarginContainer/HBoxContainer" unique_id=452675426]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "___ running in the woods."
+fit_content = true
+
+[node name="are_button" type="CheckButton" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/are_panel/MarginContainer/HBoxContainer" unique_id=303107545]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
+text = "Singular"
+
+[node name="arent_panel" type="Panel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox" unique_id=297240679]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/arent_panel" unique_id=1435500670]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/arent_panel/MarginContainer" unique_id=250114176]
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_8coj7")
+
+[node name="arent_label" type="RichTextLabel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/arent_panel/MarginContainer/HBoxContainer" unique_id=1487703126]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "___ walking to class."
+fit_content = true
+
+[node name="arent_button" type="CheckButton" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/arent_panel/MarginContainer/HBoxContainer" unique_id=457889411]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
+text = "Singular"
+
+[node name="were_panel" type="Panel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox" unique_id=2006127749]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/were_panel" unique_id=82004903]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/were_panel/MarginContainer" unique_id=1446345504]
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_8coj7")
+
+[node name="were_label" type="RichTextLabel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/were_panel/MarginContainer/HBoxContainer" unique_id=1481259869]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "___ aware of the extent of the damage."
+fit_content = true
+
+[node name="were_button" type="CheckButton" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/were_panel/MarginContainer/HBoxContainer" unique_id=1774268004]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
+text = "Singular"
+
+[node name="have_panel" type="Panel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox" unique_id=274791632]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/have_panel" unique_id=933570401]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/have_panel/MarginContainer" unique_id=95126100]
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_8coj7")
+
+[node name="have_label" type="RichTextLabel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/have_panel/MarginContainer/HBoxContainer" unique_id=76725461]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "___ run out of time."
+fit_content = true
+
+[node name="have_button" type="CheckButton" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/have_panel/MarginContainer/HBoxContainer" unique_id=836778438]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
+text = "Singular"
+
+[node name="do_panel" type="Panel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox" unique_id=356820288]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/do_panel" unique_id=354192410]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/do_panel/MarginContainer" unique_id=1107658555]
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_8coj7")
+
+[node name="do_label" type="RichTextLabel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/do_panel/MarginContainer/HBoxContainer" unique_id=1262638979]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "___ like coffee?"
+fit_content = true
+
+[node name="do_button" type="CheckButton" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/do_panel/MarginContainer/HBoxContainer" unique_id=1971538124]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
+text = "Singular"
+
+[node name="dont_panel" type="Panel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox" unique_id=1464818010]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/dont_panel" unique_id=1021054621]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/dont_panel/MarginContainer" unique_id=2100203168]
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_8coj7")
+
+[node name="dont_label" type="RichTextLabel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/dont_panel/MarginContainer/HBoxContainer" unique_id=636701950]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "___ like candy?"
+fit_content = true
+
+[node name="dont_button" type="CheckButton" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/dont_panel/MarginContainer/HBoxContainer" unique_id=1621255494]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
+text = "Singular"
+
+[node name="s_panel" type="Panel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox" unique_id=1986641466]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/s_panel" unique_id=1631974754]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/s_panel/MarginContainer" unique_id=670385963]
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_8coj7")
+
+[node name="s_label" type="RichTextLabel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/s_panel/MarginContainer/HBoxContainer" unique_id=1825125614]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "___ like a machine."
+fit_content = true
+
+[node name="s_button" type="CheckButton" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/s_panel/MarginContainer/HBoxContainer" unique_id=1828426153]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
+text = "Singular"
+
+[node name="es_panel" type="Panel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox" unique_id=1362115396]
+custom_minimum_size = Vector2(0, 35)
+custom_maximum_size = Vector2(-1, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/es_panel" unique_id=186258041]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/es_panel/MarginContainer" unique_id=844105330]
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_8coj7")
+
+[node name="es_label" type="RichTextLabel" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/es_panel/MarginContainer/HBoxContainer" unique_id=1590411722]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "___ homework every day."
+fit_content = true
+
+[node name="es_button" type="CheckButton" parent="VerbControl/Panel/VBoxContainer/MarginContainer/verbs_vbox/es_panel/MarginContainer/HBoxContainer" unique_id=1260741305]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.86467505, 0.86467516, 0.864675, 1)
+text = "Singular"
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1557183185]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2" unique_id=622539503]
+layout_mode = 2
+
+[node name="back_button" type="Button" parent="MarginContainer2/HBoxContainer" unique_id=803106509]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Back"
+
+[node name="Control" type="Control" parent="MarginContainer2/HBoxContainer" unique_id=2109557289]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="confirm_button" type="Button" parent="MarginContainer2/HBoxContainer" unique_id=1303300243]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Confirm"
