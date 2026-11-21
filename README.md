@@ -22,7 +22,7 @@ Emits once the pronouns have been saved.
 #### - `player_pronouns: Dictionary`
 Stores all the pronouns and the pronouns correct verbs.
 
-#### - `default_pronouns: Dicitionary`
+#### - `default_pronouns: Dicitonary`
 The default pronouns, add in all the default pronouns here. Every new key and their values will automatically be added as a button.
 
 #### - `custom_pronouns: Dicitionary`
